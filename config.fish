@@ -89,11 +89,12 @@ if status is-interactive
     abbr -a --set-cursor copy wl-copy
     abbr -a --set-cursor paste wl-paste
 
-    # eza Aliases
-    alias ls="eza --icons --group-directories-first"
-    alias ll="eza -lh --icons --grid --group-directories-first"
-    alias la="eza -a --icons --group-directories-first"
-    alias tree="eza --tree --icons"
+    ## eza
+    abbr -a ls 'eza --icons --group-directories-first'
+    abbr -a ll 'eza -lh --icons --grid --group-directories-first'
+    abbr -a la 'eza -a --icons --group-directories-first'
+    abbr -a tree 'eza --tree --icons'
+
 
     # Linker Variable
     set -gx LD /usr/local/bin/mold
@@ -109,3 +110,11 @@ if status is-interactive
     # Completions
     complete -c y -w yazi
 end
+
+# argc-completions
+set -gx ARGC_COMPLETIONS_ROOT /home/fall-of-baghdad/argc-completions
+set -gx ARGC_COMPLETIONS_PATH "$ARGC_COMPLETIONS_ROOT/completions/linux:$ARGC_COMPLETIONS_ROOT/completions"
+fish_add_path "$ARGC_COMPLETIONS_ROOT/bin"
+# To add completions for only the specified command, modify next line e.g. set argc_scripts cargo git
+set argc_scripts (ls -p -1 "$ARGC_COMPLETIONS_ROOT/completions/linux" "$ARGC_COMPLETIONS_ROOT/completions" | sed -n 's/\.sh$//p')
+argc --argc-completions fish $argc_scripts | source
