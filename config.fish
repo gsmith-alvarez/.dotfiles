@@ -32,6 +32,11 @@ if test -d /mnt/c/
     fish_add_path "/mnt/c/Program Files/MATLAB/R2025b/bin"
 end
 
+# GitHub API Authentication via System Keyring
+if command -v secret-tool >/dev/null
+    set -gx GITHUB_TOKEN (secret-tool lookup github token)
+    set -gx GH_TOKEN $GITHUB_TOKEN # For tools that prefer this variable name
+end
 ### --- 2. INTERACTIVE ONLY --- ###
 
 if status is-interactive
@@ -60,16 +65,16 @@ if status is-interactive
     abbr -a find fd
     abbr -a yr yazi
     abbr -a du "dust -r"
-    abbr -a cp "rsync -ah --progress"
+    abbr -a cp "rsync -ah --info=progress2"
     abbr -a mrun 'mold -run'
-        # Git
+    # Git
     abbr -a g git
     abbr -a gs 'git status'
     abbr -a ga 'git add'
     abbr -a gc 'git commit -m'
     abbr -a gp 'git push'
     abbr -a gcan 'git commit --amend --no-edit'
-        # VS Code
+    # VS Code
     abbr -a c "code ."
     abbr -a cr "code -r ."
     abbr -a cn "code -n ."
@@ -79,9 +84,10 @@ if status is-interactive
     abbr -a pquiet "asusctl profile -P Quiet"
     abbr -a bmax "asusctl -c 100"
     abbr -a bstay "asusctl -c 60"
-     # Clipboard (Wayland/Pop!_OS)
-   abbr -a --set-cursor copy wl-copy
+    # Clipboard (Wayland/Pop!_OS)
+    abbr -a --set-cursor copy wl-copy
     abbr -a --set-cursor paste wl-paste
+
 
     # uv    
     abbr -a py "uv run"
@@ -95,16 +101,22 @@ if status is-interactive
         abbr -a tree 'eza --tree --icons'
     end
 
+    # ProtonVPN
+    abbr -a vpn+ "protonvpn connect"
+    abbr -a vpn- "protonvpn disconnect"
+
     complete -c y -w yazi
 end
-    ### --- 4. ARGC COMPLETIONS --- ###
-    set -gx ARGC_COMPLETIONS_ROOT "$HOME/argc-completions"
-    if test -d "$ARGC_COMPLETIONS_ROOT"
-        set -gx ARGC_COMPLETIONS_PATH "$ARGC_COMPLETIONS_ROOT/completions/linux:$ARGC_COMPLETIONS_ROOT/completions"
-        fish_add_path "$ARGC_COMPLETIONS_ROOT/bin"
+### --- 4. ARGC COMPLETIONS --- ###
+set -gx ARGC_COMPLETIONS_ROOT "$HOME/argc-completions"
+if test -d "$ARGC_COMPLETIONS_ROOT"
+    set -gx ARGC_COMPLETIONS_PATH "$ARGC_COMPLETIONS_ROOT/completions/linux:$ARGC_COMPLETIONS_ROOT/completions"
+    fish_add_path "$ARGC_COMPLETIONS_ROOT/bin"
 
-        if type -q argc
-            set -l argc_scripts cargo git asusctl brew
-            argc --argc-completions fish $argc_scripts | source
-        end
+    if type -q argc
+        set -l argc_scripts cargo git asusctl brew
+        argc --argc-completions fish $argc_scripts | source
     end
+end
+
+fastfetch

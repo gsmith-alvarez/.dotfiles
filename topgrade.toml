@@ -116,7 +116,6 @@ cleanup = true
 
 "Asusctl (Source Update)" = "/bin/bash -c 'cd ~/tools/asusctl && git fetch && if [ $(git rev-parse HEAD) != $(git rev-parse @{u}) ]; then git pull && make && sudo make install && sudo systemctl daemon-reload && sudo systemctl restart asusd; else echo \"asusctl is up to date\"; fi'"
 
-"Update bin binaries" = "bin update"
 # "Python Environment" = "~/dev/.env/bin/pip install -i https://pypi.python.org/simple -U --upgrade-strategy eager jupyter"
 # "Custom command using interactive shell (unix)" = "-i vim_upgrade"
 
