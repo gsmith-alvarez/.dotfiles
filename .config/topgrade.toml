@@ -243,13 +243,12 @@ dnf_arguments = "--refresh --assumeyes"
 
 [git]
 # How many repos to pull or fetch at max in parallel
-# max_concurrency = 5
+max_concurrency = 5
 
 # Additional git repositories to pull or fetch
-# repos = [
-#     "~/src/*/",
-#     "~/.config/something"
-# ]
+repos = [
+    "~/dotfiles/"
+]
 
 # Set to `false` to skip pulling/fetching the predefined git repos
 # pull_predefined = false
@@ -306,7 +305,7 @@ dnf_arguments = "--refresh --assumeyes"
 
 # Number of jobs to run in parallel
 # (default: 4)
-# jobs = 4
+jobs = 4
 
 # Run interactively
 # (default: false)
@@ -433,4 +432,4 @@ dnf_arguments = "--refresh --assumeyes"
 [rustup]
 # If set, updates only these channels.
 # (default: [] (all channels))
-# channels = ["stable"]
+channels = ["stable"]
