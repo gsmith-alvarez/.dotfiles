@@ -51,8 +51,6 @@ if status is-interactive
 
     # Package Management
     abbr -a top 'topgrade --cleanup'
-    abbr -a mi 'mise install'
-    abbr -a mu 'mise update'
 
     # Python (uv)
     abbr -a py "uv run"
