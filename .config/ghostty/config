@@ -2,7 +2,6 @@ theme = Catppuccin Mocha
 
 title = Hello
 command = /usr/bin/fish
-maximize = true
 shell-integration = fish
 quick-terminal-position = center
 clipboard-read = allow
