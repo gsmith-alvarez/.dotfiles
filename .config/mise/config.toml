@@ -1,0 +1,32 @@
+[tools]
+# Binaries
+atuin = "latest"
+yazi = "latest"
+bat = "latest"
+bottom = "latest"
+dust = "latest"
+eza = "latest"
+fd = "latest"
+fzf = "latest"
+just = "latest"
+ripgrep = "latest"
+starship = "latest"
+zoxide = "latest"
+mold = "latest"
+
+[env]
+# Global Variables
+EDITOR = "yazi"
+VISUAL = "yazi"
+PAGER = "bat"
+LANG = "en_US.UTF-8"
+LD_LIBRARY_PATH = "/usr/local/lib:${LD_LIBRARY_PATH:-}"
+
+# Performance/System Tweaks
+RUSTFLAGS = "-C link-arg=-fuse-ld=mold"
+
+# Custom Paths
+# PATH = "/home/gsmith-alvarez/.local/bin:$PATH"
+
+[settings]
+env_shell_expand = true
