@@ -3,7 +3,7 @@
 set -gx EDITOR nvim
 set -gx VISUAL nvim
 set -gx PAGER bat
-set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
+set -gx MANPAGER "sh -c 'bat -l man --color=always'"
 set -gx JAVA_HOME /usr/lib/jvm/java-21-openjdk-amd64
 set -gx LD /usr/local/bin/mold
 set -gx LDFLAGS "-fuse-ld=mold"
@@ -25,12 +25,19 @@ end
 # -p prepends (priority), -a appends
 fish_add_path -p "$HOME/.local/bin" "$HOME/scripts"
 fish_add_path -a "$HOME/.cargo/bin" "$HOME/.local/share/fnm" "$HOME/.npm-global/bin" "$JAVA_HOME/bin"
+set -gx PATH $PATH /home/fall-of-baghdad/.lmstudio/bin
 
 # WSL Interop Paths
 if test -d /mnt/c/
     fish_add_path "/mnt/c/Users/Giova/AppData/Local/Programs/Microsoft VS Code/bin"
     fish_add_path "/mnt/c/Program Files/MATLAB/R2025b/bin"
 end
+
+# rustc toolchain path
+fish_add_path -p "~/.cargo/bin"
+
+##lmstudio
+fish_add_path ~/.lmstudio/bin
 
 # GitHub API Authentication via System Keyring
 if command -v secret-tool >/dev/null
@@ -79,9 +86,10 @@ if status is-interactive
     abbr -a cr "code -r ."
     abbr -a cn "code -n ."
     # Asuscli Controller (Zenbook Specific)
-    abbr -a pperf "asusctl profile -P Performance"
-    abbr -a pbal "asusctl profile -P Balanced"
-    abbr -a pquiet "asusctl profile -P Quiet"
+    abbr -a pperf "asusctl profile set Performance; echo 'performance' | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference"
+    abbr -a pbal "asusctl profile set Balanced; echo 'balance_performance' | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference"
+    abbr -a pquiet "asusctl profile set Quiet; echo 'balance_power' | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference"
+
     abbr -a bmax "asusctl -c 100"
     abbr -a bstay "asusctl -c 60"
     # Clipboard (Wayland/Pop!_OS)
@@ -101,10 +109,6 @@ if status is-interactive
         abbr -a tree 'eza --tree --icons'
     end
 
-    # ProtonVPN
-    abbr -a vpn+ "protonvpn connect"
-    abbr -a vpn- "protonvpn disconnect"
-
     complete -c y -w yazi
 end
 ### --- 4. ARGC COMPLETIONS --- ###
@@ -118,5 +122,3 @@ if test -d "$ARGC_COMPLETIONS_ROOT"
         argc --argc-completions fish $argc_scripts | source
     end
 end
-
-fastfetch
