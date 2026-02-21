@@ -3,7 +3,6 @@
 atuin = "latest"
 yazi = "latest"
 bat = "latest"
-bottom = "latest"
 dust = "latest"
 eza = "latest"
 fd = "latest"
@@ -15,7 +14,23 @@ zoxide = "latest"
 mold = "latest"
 neovim = "latest"
 node = "lts"
+
+#python
 python = "latest"
+uv = "latest"
+ruff = "latest"
+
+#lua
+lua = "latest"
+stylua = "latest"
+
+#Microcontrollers
+arduino-cli = "latest"
+
+#Languages of interest
+rust = "latest"
+go = "latest"
+zig = "latest"
 
 [env]
 # Global Variables

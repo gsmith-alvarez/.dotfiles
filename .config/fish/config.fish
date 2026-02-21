@@ -31,6 +31,8 @@ if status is-interactive
     abbr -a .. 'cd ..'
     abbr -a ... 'cd ../..'
     abbr -a cd z
+
+    # Some Tools
     abbr -a cat bat
     abbr -a find fd
     abbr -a yr yazi
@@ -72,3 +74,7 @@ if status is-interactive
 
     complete -c y -w yazi
 end
+
+# Added by LM Studio CLI (lms)
+set -gx PATH $PATH /home/gsmith-alvarez/.lmstudio/bin
+# End of LM Studio CLI section
