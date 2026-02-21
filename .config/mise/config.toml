@@ -13,7 +13,11 @@ starship = "latest"
 zoxide = "latest"
 mold = "latest"
 neovim = "latest"
+
+#js
 node = "lts"
+oxlint = "latest"
+# oxfmt = "latest" #not yet supported
 
 #python
 python = "latest"
@@ -23,6 +27,7 @@ ruff = "latest"
 #lua
 lua = "latest"
 stylua = "latest"
+lua-language-server = "latest"
 
 #Microcontrollers
 arduino-cli = "latest"
