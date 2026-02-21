@@ -39,12 +39,13 @@ VISUAL = "nvim"
 PAGER = "bat"
 LANG = "en_US.UTF-8"
 LD_LIBRARY_PATH = "/usr/local/lib:${LD_LIBRARY_PATH:-}"
+GOPATH = "{{env.HOME}}/.local/share/go"
 
 # Performance/System Tweaks
 RUSTFLAGS = "-C link-arg=-fuse-ld=mold"
 
 # Custom Paths
-# PATH = "/home/gsmith-alvarez/.local/bin:$PATH"
+"PATH" = "{{env.HOME}}/.local/share/go/bin:{{env.PATH}}"
 
 [settings]
 env_shell_expand = true
