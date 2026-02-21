@@ -41,7 +41,7 @@ if status is-interactive
     abbr -a pperf "asusctl profile set Performance"
     abbr -a pbal "asusctl profile set Balanced"
     abbr -a pquiet "asusctl profile set Quiet"
-    abbr -a bbstay "asusctl -c 60"
+    abbr -a bbstay "asusctl battery limit 60"
 
     # Git
     abbr -a g git
