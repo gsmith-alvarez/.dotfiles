@@ -1,6 +1,7 @@
 ### --- 1. INITIALIZATION --- ###
+fish_add_path ~/.local/bin
+fish_add_path ~/.cargo/bin
 
-# Start mise (This replaces all the manual path and env logic)
 if type -q mise
     mise activate fish | source
 end
