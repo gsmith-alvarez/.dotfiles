@@ -1,10 +1,10 @@
 ### --- 1. INITIALIZATION --- ###
-fish_add_path ~/.local/bin
-fish_add_path ~/.cargo/bin
-
 if type -q mise
     mise activate fish | source
 end
+
+fish_add_path ~/.local/bin
+fish_add_path ~/.cargo/bin
 
 # GitHub Token (Keeping your existing keyring logic)
 if command -v secret-tool >/dev/null

@@ -1,5 +1,12 @@
 [tools]
 # Binaries
+ripgrep = "latest"
+starship = "latest"
+zoxide = "latest"
+mold = "latest"
+neovim = "latest"
+
+#tools
 atuin = "latest"
 yazi = "latest"
 bat = "latest"
@@ -8,11 +15,9 @@ eza = "latest"
 fd = "latest"
 fzf = "latest"
 just = "latest"
-ripgrep = "latest"
-starship = "latest"
-zoxide = "latest"
-mold = "latest"
-neovim = "latest"
+typos = "latest"
+glow = "latest"
+carapace = "latest"
 
 #js
 node = "lts"
