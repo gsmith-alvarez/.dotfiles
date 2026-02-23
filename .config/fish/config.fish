@@ -26,6 +26,9 @@ if command -v secret-tool >/dev/null
     set -gx GH_TOKEN $GITHUB_TOKEN
 end
 
+# LM Studio
+set -gx PATH $PATH /home/gsmith-alvarez/.lmstudio/bin
+
 ### --- 2. INTERACTIVE ONLY --- ###
 
 if status is-interactive
@@ -89,6 +92,3 @@ if status is-interactive
     complete -c y -w yazi
 end
 
-# Added by LM Studio CLI (lms)
-set -gx PATH $PATH /home/gsmith-alvarez/.lmstudio/bin
-# End of LM Studio CLI section
