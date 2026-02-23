@@ -77,7 +77,6 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", TAG+="uacc
 
 # Arduino Uno / Mega
 SUBSYSTEMS=="usb", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="0043", TAG+="uaccess"
-
 ```
 
 ### B. MCU Bootloaders (`61-mcu-bootloaders.rules`)
@@ -91,7 +90,6 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="df11", TAG+="uacc
 
 # Raspberry Pi Pico (RP2040 Bootloader)
 SUBSYSTEMS=="usb", ATTRS{idVendor}=="2e8a", ATTRS{idProduct}=="0003", TAG+="uaccess"
-
 ```
 
 ### C. Logic Analyzers & Digilent (`62-ee-tools.rules`)
@@ -110,10 +108,7 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="21a9", ATTRS{idProduct}=="1006", TAG+="uacc
 
 # Digilent Adept / Waveforms
 SUBSYSTEMS=="usb", ATTRS{idVendor}=="1443", MODE="666", TAG+="uaccess"
-
 ```
-
----
 
 ## 4. Applying Hardware Changes
 
@@ -123,7 +118,7 @@ After saving the file, you must run these commands to tell Fedora to update its 
 sudo udevadm control --reload-rules && sudo udevadm trigger
 ```
 
-### 5. Flatpaks
+## 5. Flatpaks
 
 
 ```bash
