@@ -53,6 +53,7 @@ gh repo clone gsmith-alvarez/.dotfiles ~/dotfiles
 cd ~/dotfiles
 # Use --restow to overwrite any existing symlinks safely
 stow --restow . -t ~
+gpg --keyserver hkps://keyserver.ubuntu.com --recv-keys B2508A90102F8AE3B12A0090DEACCAAEDB78137A
 mise install -y
 ```
 
