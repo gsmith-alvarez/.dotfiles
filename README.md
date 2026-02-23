@@ -116,15 +116,6 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="1443", MODE="666", TAG+="uaccess"
 
 ## 4. Applying Hardware Changes
 
-Run this to force the kernel to recognize the new modular files:
-
-```bash
-sudo udevadm control --reload-rules && sudo udevadm trigger
-
-```
-
-## 4. Applying Hardware Changes
-
 After saving the file, you must run these commands to tell Fedora to update its permissions:
 
 ```
@@ -176,7 +167,6 @@ org.freedesktop.LinuxAudio.Plugins.MDA \
 org.freedesktop.LinuxAudio.Plugins.TAP \
 org.freedesktop.LinuxAudio.Plugins.ZamPlugins \
 org.freedesktop.LinuxAudio.Plugins.swh
-
 ```
 
 
