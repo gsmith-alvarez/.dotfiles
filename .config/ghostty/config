@@ -1,16 +1,19 @@
 theme = Catppuccin Mocha
 
+# Basic Settings
 title = Hello
 command = ~/.local/share/mise/shims/zellij attach -c
 shell-integration = fish
 quick-terminal-position = center
+
+# Clipboard Settings
 clipboard-read = allow
 clipboard-write = allow
 copy-on-select = clipboard
 
-# Font Settings
-font-family = GeistMono NF UltraBlack
-window-title-font-family = GeistMono NF UltraBlack
+# Font Settings - Quotes are only needed if there are spaces in the name
+font-family = "GeistMono NF UltraBlack"
+window-title-font-family = "GeistMono NF UltraBlack"
 mouse-hide-while-typing = true
 
 # Window Effects
