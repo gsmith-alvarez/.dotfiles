@@ -48,6 +48,13 @@ Go to their [website](https://digilent.com/reference/software/waveforms/waveform
 sudo dnf install ./digilent.adept.runtime_*.rpm ./digilent.waveforms_*.rpm
 ```
 
+### Mise
+
+```bash
+curl https://mise.jdx.dev/install.sh | sh
+gpg --keyserver hkps://keyserver.ubuntu.com --recv-keys B2508A90102F8AE3B12A0090DEACCAAEDB78137A
+```
+
 ## 2. Initial Repository Setup
 
 ```bash

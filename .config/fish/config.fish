@@ -6,11 +6,18 @@ if type -q mise
 
     mise activate fish --shims | source
 
-    # 2. Additional Binary Paths
     fish_add_path -m ~/.local/bin
-    # Only try to add Go path if the binary exists to avoid error noise
+
+    # 2. Language-Specific Binary Paths
+    # Cargo (Rust) binaries
+    if test -d ~/.cargo/bin
+        fish_add_path -m ~/.cargo/bin
+    end
+
+    # Go binaries (Dynamic check to avoid calling 'go env' on every shell start)
     if type -q go
-        fish_add_path -m (go env GOPATH)/bin
+        set -gx GOPATH (go env GOPATH)
+        fish_add_path -m $GOPATH/bin
     end
 
     # 3. Carapace Configuration
@@ -20,17 +27,21 @@ if type -q mise
     end
 end
 
-# GitHub Token (Keeping your existing keyring logic)
+# --- 2. CREDENTIALS & ENVIRONMENT --- #
+
+# GitHub Token (Non-blocking keyring lookup)
 if command -v secret-tool >/dev/null
+    # Using a background check or variable check to ensure this doesn't hang
     set -gx GITHUB_TOKEN (secret-tool lookup github token)
     set -gx GH_TOKEN $GITHUB_TOKEN
 end
 
-# LM Studio
-set -gx PATH $PATH /home/gsmith-alvarez/.lmstudio/bin
+# LM Studio 
+if test -d /home/gsmith-alvarez/.lmstudio/bin
+    fish_add_path -m /home/gsmith-alvarez/.lmstudio/bin
+end
 
 ### --- 2. INTERACTIVE ONLY --- ###
-
 if status is-interactive
     # mise handles the PATH, so these inits are now much faster
     type -q starship; and starship init fish | source

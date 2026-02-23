@@ -12,7 +12,6 @@ yazi = "latest"             # Extremely fast terminal file manager (Rust-based)
 eza = "latest"              # Modern replacement for 'ls' with icons and colors
 dust = "latest"             # Visual disk usage analyzer (replaces du)
 glow = "latest"             # Markdown renderer for reading docs in the terminal
-bottom = "latest"           # Graphical system monitor (TUI) - better for monitoring high-CPU builds
 cargo-binstall = "latest"   # Install Rust binaries from GitHub releases instead of compiling (saves time)
 "cargo:cargo-update" = "latest" # Updates all binaries installed via cargo
 "cargo:topgrade" = "latest" # One command to update everything: system, cargo, mise, and flatpaks
@@ -20,9 +19,6 @@ cargo-binstall = "latest"   # Install Rust binaries from GitHub releases instead
 usage = "latest"            # CLI specification for argument completion
 carapace = "latest"         # Multi-shell argument completion logic
 "npm:@microsoft/inshellisense" = "latest"
-
-# --- Productivity Tools ---
-"cargo:bmm" = "latest"    # bmm (stands for "bookmarks manager") lets you get to your bookmarks in a flash.
 
 # --- Development & Build Tools ---
 neovim = "latest"           # Hyperextensible text editor (the heart of the workflow)
@@ -49,7 +45,8 @@ arduino-cli = "latest"      # Official Arduino toolchain for compiling/uploading
 
 # --- Languages & Toolchains ---
 rust = "latest"
-rust-analyzer = "latest"    # Rust LSP 
+rust-analyzer = "latest"    # Rust LSP
+"cargo:bacon" = "latest"
 go = "latest"
 zig = "latest"
 python = "latest"
@@ -67,6 +64,28 @@ typos = "latest"            # Source code spell checker (great for catching erro
 marksman = "latest"         # Language server for Markdown (notes/documentation)
 markdownlint-cli2 = "latest"
 "npm:markdownlint-cli" = "latest" # Till I update my neovim config for cli2 or marksman
+
+# --- Navigation & Search ---
+"cargo:bmm" = "latest"            # Fast TUI bookmark manager (browser independent)
+"cargo:wiki-tui" = "latest"       # Wikipedia explorer; browse articles without leaving the shell
+navi = "latest"                   # Interactive cheatsheet tool for CLI command snippets
+
+# --- Connectivity & Hardware ---
+"cargo:impala" = "latest"         # TUI frontend for iwctl (Wi-Fi management)
+"cargo:bluetui" = "latest"        # Bluetooth manager; scan, pair, and connect via TUI
+"cargo:jolt-tui" = "latest"       # Real-time battery monitor with discharge graphs
+
+# --- File & Network Utilities ---
+"cargo:ouch" = "latest"           # Painless compression/decompression (handles zip, tar.gz, etc.)
+"go:github.com/surge-downloader/surge" = "latest" # High-performance P2P & HTTP download manager
+"cargo:lemmeknow" = "latest"      # "What is this string?" (identifies hashes, API keys, etc.)
+
+# --- Web & API Exploration ---
+"go:github.com/rs/curlie" = "latest" # The power of curl with the user-friendliness of HTTPie
+"pipx:httpie" = "latest"            # Standard-bearer for human-friendly HTTP requests (Python-based)
+
+# --- Media & ---
+"cargo:spotify_player" = "latest" # Feature-rich Spotify TUI (requires Spotify Premium)
 
 [env]
 # Global Defaults
@@ -96,3 +115,4 @@ LDFLAGS = "-fuse-ld=mold"
 [settings]
 env_shell_expand = true     # Allow variables like $HOME in the config
 asdf_compat = true          # Maintain compatibility with legacy .tool-versions files
+experimental = true
