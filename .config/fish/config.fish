@@ -3,9 +3,9 @@ if type -q mise
     # 1. Mise Setup
     set -gx MISE_SHIMS "$HOME/.local/share/mise/shims"
     fish_add_path -m $MISE_SHIMS
-    
-    mise activate fish --shims | source 
-    
+
+    mise activate fish --shims | source
+
     # 2. Additional Binary Paths
     fish_add_path -m ~/.local/bin
     # Only try to add Go path if the binary exists to avoid error noise
@@ -91,4 +91,3 @@ if status is-interactive
 
     complete -c y -w yazi
 end
-
