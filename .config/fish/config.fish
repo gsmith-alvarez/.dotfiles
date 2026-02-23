@@ -1,6 +1,11 @@
 ### --- 1. INITIALIZATION --- ###
+set -gx MISE_SHIMS "$HOME/.local/share/mise/shims"
+if test -d $MISE_SHIMS
+    fish_add_path -m $MISE_SHIMS
+end
+
 if type -q mise
-    mise activate fish | source
+    mise activate fish --shims | source
 end
 
 fish_add_path ~/.local/bin
