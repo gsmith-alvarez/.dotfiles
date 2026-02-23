@@ -17,6 +17,9 @@ cargo-binstall = "latest"   # Install Rust binaries from GitHub releases instead
 "cargo:cargo-update" = "latest" # Updates all binaries installed via cargo
 "cargo:topgrade" = "latest" # One command to update everything: system, cargo, mise, and flatpaks
 "cargo:cargo-cache" = "latest"
+usage = "latest"            # CLI specification for argument completion
+carapace = "latest"         # Multi-shell argument completion logic
+"npm:@microsoft/inshellisense" = "latest"
 
 # --- Productivity Tools ---
 "cargo:bmm" = "latest"    # bmm (stands for "bookmarks manager") lets you get to your bookmarks in a flash. 
@@ -24,8 +27,6 @@ cargo-binstall = "latest"   # Install Rust binaries from GitHub releases instead
 # --- Development & Build Tools ---
 neovim = "latest"           # Hyperextensible text editor (the heart of the workflow)
 zellij = "latest"           # Terminal multiplexer with a workspace feel (Rust-based alternative to tmux)
-usage = "latest"            # CLI specification for argument completion
-carapace = "latest"         # Multi-shell argument completion logic
 make = "latest"             # Standard build tool for C/C++ projects
 cmake = "latest"            # Cross-platform build system generator
 just = "latest"             # A modern, simpler alternative to 'make' for project tasks

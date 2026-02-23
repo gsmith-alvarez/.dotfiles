@@ -1,5 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
+SETUVAR --export CARAPACE_BRIDGES:zsh\x2cbash\x2cinshellisense\x2cusage
 SETUVAR __fish_initialized:4300
 SETUVAR _fisher_upgraded_to_4_4:\x1d
 SETUVAR fish_user_key_bindings:\x1d

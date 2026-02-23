@@ -174,4 +174,8 @@ org.freedesktop.LinuxAudio.Plugins.swh
 
 ## Extra
 
-[Keepassxc Browser Connection - Flatpak](https://github.com/theCalcaholic/fix-keepassxc-flatpak-browsers) 
+[Keepassxc Browser Connection - Flatpak](https://github.com/theCalcaholic/fix-keepassxc-flatpak-browsers)
+
+Carapace Compleitions
+
+`carapace --list | awk '{print $1}' | xargs -I{} touch ~/.config/fish/completions/{}.fish`

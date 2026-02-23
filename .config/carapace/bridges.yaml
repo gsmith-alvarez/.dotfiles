@@ -1,0 +1,2 @@
+node: ["$carapace.bridge.Inshellisense([node])"]
+npm: ["$carapace.bridge.Inshellisense([npm])"]

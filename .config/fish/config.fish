@@ -17,6 +17,13 @@ if command -v secret-tool >/dev/null
     set -gx GH_TOKEN $GITHUB_TOKEN
 end
 
+# Caraoace Shell Completer
+
+if type -q carapace
+    set -gx CARAPACE_BRIDGES 'zsh,bash,inshellisense,usage'
+    carapace _carapace | source
+end
+
 ### --- 2. INTERACTIVE ONLY --- ###
 
 if status is-interactive
