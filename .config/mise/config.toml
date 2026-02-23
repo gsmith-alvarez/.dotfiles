@@ -29,6 +29,7 @@ carapace = "latest"         # Multi-shell argument completion logic
 make = "latest"             # Standard build tool for C/C++ projects
 cmake = "latest"            # Cross-platform build system generator
 just = "latest"             # A modern, simpler alternative to 'make' for project tasks
+hyperfine = "latest"
 
 # --- Advanced Linkers & Compilers ---
 mold = "latest"		    # A modern rust linker
