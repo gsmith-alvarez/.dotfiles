@@ -22,7 +22,7 @@ carapace = "latest"         # Multi-shell argument completion logic
 "npm:@microsoft/inshellisense" = "latest"
 
 # --- Productivity Tools ---
-"cargo:bmm" = "latest"    # bmm (stands for "bookmarks manager") lets you get to your bookmarks in a flash. 
+"cargo:bmm" = "latest"    # bmm (stands for "bookmarks manager") lets you get to your bookmarks in a flash.
 
 # --- Development & Build Tools ---
 neovim = "latest"           # Hyperextensible text editor (the heart of the workflow)
@@ -30,7 +30,9 @@ zellij = "latest"           # Terminal multiplexer with a workspace feel (Rust-b
 make = "latest"             # Standard build tool for C/C++ projects
 cmake = "latest"            # Cross-platform build system generator
 just = "latest"             # A modern, simpler alternative to 'make' for project tasks
-hyperfine = "latest"
+hyperfine = "latest"	    # Benchmarking tool
+podman = "latest"           # Daemonless Virtualization Tool
+podman-tui = "latest"
 
 # --- Advanced Linkers & Compilers ---
 mold = "latest"		    # A modern rust linker

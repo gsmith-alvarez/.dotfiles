@@ -28,7 +28,8 @@ Check Updates
 sudo dnf install llvm-devel clang lldb lld ccache git gh ghostty \
 direnv lnav tree-sitter-cli valgrind gdb \
 flatpak podman toolbox virt-manager wine-core \
-code thunderbird keepassxc syncthing texlive-scheme-medium libusb1-devel
+code thunderbird keepassxc syncthing texlive-scheme-medium libusb1-devel \
+distrobox
 ``` 
 
 ### dnf Groups
