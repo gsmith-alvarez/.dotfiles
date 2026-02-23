@@ -35,7 +35,8 @@ code thunderbird keepassxc syncthing texlive-scheme-medium libusb1-devel
 
 ```
 sudo dnf group install admin-tools c-development development-tools \
-security-lab electronic-lab python-science libreoffice
+security-lab electronic-lab python-science libreoffice \
+multimedia sound-and-video
 ```
 
 ### Digilent Waveforms+Runtimes
