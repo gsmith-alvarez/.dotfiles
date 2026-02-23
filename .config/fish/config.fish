@@ -48,6 +48,7 @@ if status is-interactive
     type -q zoxide; and zoxide init fish | source
     type -q fzf; and fzf --fish | source
     type -q atuin; and atuin init fish | source
+    type -q navi; and navi widget fish | source
 
     # UI Preferences
     set -g fish_greeting
@@ -96,6 +97,16 @@ if status is-interactive
         abbr -a tree 'eza --tree --icons'
     end
 
+    # Navi Keybinds
+    if type -q navi
+        # Bind to Alt+e (Escape + e in terminal talk)
+        # This works in both default and vi-mode
+        bind \ee _navi_smart_replace
+        # If you use Fish VI mode, ensure it works in 'insert' mode too
+        if functions -q fish_vi_key_bindings
+            bind -M insert \ee _navi_smart_replace
+        end
+    end
     # Wayland Clipboard
     abbr -a --set-cursor copy wl-copy
     abbr -a --set-cursor paste wl-paste
