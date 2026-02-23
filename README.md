@@ -35,7 +35,8 @@ code thunderbird keepassxc syncthing texlive-scheme-medium libusb1-devel
 
 ```
 sudo dnf group install admin-tools c-development development-tools \
-security-lab electronic-lab python-science libreoffice
+security-lab electronic-lab python-science libreoffice \
+multimedia sound-and-video
 ```
 
 ### Digilent Waveforms+Runtimes
@@ -179,3 +180,19 @@ org.freedesktop.LinuxAudio.Plugins.swh
 Carapace Compleitions
 
 `carapace --list | awk '{print $1}' | xargs -I{} touch ~/.config/fish/completions/{}.fish`
+
+**Laptop**
+
+Suspend on close
+
+`sudo nano /etc/systemd/logind.conf`
+
+Then paste this
+
+```bash
+ HandleLidSwitch=suspend
+ HandleLidSwitchExternalPower=suspend
+ HandleLidSwitchDocked=suspend
+```
+
+Restart Laptop
