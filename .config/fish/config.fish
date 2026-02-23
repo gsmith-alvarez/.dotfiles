@@ -1,27 +1,29 @@
 ### --- 1. INITIALIZATION --- ###
-set -gx MISE_SHIMS "$HOME/.local/share/mise/shims"
-if test -d $MISE_SHIMS
-    fish_add_path -m $MISE_SHIMS
-end
-
 if type -q mise
-    mise activate fish --shims | source
-end
+    # 1. Mise Setup
+    set -gx MISE_SHIMS "$HOME/.local/share/mise/shims"
+    fish_add_path -m $MISE_SHIMS
+    
+    mise activate fish --shims | source 
+    
+    # 2. Additional Binary Paths
+    fish_add_path -m ~/.local/bin
+    # Only try to add Go path if the binary exists to avoid error noise
+    if type -q go
+        fish_add_path -m (go env GOPATH)/bin
+    end
 
-fish_add_path ~/.local/bin
-fish_add_path ~/.cargo/bin
+    # 3. Carapace Configuration
+    if type -q carapace
+        set -gx CARAPACE_BRIDGES 'zsh,bash,inshellisense,usage'
+        carapace _carapace | source
+    end
+end
 
 # GitHub Token (Keeping your existing keyring logic)
 if command -v secret-tool >/dev/null
     set -gx GITHUB_TOKEN (secret-tool lookup github token)
     set -gx GH_TOKEN $GITHUB_TOKEN
-end
-
-# Caraoace Shell Completer
-
-if type -q carapace
-    set -gx CARAPACE_BRIDGES 'zsh,bash,inshellisense,usage'
-    carapace _carapace | source
 end
 
 ### --- 2. INTERACTIVE ONLY --- ###
