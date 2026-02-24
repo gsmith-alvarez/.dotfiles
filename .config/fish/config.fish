@@ -92,21 +92,31 @@ if status is-interactive
         abbr -a tree 'eza --tree --icons'
     end
 
-    # Navi Keybinds
-    if type -q navi
-        # Bind to Alt+e (Escape + e in terminal talk)
-        # This works in both default and vi-mode
-        bind \ee _navi_smart_replace
-        # If you use Fish VI mode, ensure it works in 'insert' mode too
-        if functions -q fish_vi_key_bindings
-            bind -M insert \ee _navi_smart_replace
+    # Define user keybindings (persists across mode changes)
+    function fish_user_key_bindings
+        # Navi Keybinds
+        if type -q navi
+            # Restore default Ctrl+g bindings
+            bind \cg _navi_smart_replace
+            if test "$fish_key_bindings" = "fish_vi_key_bindings"
+                bind -M insert \cg _navi_smart_replace
+            end
+            # Bind to Alt+e (Escape + e in terminal talk)
+            # This works in both default and vi-mode
+            bind \ee _navi_smart_replace
+            if test "$fish_key_bindings" = "fish_vi_key_bindings"
+                bind -M insert \ee _navi_smart_replace
+            end
         end
     end
+    
+    # Call it once to apply (since fish_vi_key_bindings was already called)
+    fish_user_key_bindings
 
     # Carapace Configuration
     if type -q carapace
         set -gx CARAPACE_BRIDGES 'zsh,bash,inshellisense,usage'
-        carapace _carapace | source
+        carapace _carapace fish | source
     end
 
     # Wayland Clipboard
