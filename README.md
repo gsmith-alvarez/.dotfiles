@@ -204,3 +204,58 @@ Then paste this
 ```
 
 Restart Laptop
+
+### Better Wifi
+
+By default, most Linux distributions use `wpa_supplicant` as the wireless backend. Switching to **iwd** (iNet Wireless Daemon) developed by Intel typically results in faster network scanning, quicker connection times, and lower resource overhead.
+
+**Prerequisites**
+
+* **NetworkManager**: Ensure you are using NetworkManager to manage your connections.
+* **iwd**: The modern wireless daemon.
+
+**Configuration Steps**
+
+1. **Install the iwd backend**
+```bash
+sudo dnf install iwd
+
+```
+
+
+2. **Configure NetworkManager to use iwd** Create a drop-in configuration file to redirect the Wi-Fi backend from the default to `iwd`.
+```bash
+echo -e "[device]\nwifi.backend=iwd" | sudo tee /etc/NetworkManager/conf.d/iwd.conf
+
+```
+
+
+3. **Disable the legacy backend** Masking `wpa_supplicant` ensures it cannot be started by other services, preventing conflicts over the wireless interface.
+```bash
+sudo systemctl mask wpa_supplicant
+
+```
+
+
+4. **Activation** Enable the new daemon and restart the network stack to apply the changes.
+```bash
+sudo systemctl enable --now iwd
+sudo systemctl restart NetworkManager
+
+```
+
+
+
+> [!IMPORTANT]
+> **Note on Migration:** Existing saved Wi-Fi passwords may not migrate automatically. You may need to re-enter your credentials via your system's network settings or a TUI like `impala` upon the first connection.
+
+**Troubleshooting**
+
+If your Wi-Fi device is not detected after the restart, verify the status of the services:
+
+```bash
+systemctl status iwd
+nmcli device
+
+```
+
