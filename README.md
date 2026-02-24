@@ -22,7 +22,7 @@ dnf check-update
 
 sudo dnf install llvm-devel clang lldb lld ccache git gh ghostty \
 direnv lnav tree-sitter-cli valgrind gdb \
-flatpak podman toolbox virt-manager wine-core \
+flatpak podman toolbox virt-manager \
 code thunderbird keepassxc syncthing texlive-scheme-medium libusb1-devel \
 distrobox openssl-devel alsa-lib-devel dbus-devel
 
@@ -42,9 +42,8 @@ sudo dnf install ./digilent.adept.runtime_*.rpm ./digilent.waveforms_*.rpm
 **4. Mise**
 
 ```bash
-curl https://mise.jdx.dev/install.sh | sh
-MISE_KEY=$(curl -sL https://mise.jdx.dev/install.sh | grep -oE '[A-F0-9]{40}' | head -n 1)
-gpg --keyserver hkps://keyserver.ubuntu.com --recv-keys "$MISE_KEY"
+dnf config-manager addrepo --from-repofile="https://mise.jdx.dev/rpm/mise.repo"
+sudo dnf install mise
 ```
 
 ---
@@ -58,7 +57,7 @@ gh repo clone gsmith-alvarez/.dotfiles ~/dotfiles
 cd ~/dotfiles
 
 # Safely overwrite any existing symlinks
-stow --restow . -t ~
+stow .config -t ~
 mise install -y
 
 ```
@@ -99,7 +98,7 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="21a9", ATTRS{idProduct}=="1003", TAG+="uacc
 SUBSYSTEMS=="usb", ATTRS{idVendor}=="21a9", ATTRS{idProduct}=="1004", TAG+="uaccess"
 SUBSYSTEMS=="usb", ATTRS{idVendor}=="21a9", ATTRS{idProduct}=="1005", TAG+="uaccess"
 SUBSYSTEMS=="usb", ATTRS{idVendor}=="21a9", ATTRS{idProduct}=="1006", TAG+="uaccess"
-SUBSYSTEMS=="usb", ATTRS{idVendor}=="1443", MODE="666", TAG+="uaccess"
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="1443", TAG+="uaccess"
 
 ```
 
@@ -133,9 +132,9 @@ org.freedesktop.LinuxAudio.Plugins.MDA org.freedesktop.LinuxAudio.Plugins.TAP \
 org.freedesktop.LinuxAudio.Plugins.ZamPlugins org.freedesktop.LinuxAudio.Plugins.swh
 
 # Apply IPC/Device Overrides
-sudo flatpak override --device --share=ipc cc.arduino.IDE2
-sudo flatpak override --device --share=ipc org.kicad.KiCad
-sudo flatpak override --device --share=ipc com.bambulab.BambuStudio
+flatpak override --user --device=all cc.arduino.IDE2
+flatpak override --user --device=all org.kicad.KiCad
+flatpak override --user --device=all com.bambulab.BambuStudio
 
 ```
 
@@ -152,7 +151,7 @@ Switch from `wpa_supplicant` to Intel's `iwd` for faster scanning and lower over
 
 ```bash
 sudo dnf install iwd
-cargo install tampla
+cargo install impala
 echo -e "[device]\nwifi.backend=iwd" | sudo tee /etc/NetworkManager/conf.d/iwd.conf
 sudo systemctl mask wpa_supplicant
 sudo systemctl enable --now iwd
@@ -160,19 +159,7 @@ sudo systemctl restart NetworkManager
 
 ```
 
-**2. bpftune (Network Auto-Tuning)**
-Use Oracle's BPF daemon to dynamically adjust TCP buffer sizes and congestion controls under load.
-
-```bash
-sudo dnf install bpftool libnl3-devel python3-docutils libbpf-devel
-git clone https://github.com/oracle/bpftune.git
-cd bpftune && make && sudo make install
-sudo systemctl enable --now bpftune
-bpftune -S # Verify
-
-```
-
-**3. scx (CPU Scheduler)**
+**2. scx (CPU Scheduler)**
 Bypass the standard EEVDF scheduler and inject `rustland`, a BPF-based scheduler optimized for latency.
 
 ```bash
@@ -204,13 +191,11 @@ sudo systemctl enable --now systemd-oomd
 ```
 
 **2. Hardware Power States**
-Manage Thunderbolt DMA security levels (`bolt`), generate power reports (`powertop`), and aggressively undervolt/manage PCIe states (`tlp`).
+Manage Thunderbolt DMA security levels (`bolt`), generate power reports (`powertop`), and manage modern P-states.
 
 ```bash
-sudo dnf install tlp tlp-rdw bolt powertop
-sudo systemctl mask power-profiles-daemon
-sudo systemctl enable --now tlp boltd
-
+sudo dnf install bolt powertop tuned tuned-ppd
+sudo systemctl enable --now tuned boltd
 ```
 
 **3. Laptop Lid Behavior**

@@ -18,14 +18,12 @@ cargo-binstall = "latest"   # Install Rust binaries from releases (Rust)
 "cargo:cargo-cache" = "latest"  # Manage/clean cargo cache (Rust)
 usage = "latest"            # CLI specification tool (Rust)
 carapace = "latest"         # Multi-shell completion engine (Go)
-"npm:@microsoft/inshellisense" = "latest" # IDE-style shell completion (JS)
 
 # --- Config & Data Formats ---
 taplo = "latest"            # TOML LSP, linter, and formatter (Rust)
 "cargo:kdl-fmt" = "latest"  # Formatter for KDL documents (Rust)
 "npm:yaml-language-server" = "latest" # YAML LSP (JS)
 yamllint = "latest"         # Strict YAML logic/syntax linter (Python)
-"npm:vscode-langservers-extracted" = "latest" # JSON/HTML/CSS LSPs (JS)
 "cargo:jless" = "latest"    # Interactive JSON viewer/pager (Rust)
 
 # --- Shell Scripting ---
@@ -86,7 +84,7 @@ navi = "latest"             # Interactive cheatsheet (Rust)
 "go:github.com/surge-downloader/surge" = "latest" # P2P/HTTP downloader (Go)
 "cargo:lemmeknow" = "latest" # String/Hash identifier (Rust)
 "go:github.com/rs/curlie" = "latest" # User-friendly curl wrapper (Go)
-"pipx:httpie" = "latest"    # Human-friendly HTTP client (Python)
+xh = "latest"               # Fast native HTTP client (Rust)
 "cargo:spotify_player" = "latest" # Feature-rich Spotify TUI (Rust)
 
 [env]
@@ -116,3 +114,4 @@ CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER = "clang"
 env_shell_expand = true     # Support $HOME in paths
 experimental = true         # Enable mise experimental features
 all_compile = false         # Favor binaries over source builds
+cargo_binstall = true       # Use pre-compiled Cargo binaries
