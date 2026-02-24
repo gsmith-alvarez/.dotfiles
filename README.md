@@ -24,7 +24,8 @@ sudo dnf install llvm-devel clang lldb lld ccache git gh ghostty \
 direnv lnav tree-sitter-cli valgrind gdb \
 flatpak podman toolbox virt-manager \
 code thunderbird keepassxc syncthing texlive-scheme-medium libusb1-devel \
-distrobox openssl-devel alsa-lib-devel dbus-devel
+distrobox openssl-devel alsa-lib-devel dbus-devel mold \
+sysstat perf picocom avrdude tuned-utils iotop nload
 
 sudo dnf group install admin-tools c-development development-tools \
 security-lab electronic-lab python-science libreoffice \
