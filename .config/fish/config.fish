@@ -1,45 +1,40 @@
 ### --- 1. INITIALIZATION --- ###
-if type -q mise
-    # 1. Mise Setup
-    set -gx MISE_SHIMS "$HOME/.local/share/mise/shims"
-    fish_add_path -m $MISE_SHIMS
+# We add all standard paths FIRST using -g (global append/prepend)
+# so that our high-performance tools can overwrite them later.
 
-    mise activate fish --shims | source
+fish_add_path -g ~/.local/bin
 
-    fish_add_path -m ~/.local/bin
-
-    # 2. Language-Specific Binary Paths
-    # Cargo (Rust) binaries
-    if test -d ~/.cargo/bin
-        fish_add_path -m ~/.cargo/bin
-    end
-
-    # Go binaries (Dynamic check to avoid calling 'go env' on every shell start)
-    if type -q go
-        set -gx GOPATH (go env GOPATH)
-        fish_add_path -m $GOPATH/bin
-    end
-
-    # 3. Carapace Configuration
-    if type -q carapace
-        set -gx CARAPACE_BRIDGES 'zsh,bash,inshellisense,usage'
-        carapace _carapace | source
-    end
+if test -d ~/.cargo/bin
+    fish_add_path -g ~/.cargo/bin
 end
 
-# --- 2. CREDENTIALS & ENVIRONMENT --- #
+if test -d /home/gsmith-alvarez/.lmstudio/bin
+    fish_add_path -g /home/gsmith-alvarez/.lmstudio/bin
+end
 
-# GitHub Token (Non-blocking keyring lookup)
-if command -v secret-tool >/dev/null
-    # Using a background check or variable check to ensure this doesn't hang
-    set -gx GITHUB_TOKEN (secret-tool lookup github token)
-    set -gx GH_TOKEN $GITHUB_TOKEN
+# Go (Only needed for dynamic go installs since mise manages the core binary)
+if type -q go
+    set -gx GOPATH (go env GOPATH)
+    fish_add_path -g $GOPATH/bin
 end
 
 # LM Studio 
 if test -d /home/gsmith-alvarez/.lmstudio/bin
-    fish_add_path -m /home/gsmith-alvarez/.lmstudio/bin
+    fish_add_path -g /home/gsmith-alvarez/.lmstudio/bin
 end
+
+### --- 2. THE ENGINE: MISE (Top Layer) --- ###
+if type -q mise
+    mise activate fish | source
+end
+
+### --- 3. CREDENTIALS --- ###
+# GitHub Token (Note: synchronous lookups add shell startup latency)
+if command -v secret-tool >/dev/null
+    set -gx GITHUB_TOKEN (secret-tool lookup github token)
+    set -gx GH_TOKEN $GITHUB_TOKEN
+end
+
 
 ### --- 2. INTERACTIVE ONLY --- ###
 if status is-interactive
@@ -107,6 +102,13 @@ if status is-interactive
             bind -M insert \ee _navi_smart_replace
         end
     end
+
+    # Carapace Configuration
+    if type -q carapace
+        set -gx CARAPACE_BRIDGES 'zsh,bash,inshellisense,usage'
+        carapace _carapace | source
+    end
+
     # Wayland Clipboard
     abbr -a --set-cursor copy wl-copy
     abbr -a --set-cursor paste wl-paste

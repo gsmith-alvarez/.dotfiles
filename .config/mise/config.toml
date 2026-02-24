@@ -23,13 +23,13 @@ btop = "latest"
 # --- Config & Data Formats ---
 taplo = "latest"            # TOML LSP, linter, and formatter (Rust)
 "cargo:kdl-fmt" = "latest"  # Formatter for KDL documents (Rust)
-"npm:yaml-language-server" = "latest" # YAML LSP (JS)
 yamllint = "latest"         # Strict YAML logic/syntax linter (Python)
 "cargo:jless" = "latest"    # Interactive JSON viewer/pager (Rust)
 
 # --- Shell Scripting ---
-shellcheck = "latest"       # Bash/Sh static analysis (Haskell)
+shellcheck = "latest"
 shfmt = "latest"            # Shell script formatter (Go)
+"go:github.com/go-delve/delve/cmd/dlv" = "latest"
 
 # --- Development & Build Tools ---
 neovim = "latest"           # Core text editor (C/Lua)
@@ -69,8 +69,14 @@ oxlint = "latest"           # Ultra-fast JS/TS linter (Rust)
 "npm:oxfmt" = "latest"      # Fast JS/TS formatter (Rust-backed)
 typos = "latest"            # Source code spell checker (Rust)
 marksman = "latest"         # Markdown LSP (C#)
-markdownlint-cli2 = "latest" # Strict markdown linter (JS)
-"npm:markdownlint-cli" = "latest" # Legacy markdown linter support (JS)
+"npm:bash-language-server" = "latest"
+"npm:vscode-json-languageserver" = "latest"
+"npm:yaml-language-server" = "latest"
+"npm:dockerfile-language-server-nodejs" = "latest"
+"npm:typescript-language-server" = "latest" # ts_ls
+"go:golang.org/x/tools/gopls" = "latest"
+tree-sitter = "latest"
+"npm:pyright" = "latest"
 
 # --- Navigation & Utilities ---
 "cargo:bmm" = "latest"      # TUI bookmark manager (Rust)
@@ -84,6 +90,7 @@ navi = "latest"             # Interactive cheatsheet (Rust)
 "go:github.com/rs/curlie" = "latest" # User-friendly curl wrapper (Go)
 xh = "latest"               # Fast native HTTP client (Rust)
 "cargo:spotify_player" = "latest" # Feature-rich Spotify TUI (Rust)
+"npm:markdownlint-cli2" = "latest"
 
 [env]
 EDITOR = "nvim"
@@ -112,4 +119,3 @@ CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER = "clang"
 env_shell_expand = true     # Support $HOME in paths
 experimental = true         # Enable mise experimental features
 all_compile = false         # Favor binaries over source builds
-cargo_binstall = true       # Use pre-compiled Cargo binaries
