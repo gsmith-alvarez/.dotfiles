@@ -18,6 +18,7 @@ cargo-binstall = "latest"   # Install Rust binaries from releases (Rust)
 "cargo:cargo-cache" = "latest"  # Manage/clean cargo cache (Rust)
 usage = "latest"            # CLI specification tool (Rust)
 carapace = "latest"         # Multi-shell completion engine (Go)
+btop = "latest"
 
 # --- Config & Data Formats ---
 taplo = "latest"            # TOML LSP, linter, and formatter (Rust)
