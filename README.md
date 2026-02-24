@@ -219,7 +219,7 @@ By default, most Linux distributions use `wpa_supplicant` as the wireless backen
 1. **Install the iwd backend**
 ```bash
 sudo dnf install iwd
-
+cargo install tampla
 ```
 
 
