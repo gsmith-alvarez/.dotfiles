@@ -113,6 +113,7 @@ cleanup = true
 # Custom commands
 [commands]
 "Update keyd" = "cd ~/tools/keyd && git fetch && [ $(git rev-parse HEAD) != $(git rev-parse @{u}) ] && git pull && make && sudo make install || echo 'keyd is up to date'"
+"Update bpftune" = "cd ~/tools/bpftune && git fetch && [ $(git rev-parse HEAD) != $(git rev-parse @{u}) ] && git pull && make clean && make && sudo make install || echo 'bpftune is up to date'"
 # "Python Environment" = "~/dev/.env/bin/pip install -i https://pypi.python.org/simple -U --upgrade-strategy eager jupyter"
 # "Custom command using interactive shell (unix)" = "-i vim_upgrade"
 
