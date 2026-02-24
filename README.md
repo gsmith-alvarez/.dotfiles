@@ -258,4 +258,107 @@ systemctl status iwd
 nmcli device
 
 ```
+## Optimizations
+
+### zram
+
+Standard swap partitions are a relic of the HDD era. Even with an NVMe, swapping to disk is orders of magnitude slower than RAM. zram creates a compressed swap device inside your RAM.
+
+    The Upgrade: Instead of your system slowing to a crawl when RAM fills up, it compresses "cold" data in memory. It effectively gives you 1.5x to 2x more usable multitasking space with zero disk latency.
+
+```bash
+# Install the generator (standard on Fedora)
+sudo dnf install systemd-zram-generator
+
+# Create the config: use 50% of your RAM as compressed swap
+echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd" | sudo tee /etc/systemd/zram-generator.conf
+
+# Apply
+sudo systemctl daemon-reload
+sudo systemctl start /dev/zram0
+```
+
+### bpftune: Auto-Tunning Network
+
+The Linux kernel has over 1,500 "tunables" (sysctls) for things like TCP buffer sizes and congestion control. Most people never touch them. bpftune is a modern daemon from Oracle that uses BPF (Berkeley Packet Filter) to observe your system's traffic in real-time and auto-tune the kernel for you.
+
+    The Upgrade: It replaces "magic numbers" in sysctl.conf with dynamic, always-on optimization. If you start a huge download or a high-concurrency dev server, it adjusts the buffers on the fly.
+
+```bash
+# Depencdencies
+sudo dnf install bpftool libnl3-devel python3-docutils
+
+git clone https://github.com/oracle/bpftune.git
+cd bpftune
+make
+
+sudo make install
+sudo systemctl enable --now bpftune
+```
+
+Veify it is working
+
+`bpftune -S`
+
+### `systemd-ood`: Proactive Memeory Management
+
+When you run out of memory, the default Linux kernel OOM-killer usually waits until the system is completely unresponsive (thrashing) before it starts killing processes. systemd-oomd uses Pressure Stall Information (PSI) to see when the system is starting to struggle and kills the offending process before your mouse cursor freezes.
+
+    The Upgrade: It ensures your system stays responsive even under extreme load.
+
+```bash
+# Enable the daemon
+sudo systemctl enable --now systemd-oomd
+
+# Verify it can see your memory pressure
+oomctl
+```
+
+### `scx` CPU Schedular
+
+Standard Linux uses the EEVDF scheduler. It’s a general-purpose "jack of all trades." However, there is a new framework called sched-ext (Scheduler Extensions) that allows you to run CPU schedulers implemented as BPF programs.
+
+```bash
+# Enable the COPR for sched-ext
+sudo dnf copr enable bieszczaders/kernel-cachyos-addons
+
+# Install the Rust-based schedulers
+sudo dnf install scx-scheds scx-manager scx-tools
+
+# Start 'rustland' - a scheduler optimized for task latency
+sudo systemctl enable --now scx_loader.service
+scxctl start --sched rustland
+sudo mkdir -p /etc/scx_loader
+echo -e 'default_sched = "scx_rustland"\ndefault_mode = "Auto"' | sudo tee /etc/scx_loader/config.toml
+```
+
+### `tlp` Power Manager
+
+The Upgrade: It automates "undervolting" logic and aggressively manages the power state of PCIe devices, NVMe controllers, and USB ports when the charger is unplugged.
+
+```bash
+# Note: If you use TLP, you must remove power-profiles-daemon
+sudo dnf install tlp tlp-rdw
+sudo systemctl mask power-profiles-daemon
+sudo systemctl enable --now tlp
+```
+
+### bolt: Thunderbolt Management
+
+If your laptop has Thunderbolt 3 or 4 ports, you need bolt. It manages "Security Levels" for external devices.
+
+    The Upgrade: It ensures that when you plug into a dock, the high-speed DMA (Direct Memory Access) is authorized properly, preventing "Evil Maid" attacks where a USB device could read your RAM.
+
+```bash
+sudo dnf install bolt
+sudo systemctl enable --now boltd
+```
+
+### `powertop`: Power Management Report
+
+```bash
+sudo dnf install powertop
+sudo powertop
+```
+
 
