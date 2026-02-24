@@ -42,9 +42,6 @@ ninja = "latest"            # High-speed build executor (C++)
 ccache = "latest"           # Compiler cache for C/C++ (C++)
 "cargo:sccache" = "latest" 
 
-# --- Advanced Linkers & Compilers ---
-mold = "latest"             # High-performance linker (C++)
-
 # --- Embedded & Systems (EE Specific) ---
 arduino-cli = "latest"      # Command-line Arduino toolchain (Go)
 "gcc-arm-none-eabi" = "latest" # ARM Cortex-M cross-compiler (C)
