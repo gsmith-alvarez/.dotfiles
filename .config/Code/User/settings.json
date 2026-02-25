@@ -5,6 +5,8 @@
     "workbench.statusBar.visible": true,
     "editor.lineNumbers": "relative",
     "editor.minimap.enabled": false,
+    "editor.detectIndentation": true,
+    "keyboard.dispatch": "keyCode",
     "workbench.layoutControl.enabled": false,
     "workbench.editor.showTabs": "single",
     "breadcrumbs.enabled": false,
@@ -17,5 +19,79 @@
     "terminal.integrated.defaultProfile.linux": "fish",
     "terminal.integrated.env.linux": {
         "PATH": "${env:HOME}/.local/share/mise/shims:${env:PATH}"
-    }
+    },
+    "mise.configureExtensionsAutomatically": true,
+    "mise.updateEnvAutomatically": true,
+    "vim.easymotion": true,
+    "vim.useSystemClipboard": true,
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<space>"
+            ],
+            "commands": [
+                "vspacecode.space"
+            ]
+        },
+        {
+            "before": [
+                ","
+            ],
+            "commands": [
+                "vspacecode.space",
+                {
+                    "command": "whichkey.triggerKey",
+                    "args": "m"
+                }
+            ]
+        }
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<space>"
+            ],
+            "commands": [
+                "vspacecode.space"
+            ]
+        },
+        {
+            "before": [
+                ","
+            ],
+            "commands": [
+                "vspacecode.space",
+                {
+                    "command": "whichkey.triggerKey",
+                    "args": "m"
+                }
+            ]
+        },
+        {
+            "before": [
+                ">"
+            ],
+            "commands": [
+                "editor.action.indentLines"
+            ]
+        },
+        {
+            "before": [
+                "<"
+            ],
+            "commands": [
+                "editor.action.outdentLines"
+            ]
+        }
+    ],
+    "platformio-ide.useBuiltinPIOCore": false,
+    "platformio-ide.customPATH": "/home/gsmith-alvarez/.local/share/mise/installs/pipx-platformio/6.1.19/bin/pio",
+    "platformio-ide.autoRebuildAutocompleteIndex": false,
+    "C_Cpp.intelliSenseEngine": "disabled",
+    "clangd.arguments": [
+        "--compile-commands-dir=${workspaceFolder}",
+        "--background-index",
+        "--completion-style=detailed",
+        "--header-insertion=never"
+    ]
 }

@@ -50,6 +50,7 @@ arduino-cli = "latest"      # Command-line Arduino toolchain (Go)
 "cargo:cargo-binutils" = "latest" # Binary management for MCUs (Rust)
 "cargo:cargo-bloat" = "latest"    # Analyze binary size overhead (Rust)
 "cargo:probe-rs-tools" = "latest"       # MCU flashing/debugging suite (Rust)
+"pipx:platformio" = "latest"
 
 # --- Languages & Toolchains ---
 rust = "latest"             # Systems programming language
@@ -62,6 +63,7 @@ uv = "latest"               # Fast Python project/package manager (Rust)
 node = "lts"                # JS/TS runtime
 lua = "5.1"              # Scripting language (Neovim config)
 lazygit = "latest"
+
 
 # --- Linters & Formatters ---
 ruff = "latest"             # Fast Python linter/formatter (Rust)
@@ -121,3 +123,8 @@ CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER = "clang"
 env_shell_expand = true     # Support $HOME in paths
 experimental = true         # Enable mise experimental features
 all_compile = false         # Favor binaries over source builds
+activate_aggressive = true
+color_theme = "catppuccin"
+
+[settings.pipx]
+uvx = true

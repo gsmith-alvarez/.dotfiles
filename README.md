@@ -40,6 +40,12 @@ Install Digilent Waveforms from local `.rpm` files and configure the `mise` tool
 sudo dnf install ./digilent.adept.runtime_*.rpm ./digilent.waveforms_*.rpm
 ```
 
+### uv tools
+
+```bash
+
+uv tool install platformio
+```
 **4. Mise**
 
 ```bash
