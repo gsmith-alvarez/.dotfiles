@@ -133,7 +133,7 @@ flatpak install flathub \
 cc.arduino.IDE2 com.bambulab.BambuStudio com.calibre_ebook.calibre \
 com.discordapp.Discord com.github.flxzt.rnote com.github.reds.LogisimEvolution \
 com.github.tchx84.Flatseal com.github.wwmm.easyeffects com.jgraph.drawio.desktop \
-com.obsproject.Studio com.spotify.Client com.usebottles.bottles \
+com.obsproject.Studio com.usebottles.bottles \
 eu.jumplink.Learn6502 io.github.alainm23.planify io.github.ra3xdh.qucs_s \
 md.obsidian.Obsidian net.ankiweb.Anki org.freecad.FreeCAD \
 org.gnome.NetworkDisplays org.kde.kdenlive org.kicad.KiCad org.qbittorrent.qBittorrent \

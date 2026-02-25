@@ -117,11 +117,10 @@ cleanup = true
 # "Python Environment" = "~/dev/.env/bin/pip install -i https://pypi.python.org/simple -U --upgrade-strategy eager jupyter"
 # "Custom command using interactive shell (unix)" = "-i vim_upgrade"
 # This keeps your 'pio' and 'platformio' binaries updated via uv
-"UV Tools" = "uv tool upgrade --all"
 
 # This updates the actual compilers (GCC/GDB) and frameworks (Arduino/ESP-IDF)
 "PlatformIO Core" = "pio pkg update --global"
-"Update LSP DB" = "find ~/projects -name 'platformio.ini' -execdir pio run -t compiledb \;"
+"Update LSP DB" = "find ~/projects -name 'platformio.ini' -execdir pio run -t compiledb \\;"
 
 [python]
 # enable_pip_review = true                         ###disabled by default
