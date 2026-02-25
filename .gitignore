@@ -1,0 +1,15 @@
+# Ignore everything in the Code folder by default
+.config/Code/*
+
+# But explicitly allow the stuff that actually matters
+!.config/Code/User/
+.config/Code/User/*
+!.config/Code/User/settings.json
+!.config/Code/User/keybindings.json
+!.config/Code/User/snippets/
+
+# Ignore the heavy/private stuff inside the User folder
+.config/Code/User/History/
+.config/Code/User/workspaceStorage/
+.config/Code/User/globalStorage/
+.config/Code/User/chatSessions/
