@@ -13,3 +13,35 @@
 .config/Code/User/workspaceStorage/
 .config/Code/User/globalStorage/
 .config/Code/User/chatSessions/
+
+# --- EasyEffects ---
+# Back up your presets, but ignore the runtime state
+.config/easy-effects/*
+!.config/easy-effects/input/
+!.config/easy-effects/output/
+
+# --- Fish Shell ---
+# Keep your functions and config, ignore history and completions
+.config/fish/*
+!.config/fish/config.fish
+!.config/fish/functions/
+!.config/fish/conf.d/
+.config/fish/fish_variables
+.config/fish/fish_history
+
+# --- Mise ---
+# Mise usually tracks local tool versions in the project folder, 
+# but ignore the internal data/cache if it's in .config
+.config/mise/cache/
+.config/mise/downloads/
+
+# --- Zellij ---
+# Ignore layouts you don't want to track or temp files
+.config/zellij/cache/
+
+# --- General Linux Bloat ---
+**/*.log
+**/Cache*/
+**/cache*/
+**/tmp/
+.DS_Store
