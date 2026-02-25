@@ -4,12 +4,10 @@
     "workbench.activityBar.location": "hidden",
     "workbench.statusBar.visible": true,
     "editor.lineNumbers": "relative",
-    "editor.minimap.enabled": false,
     "editor.detectIndentation": true,
     "keyboard.dispatch": "keyCode",
     "workbench.layoutControl.enabled": false,
     "workbench.editor.showTabs": "single",
-    "breadcrumbs.enabled": false,
     "extensions.experimental.affinity": {
         "asvetliakov.vscode-neovim": 1
     },
@@ -93,5 +91,52 @@
         "--background-index",
         "--completion-style=detailed",
         "--header-insertion=never"
-    ]
+    ],
+    "editor.minimap.enabled": false,
+    "breadcrumbs.enabled": false,
+    "vspacecode.bindingOverrides": [
+        {
+            "keys": "e",
+            "name": "+Embedded (PlatformIO)",
+            "type": "bindings",
+            "bindings": [
+                {
+                    "key": "b",
+                    "name": "Build Firmware",
+                    "type": "command",
+                    "command": "workbench.action.tasks.runTask",
+                    "args": "PIO: Build"
+                },
+                {
+                    "key": "u",
+                    "name": "Upload to Board",
+                    "type": "command",
+                    "command": "workbench.action.tasks.runTask",
+                    "args": "PIO: Upload"
+                },
+                {
+                    "key": "m",
+                    "name": "Serial Monitor",
+                    "type": "command",
+                    "command": "workbench.action.tasks.runTask",
+                    "args": "PIO: Monitor"
+                },
+                {
+                    "key": "c",
+                    "name": "Update Compile DB (clangd)",
+                    "type": "command",
+                    "command": "workbench.action.tasks.runTask",
+                    "args": "PIO: Generate Compilation DB"
+                }
+            ]
+        },
+        {
+            "keys": "?",
+            "name": "Open Workflow Cheat Sheet",
+            "type": "command",
+            "command": "workbench.action.tasks.runTask",
+            "args": "Open Workflow Cheatsheet"
+        }
+    ],
+    "zig.zls.enabled": "on"
 }
