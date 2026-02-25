@@ -20,6 +20,10 @@ usage = "latest"            # CLI specification tool (Rust)
 carapace = "latest"         # Multi-shell completion engine (Go)
 btop = "latest"
 bottom = "latest"
+gojq = "latest"
+sd = "latest"
+watchexec = "latest"
+"pipx:aider-chat" = { version = "latest", uvx_args = "--python 3.12" }
 
 # --- Config & Data Formats ---
 taplo = "latest"            # TOML LSP, linter, and formatter (Rust)
@@ -118,6 +122,10 @@ CMAKE_GENERATOR = "Ninja"   # Force Ninja for CMake builds
 RUSTFLAGS = "-C link-arg=-fuse-ld=mold" # Use mold for Rust linking
 LDFLAGS = "-fuse-ld=mold"               # Use mold for C linking
 CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER = "clang"
+
+# Aider - AI
+OPENAI_API_BASE = "http://localhost:1234/v1"
+OPENAI_API_KEY = "lm-studio"
 
 [settings]
 env_shell_expand = true     # Support $HOME in paths

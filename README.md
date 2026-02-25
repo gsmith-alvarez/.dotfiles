@@ -36,7 +36,7 @@ flatpak podman toolbox virt-manager \
 code thunderbird keepassxc syncthing texlive-scheme-medium libusb1-devel \
 distrobox openssl-devel alsa-lib-devel dbus-devel mold readline-devel asd \
 sysstat perf picocom avrdude tuned-utils iotop nload clang-tools-extra \
-mise
+mise gcc-gfortran
 
 sudo dnf group install -y admin-tools c-development development-tools \
 security-lab electronic-lab python-science libreoffice \

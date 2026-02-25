@@ -1,6 +1,6 @@
 function nfzf
-    set -l file (fzf --preview="bat --color=always {}")
-    if test -n "$file" #if there is no file it doesn't open
-        $EDITOR $file
+    set -l files (fd --type f --hidden --exclude .git | fzf -m --preview="bat --color=always {}")
+    if test (count $files) -gt 0
+        $EDITOR $files
     end
 end

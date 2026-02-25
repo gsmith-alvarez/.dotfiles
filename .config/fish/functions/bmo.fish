@@ -1,6 +1,6 @@
 function bmo
     # 1. Get the URI using the pipeline
-    set -l target (bmm list --format json | jq -r '.[] | .uri + " " + .title' | fzf | awk '{print $1}')
+    set -l target (bmm list --format json | jq -r '.[] | "\(.uri)\t\(.title)"' | fzf | awk -F'\t' '{print $1}')
 
     # 2. If a target was selected (not empty)
     if test -n "$target"

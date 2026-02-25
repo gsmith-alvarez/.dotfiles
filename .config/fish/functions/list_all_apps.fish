@@ -97,5 +97,5 @@ function list_all_apps
 
     # 9. Final touch
     echo "✅ Master list generated at: $output_file"
-    bat --paging=never $output_file
+    glow $output_file
 end

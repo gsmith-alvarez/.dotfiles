@@ -45,3 +45,4 @@
 **/cache*/
 **/tmp/
 .DS_Store
+.aider*
