@@ -1,0 +1,15 @@
+2026-02-24 21:34:30.691 [info] MainController: Starting nvim: /usr/bin/nvim -N --embed --cmd source /home/gsmith-alvarez/.vscode/extensions/asvetliakov.vscode-neovim-1.18.24/runtime/vscode-neovim.vim -u ~/.config/nvim/init.lua
+2026-02-24 21:34:30.712 [info] MainController: Nvim info: {
+  logFile: '/home/gsmith-alvarez/.local/state/nvim/log',
+  configDir: '/home/gsmith-alvarez/.config/nvim',
+  nvimVersion: {
+    minor: 11,
+    api_compatible: 0,
+    prerelease: false,
+    api_level: 13,
+    major: 0,
+    api_prerelease: false,
+    patch: 6,
+    build: null
+  }
+}

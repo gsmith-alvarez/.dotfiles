@@ -1,0 +1,57 @@
+2026-02-24 21:34:30.009 [info] Extension host with pid 109708 started
+2026-02-24 21:34:30.243 [info] ExtensionService#_doActivateExtension vscode.github-authentication, startup: false, activationEvent: 'onAuthenticationRequest:github'
+2026-02-24 21:34:30.261 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2026-02-24 21:34:30.272 [info] ExtensionService#_doActivateExtension vscode.extension-editing, startup: false, activationEvent: 'onLanguage:markdown'
+2026-02-24 21:34:30.279 [info] ExtensionService#_doActivateExtension vscode.markdown-language-features, startup: false, activationEvent: 'onLanguage:markdown'
+2026-02-24 21:34:30.324 [info] ExtensionService#_doActivateExtension DavidAnson.vscode-markdownlint, startup: false, activationEvent: 'onLanguage:markdown'
+2026-02-24 21:34:30.360 [info] Extension host with pid 109820 started
+2026-02-24 21:34:30.453 [info] Eager extensions activated
+2026-02-24 21:34:30.513 [info] ExtensionService#_doActivateExtension asvetliakov.vscode-neovim, startup: false, activationEvent: 'onStartupFinished'
+2026-02-24 21:34:30.680 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2026-02-24 21:34:30.682 [info] ExtensionService#_doActivateExtension johnstoncode.svn-scm, startup: true, activationEvent: '*'
+2026-02-24 21:34:30.714 [info] ExtensionService#_doActivateExtension mrcrowl.hg, startup: true, activationEvent: '*'
+2026-02-24 21:34:30.788 [info] ExtensionService#_doActivateExtension vscode.markdown-math, startup: false, activationEvent: 'api', root cause: vscode.markdown-language-features
+2026-02-24 21:34:30.811 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2026-02-24 21:34:30.842 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2026-02-24 21:34:30.941 [info] Eager extensions activated
+2026-02-24 21:34:30.947 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2026-02-24 21:34:30.948 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2026-02-24 21:34:30.958 [info] ExtensionService#_doActivateExtension Catppuccin.catppuccin-vsc, startup: false, activationEvent: 'onStartupFinished'
+2026-02-24 21:34:30.962 [info] ExtensionService#_doActivateExtension eamodio.gitlens, startup: false, activationEvent: 'onStartupFinished'
+2026-02-24 21:34:31.030 [info] ExtensionService#_doActivateExtension esbenp.prettier-vscode, startup: false, activationEvent: 'onStartupFinished'
+2026-02-24 21:34:31.030 [info] ExtensionService#_doActivateExtension formulahendry.code-runner, startup: false, activationEvent: 'onStartupFinished'
+2026-02-24 21:34:31.041 [info] ExtensionService#_doActivateExtension ms-vscode-remote.remote-containers, startup: false, activationEvent: 'onStartupFinished'
+2026-02-24 21:34:31.152 [info] ExtensionService#_doActivateExtension PKief.material-icon-theme, startup: false, activationEvent: 'onStartupFinished'
+2026-02-24 21:34:31.160 [info] ExtensionService#_doActivateExtension ritwickdey.LiveServer, startup: false, activationEvent: 'onStartupFinished'
+2026-02-24 21:34:31.163 [info] ExtensionService#_doActivateExtension vscodevim.vim, startup: false, activationEvent: 'onStartupFinished'
+2026-02-24 21:34:31.222 [info] ExtensionService#_doActivateExtension VSpaceCode.whichkey, startup: false, activationEvent: 'onStartupFinished', root cause: VSpaceCode.vspacecode
+2026-02-24 21:34:31.393 [info] ExtensionService#_doActivateExtension VSpaceCode.vspacecode, startup: false, activationEvent: 'onStartupFinished'
+2026-02-24 21:35:27.005 [info] ExtensionService#_doActivateExtension vscjava.vscode-maven, startup: false, activationEvent: 'onView:mavenProjects'
+2026-02-24 21:35:29.972 [info] Extension host terminating: renderer closed the MessagePort
+2026-02-24 21:35:29.979 [warning] ExtHostTextEditorOptions 'setCursorStyle' failed:'
+2026-02-24 21:35:29.981 [warning] Canceled
+2026-02-24 21:35:29.981 [info] Extension host with pid 109820 exiting with code 0
+2026-02-24 21:35:30.046 [info] Extension host terminating: renderer closed the MessagePort
+2026-02-24 21:35:30.057 [error] An error occurred when disposing the subscriptions for extension 'eamodio.gitlens':
+2026-02-24 21:35:30.059 [error] TypeError: Cannot read properties of undefined (reading 'dispose')
+	at Object.dispose (file:///usr/share/code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:144:140616)
+	at Vw.<anonymous> (file:///usr/share/code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:112:24779)
+	at Vw.dispose (file:///usr/share/code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:112:24875)
+	at Object.dispose (/home/gsmith-alvarez/.vscode/extensions/eamodio.gitlens-17.10.1/dist/gitlens.js:1596:30242)
+	at /home/gsmith-alvarez/.vscode/extensions/eamodio.gitlens-17.10.1/dist/gitlens.js:2376:58668
+	at Array.forEach (<anonymous>)
+	at Object.dispose (/home/gsmith-alvarez/.vscode/extensions/eamodio.gitlens-17.10.1/dist/gitlens.js:2376:58649)
+	at Yi (file:///usr/share/code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:25:746)
+	at qL.b (file:///usr/share/code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:120:15201)
+	at qL.dispose (file:///usr/share/code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:25:1227)
+	at pee.eb (file:///usr/share/code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:120:12075)
+	at file:///usr/share/code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:120:10030
+	at Array.map (<anonymous>)
+	at pee.$ (file:///usr/share/code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:120:10018)
+	at pee.terminate (file:///usr/share/code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:120:10261)
+	at nR.terminate (file:///usr/share/code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:122:914)
+	at zr (file:///usr/share/code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:405:11144)
+	at MessagePortMain.<anonymous> (file:///usr/share/code/resources/app/out/vs/workbench/api/node/extensionHostProcess.js:405:7611)
+	at MessagePortMain.emit (node:events:519:28)
+	at MessagePortMain._internalPort.emit (node:electron/js2c/utility_init:2:2959)
+2026-02-24 21:35:30.065 [info] Extension host with pid 109708 exiting with code 0

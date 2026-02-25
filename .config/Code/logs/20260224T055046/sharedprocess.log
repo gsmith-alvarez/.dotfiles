@@ -1,0 +1,7 @@
+2026-02-24 05:50:46.871 [info] Deleted marked for removal extension from disk ms-python.vscode-python-envs /home/gsmith-alvarez/.vscode/extensions/ms-python.vscode-python-envs-1.16.0-linux-x64
+2026-02-24 05:51:07.722 [info] Getting Manifest... davidanson.vscode-markdownlint
+2026-02-24 05:51:07.742 [info] Installing extension: davidanson.vscode-markdownlint {"isMachineScoped":false,"installPreReleaseVersion":false,"pinned":false,"profileLocation":{"$mid":1,"external":"vscode-userdata:/home/gsmith-alvarez/.vscode/extensions/extensions.json","path":"/home/gsmith-alvarez/.vscode/extensions/extensions.json","scheme":"vscode-userdata"},"isApplicationScoped":false,"productVersion":{"version":"1.109.5","date":"2026-02-19T19:43:32.382Z"}}
+2026-02-24 05:51:08.385 [info] Extension signature verification result for davidanson.vscode-markdownlint: Success. Internal Code: 0. Executed: true. Duration: 371ms.
+2026-02-24 05:51:08.401 [info] Extracted extension to file:///home/gsmith-alvarez/.vscode/extensions/davidanson.vscode-markdownlint-0.61.1: davidanson.vscode-markdownlint
+2026-02-24 05:51:08.403 [info] Renamed to /home/gsmith-alvarez/.vscode/extensions/davidanson.vscode-markdownlint-0.61.1
+2026-02-24 05:51:08.429 [info] Extension installed successfully: davidanson.vscode-markdownlint vscode-userdata:/home/gsmith-alvarez/.vscode/extensions/extensions.json

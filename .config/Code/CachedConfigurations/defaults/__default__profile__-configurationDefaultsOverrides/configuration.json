@@ -1,0 +1,1 @@
+{"explorer.fileNesting.patterns":{"Cargo.toml":"Cargo.lock"},"explorer.autoRevealExclude":{"**/.zig-cache":true,"**/zig-cache":true},"simpleBrowser.useIntegratedBrowser":true,"python.useEnvironmentsExtension":true,"python.locator":"native","http.systemCertificatesNode":true,"inlineChat.enableV2":true,"chat.editMode.hidden":true}

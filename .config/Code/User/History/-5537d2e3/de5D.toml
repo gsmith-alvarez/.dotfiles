@@ -1,0 +1,97 @@
+[tools]
+# --- Core CLI (The "Modern Unix" Suite) ---
+ripgrep = "latest"          # Blazingly fast search tool (replaces grep)
+ripgrep-all = "latest"      # Search through PDFs, Ebooks, and Office docs
+fd = "latest"               # User-friendly alternative to 'find'
+fzf = "latest"              # Fuzzy finder for files, history, and processes
+bat = "latest"              # A 'cat' clone with syntax highlighting and git integration
+zoxide = "latest"           # Smarter 'cd' command that learns your habits
+starship = "latest"         # Cross-shell customizable prompt (shows git status, rust version, etc)
+atuin = "latest"            # SQLite-backed shell history with sync and search
+yazi = "latest"             # Extremely fast terminal file manager (Rust-based)
+eza = "latest"              # Modern replacement for 'ls' with icons and colors
+dust = "latest"             # Visual disk usage analyzer (replaces du)
+glow = "latest"             # Markdown renderer for reading docs in the terminal
+bottom = "latest"           # Graphical system monitor (TUI) - better for monitoring high-CPU builds
+cargo-binstall = "latest"   # Install Rust binaries from GitHub releases instead of compiling (saves time)
+"cargo:cargo-update" = "latest" # Updates all binaries installed via cargo
+"cargo:topgrade" = "latest" # One command to update everything: system, cargo, mise, and flatpaks
+
+# --- Productivity Tools ---
+"cargo:bmm" = "latest"    # bmm (stands for "bookmarks manager") lets you get to your bookmarks in a flash. 
+
+# --- Development & Build Tools ---
+neovim = "latest"           # Hyperextensible text editor (the heart of the workflow)
+zellij = "latest"           # Terminal multiplexer with a workspace feel (Rust-based alternative to tmux)
+usage = "latest"            # CLI specification for argument completion
+carapace = "latest"         # Multi-shell argument completion logic
+make = "latest"             # Standard build tool for C/C++ projects
+cmake = "latest"            # Cross-platform build system generator
+just = "latest"             # A modern, simpler alternative to 'make' for project tasks
+
+# --- Advanced Linkers & Compilers ---
+mold = "latest"		    # A modern rust linker
+llvm = "latest"             # Provides 'lld' (the LLVM linker) and 'clang'
+ninja = "latest"            # High-speed build executor (essential for CMake projects)
+ccache = "latest"           # Compiler cache: makes rebuilds nearly instantaneous
+
+# --- Embedded & Systems (EE Specific) ---
+arduino-cli = "latest"      # Official Arduino toolchain for compiling/uploading without the Java IDE
+"gcc-arm-none-eabi" = "latest"
+
+# --- Build & Conversion Utilities ---
+"cargo:elf2bin" = "latest"  # Utility to convert .elf to .bin/hex for flashing
+"cargo:cargo-bloat" = "latest" # Analyze what is taking up space in your binary (crucial for MCU)
+
+
+# --- Languages & Toolchains ---
+rust = "latest"
+rust-analyzer = "latest"    # Rust LSP 
+go = "latest"
+zig = "latest"
+python = "latest"
+uv = "latest"               # Extremely fast Python package and project manager (replaces pip/poetry)
+node = "lts"                # JavaScript runtime for tooling and scripts
+lua = "latest"              # Scripting language, primarily for Neovim configuration
+
+# --- Linters & Formatters ---
+ruff = "latest"             # All-in-one Python linter and formatter (replaces flake8/black)
+stylua = "latest"           # Opinionated Lua code formatter
+lua-language-server = "latest" # LSP for Lua development
+oxlint = "latest"           # Ultra-fast JS/TS linter
+"npm:oxfmt" = "latest"      # Fast JS/TS formatter
+typos = "latest"            # Source code spell checker (great for catching errors in variable names)
+marksman = "latest"         # Language server for Markdown (notes/documentation)
+
+[env]
+# Global Defaults
+EDITOR = "nvim"             # Set Neovim as the default text editor
+VISUAL = "nvim"             # Default editor for visual mode
+PAGER = "bat"               # Use 'bat' to scroll through output with syntax highlighting
+LANG = "en_US.UTF-8"        # Standard UTF-8 character encoding
+
+# Tool-Specific Paths
+GOPATH = "{{user_home}}/.local/share/go"
+"PATH" = [
+  "{{user_home}}/.local/share/go/bin", # Binaries created by Go
+  "{{user_home}}/.cargo/bin",          # Binaries installed via 'cargo install'
+  "{{user_home}}/.local/bin",          # General user binaries
+  "{{env.PATH}}"                        # Inherit existing system PATH
+]
+
+# 1. Faster C/C++ Builds: Use mold for the linker and ccache for the compiler
+CC = "ccache clang"
+CXX = "ccache clang++"
+
+# 2. Tell CMake to use Ninja by default (it's faster than Make)
+CMAKE_GENERATOR = "Ninja"
+
+RUSTFLAGS = "-C link-arg=-fuse-ld={{user_home}}/.local/share/mise/installs/mold/latest/bin/mold"
+
+# 4. Global Linker search path for C projects
+LDFLAGS = "-fuse-ld=mold"
+
+[settings]
+env_shell_expand = true     # Allow variables like $HOME in the config
+asdf_compat = true          # Maintain compatibility with legacy .tool-versions files
+shims_mode = "symlink"      # Use symlinks for shims to close the "dependency void"
