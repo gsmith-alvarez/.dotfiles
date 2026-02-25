@@ -19,6 +19,7 @@ cargo-binstall = "latest"   # Install Rust binaries from releases (Rust)
 usage = "latest"            # CLI specification tool (Rust)
 carapace = "latest"         # Multi-shell completion engine (Go)
 btop = "latest"
+bottom = "latest"
 
 # --- Config & Data Formats ---
 taplo = "latest"            # TOML LSP, linter, and formatter (Rust)
@@ -59,7 +60,8 @@ zig = "latest"              # Low-level systems language
 python = "latest"           # Scripting and AI language
 uv = "latest"               # Fast Python project/package manager (Rust)
 node = "lts"                # JS/TS runtime
-lua = "latest"              # Scripting language (Neovim config)
+lua = "5.1"              # Scripting language (Neovim config)
+lazygit = "latest"
 
 # --- Linters & Formatters ---
 ruff = "latest"             # Fast Python linter/formatter (Rust)
