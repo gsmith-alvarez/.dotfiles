@@ -24,7 +24,7 @@ sudo dnf install llvm-devel clang lldb lld ccache git gh ghostty \
 direnv lnav tree-sitter-cli valgrind gdb \
 flatpak podman toolbox virt-manager \
 code thunderbird keepassxc syncthing texlive-scheme-medium libusb1-devel \
-distrobox openssl-devel alsa-lib-devel dbus-devel mold \
+distrobox openssl-devel alsa-lib-devel dbus-devel mold readline-devel asd\
 sysstat perf picocom avrdude tuned-utils iotop nload clang-tools-extra
 
 sudo dnf group install admin-tools c-development development-tools \
@@ -208,4 +208,77 @@ HandleLidSwitch=suspend
 HandleLidSwitchExternalPower=suspend
 HandleLidSwitchDocked=suspend
 
+```
+
+## System Hardening
+
+To harden the **Public** zone by removing the three services we identified—KDE Connect, Syncthing, and mDNS—you must interact with both the **Permanent** configuration and the **Runtime** state of `firewalld`.
+
+Here is the exact technical process to strip these services and verify their removal.
+
+---
+
+### Phase 1: Permanent Removal
+
+Removing a service with the `--permanent` flag ensures the change survives a system reboot or a firewall reload.
+
+```bash
+# Remove discovery and synchronization services from the public zone
+sudo firewall-cmd --permanent --zone=public --remove-service=kdeconnect
+sudo firewall-cmd --permanent --zone=public --remove-service=syncthing
+sudo firewall-cmd --permanent --zone=public --remove-service=mdns
+sudo firewall-cmd --permanent --zone=home --add-service=kdeconnect
+sudo firewall-cmd --permanent --zone=home --add-service=syncthing
+sudo firewall-cmd --permanent --zone=home --add-service=mdns
+sudo firewall-cmd --reload
+```
+
+### Phase 2: Runtime Application
+
+The `--permanent` command only changes the configuration files on disk. To apply these changes to the active firewall without rebooting, you must reload the service.
+
+```bash
+# Apply the disk configuration to the active runtime
+sudo firewall-cmd --reload
+
+```
+
+### Phase 3: Verification (Read-Only)
+
+Once reloaded, you should verify that the services are gone and that the "doors" are actually closed at the socket level.
+
+**1. Firewall Rule Check**
+This confirms `firewalld` is no longer allowing traffic for those service definitions.
+
+```bash
+firewall-cmd --zone=public --list-services
+
+```
+
+*Expected output: Should only show `dhcpv6-client` and `ssh` (if not removed).*
+
+**2. Socket Listener Check**
+Even if the firewall is closed, the applications might still be trying to "shout" internally. This command confirms what is actually listening on your network interface.
+
+```bash
+ss -tulpn | grep -E '1714-1764|22000|5353'
+
+```
+
+*Expected output: On a hardened public network, this should return nothing, meaning no external-facing processes are active on these ports.*
+
+---
+
+### Adding Networks to Home
+
+Listing our networks
+
+```bash
+nmcli connection show
+```
+
+Adding your home network
+
+```bash
+sudo nmcli connection modify "MyHomeWiFi" connection.zone home
 ```
