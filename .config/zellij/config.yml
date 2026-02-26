@@ -1,0 +1,21 @@
+# ~/.config/xremap/config.yml
+
+# 1. GLOBAL MODMAP: 1-to-1 Hardware Swaps
+# Use this to fix basic Mouse 4/5 behavior across the entire OS
+modmap:
+  - name: Global Mouse Side Buttons
+    remap:
+      BTN_EXTRA: KEY_FORWARD
+      BTN_SIDE: KEY_BACK
+
+# 2. APPLICATION KEYMAP: Context-Aware Macros
+# Use this to make your mouse do specific things inside Neovim or Zellij
+keymap:
+  - name: Neovim/Zellij Navigation
+    application:
+      # Note: Use `xremap --watch` to find the exact class name for CosmicTerm/Alacritty
+      only: [ "com.system76.CosmicTerm", "Alacritty", "kitty" ]
+    remap:
+      # Example: Map side buttons to Ctrl-O / Ctrl-I (Harpoon/Jump List)
+      BTN_SIDE: [C-o]
+      BTN_EXTRA: [C-i]

@@ -46,7 +46,7 @@ if status is-interactive
         end
     end
 
-# [[ FZF MODAL CATPPUCCIN MOCHA CONFIGURATION ]]
+    # [[ FZF MODAL CATPPUCCIN MOCHA CONFIGURATION ]]
     # Advanced State Machine: Full Vi-Movement Matrix
     set -l peach f9e2af
     set -l lavender b4befe
@@ -72,9 +72,9 @@ if status is-interactive
       --bind='j:down,k:up,h:backward-char,l:forward-char'
       --bind='w:forward-word,b:backward-word,x:delete-char,ctrl-d:clear-query,q:abort'
      
-      --bind='i:unbind(j,k,h,l,w,b,x,D,q,ctrl-d)+change-prompt([I] 󰭎 )'
---bind='esc:rebind(j,k,h,l,w,b,x,D,q,ctrl-d)+change-prompt([N] 󰭎 )'
-      --bind='start:unbind(j,k,h,l,w,b,x,D,q)'
+      --bind='i:unbind(j,k,h,l,w,b,x,D,q,ctrl-d,i)+change-prompt([I] 󰭎 )'
+      --bind='esc:rebind(j,k,h,l,w,b,x,D,q,ctrl-d,i)+change-prompt([N] 󰭎 )'
+      --bind='start:unbind(j,k,h,l,w,b,x,D,q,i)'
     "
     ### --- 4. ABBREVIATIONS & ALIASES --- ###
     abbr -a .. 'cd ..'
