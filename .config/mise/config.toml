@@ -86,6 +86,7 @@ marksman = "latest"         # Markdown LSP (C#)
 tree-sitter = "latest"
 "npm:pyright" = "latest"
 
+
 # --- Navigation & Utilities ---
 "cargo:bmm" = "latest"      # TUI bookmark manager (Rust)
 "cargo:wiki-tui" = "latest" # Wikipedia TUI explorer (Rust)

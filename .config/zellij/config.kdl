@@ -1,34 +1,78 @@
 keybinds clear-defaults=true {
     locked {
-        bind "Ctrl g" { SwitchToMode "normal"; }
+        bind "Alt g" { SwitchToMode "normal"; }
     }
+
+    // NORMAL MODE (Zellij's default, Neovim-friendly)
+    // This mode is active when not in a sub-mode like `pane` or `resize`.
+    normal {
+        // [[ Pane Navigation (Neovim-like window movement) ]]
+        // ASYMMETRIC LEVERAGE: With smart-splits.nvim, Ctrl-h/j/k/l are passed to Neovim for split navigation.
+        // Zellij's pane focus will be handled by smart-splits at the editor edges.
+        // bind "Ctrl h" { MoveFocus "left"; } // Removed for smart-splits integration
+        // bind "Ctrl j" { MoveFocus "down"; } // Removed for smart-splits integration
+        // bind "Ctrl k" { MoveFocus "up"; } // Removed for smart-splits integration
+        // bind "Ctrl l" { MoveFocus "right"; } // Removed for smart-splits integration
+
+        // [[ Tab Navigation (Alt-based) ]]
+        // Uses Alt-[/] for intuitive previous/next tab switching. Alt-g for locking.
+        bind "Alt [" { GoToPreviousTab; }
+        bind "Alt ]" { GoToNextTab; }
+        bind "Alt g" { SwitchToMode "locked"; }
+
+        // [[ Pane & Tab Creation/Closure ]]
+        // Unified Alt-based keybinds for creating and closing panes/tabs.
+        bind "Alt n" { NewPane; }        // Create new pane (auto-split)
+        bind "Alt N" { NewTab; }        // Create new tab (Shift-N)
+        bind "Alt x" { CloseFocus; } // Close current pane
+        bind "Alt X" { CloseTab; }       // Close current tab (Shift-X)
+
+        // [[ Mode Switching (Alt-based prefixes) ]]
+        // ASYMMETRIC LEVERAGE: Consistent Alt-prefix for Zellij's sub-modes for easy access.
+        bind "Alt p" { SwitchToMode "pane"; }     // Pane manipulation mode
+        bind "Alt t" { SwitchToMode "tab"; }      // Tab manipulation mode
+        bind "Alt r" { SwitchToMode "resize"; }   // Resize panes mode
+        bind "Alt m" { SwitchToMode "move"; }     // Move panes mode
+        bind "Alt s" { SwitchToMode "scroll"; }   // Scroll mode
+        bind "Alt y" { SwitchToMode "session"; } // Session/Plugin mode (Yazi-like context)
+
+        // [[ Other common actions ]]
+        bind "Alt f" { ToggleFocusFullscreen; } // Fullscreen current pane
+        bind "Alt w" { ToggleFloatingPanes; }   // Toggle floating panes
+        bind "Alt z" { TogglePaneFrames; }      // Toggle pane frames
+        bind "Alt c" { SwitchToMode "renamepane"; PaneNameInput 0; } // Rename pane
+        bind "Alt T" { SwitchToMode "renametab"; TabNameInput 0; } // Rename tab (Shift-T)
+
+        bind "Ctrl q" { Quit; } // Global quit for Zellij.
+    }
+    // PANE MODE (manipulate panes within the current tab)
+    // Focused on common pane actions using h/j/k/l for consistent movement.
     pane {
-        bind "left" { MoveFocus "left"; }
-        bind "down" { MoveFocus "down"; }
-        bind "up" { MoveFocus "up"; }
-        bind "right" { MoveFocus "right"; }
-        bind "c" { SwitchToMode "renamepane"; PaneNameInput 0; }
-        bind "d" { NewPane "down"; SwitchToMode "normal"; }
-        bind "e" { TogglePaneEmbedOrFloating; SwitchToMode "normal"; }
-        bind "f" { ToggleFocusFullscreen; SwitchToMode "normal"; }
         bind "h" { MoveFocus "left"; }
-        bind "i" { TogglePanePinned; SwitchToMode "normal"; }
         bind "j" { MoveFocus "down"; }
         bind "k" { MoveFocus "up"; }
         bind "l" { MoveFocus "right"; }
-        bind "n" { NewPane; SwitchToMode "normal"; }
-        bind "p" { SwitchFocus; }
-        bind "Ctrl p" { SwitchToMode "normal"; }
-        bind "r" { NewPane "right"; SwitchToMode "normal"; }
-        bind "s" { NewPane "stacked"; SwitchToMode "normal"; }
-        bind "w" { ToggleFloatingPanes; SwitchToMode "normal"; }
-        bind "z" { TogglePaneFrames; SwitchToMode "normal"; }
+        bind "d" { NewPane "down"; SwitchToMode "normal"; } // New pane below
+        bind "r" { NewPane "right"; SwitchToMode "normal"; } // New pane right
+        bind "n" { NewPane; SwitchToMode "normal"; } // New auto-split pane
+        bind "x" { CloseFocus; SwitchToMode "normal"; } // Close focused pane
+        bind "f" { ToggleFocusFullscreen; SwitchToMode "normal"; } // Fullscreen pane
+        bind "e" { TogglePaneEmbedOrFloating; SwitchToMode "normal"; } // Embed/float pane
+        bind "p" { SwitchFocus; } // Switch to previous pane
+        bind "c" { SwitchToMode "renamepane"; PaneNameInput 0; } // Rename pane
+        bind "Alt esc" { SwitchToMode "normal"; }
     }
+    // TAB MODE (manipulate tabs in the current session)
+    // Simplified tab management.
     tab {
-        bind "left" { GoToPreviousTab; }
-        bind "down" { GoToNextTab; }
-        bind "up" { GoToPreviousTab; }
-        bind "right" { GoToNextTab; }
+        bind "h" { GoToPreviousTab; }
+        bind "l" { GoToNextTab; }
+        bind "n" { NewTab; SwitchToMode "normal"; } // New tab
+        bind "x" { CloseTab; SwitchToMode "normal"; } // Close tab
+        bind "r" { SwitchToMode "renametab"; TabNameInput 0; } // Rename tab
+        bind "Alt h" { MoveTab "left"; } // Move tab left
+        bind "Alt l" { MoveTab "right"; } // Move tab right
+        // Direct tab jumps (1-9) for rapid access.
         bind "1" { GoToTab 1; SwitchToMode "normal"; }
         bind "2" { GoToTab 2; SwitchToMode "normal"; }
         bind "3" { GoToTab 3; SwitchToMode "normal"; }
@@ -38,63 +82,63 @@ keybinds clear-defaults=true {
         bind "7" { GoToTab 7; SwitchToMode "normal"; }
         bind "8" { GoToTab 8; SwitchToMode "normal"; }
         bind "9" { GoToTab 9; SwitchToMode "normal"; }
-        bind "[" { BreakPaneLeft; SwitchToMode "normal"; }
-        bind "]" { BreakPaneRight; SwitchToMode "normal"; }
-        bind "b" { BreakPane; SwitchToMode "normal"; }
-        bind "h" { GoToPreviousTab; }
-        bind "j" { GoToNextTab; }
-        bind "k" { GoToPreviousTab; }
-        bind "l" { GoToNextTab; }
-        bind "n" { NewTab; SwitchToMode "normal"; }
-        bind "r" { SwitchToMode "renametab"; TabNameInput 0; }
-        bind "s" { ToggleActiveSyncTab; SwitchToMode "normal"; }
-        bind "Ctrl t" { SwitchToMode "normal"; }
-        bind "x" { CloseTab; SwitchToMode "normal"; }
-        bind "tab" { ToggleTab; }
+        bind "Alt esc" { SwitchToMode "normal"; }
     }
+    // RESIZE MODE (change pane dimensions)
+    // Intuitive h/j/k/l for resizing, with Shift-H/J/K/L for shrinking.
     resize {
-        bind "left" { Resize "Increase left"; }
-        bind "down" { Resize "Increase down"; }
-        bind "up" { Resize "Increase up"; }
-        bind "right" { Resize "Increase right"; }
-        bind "+" { Resize "Increase"; }
-        bind "-" { Resize "Decrease"; }
-        bind "=" { Resize "Increase"; }
-        bind "H" { Resize "Decrease left"; }
-        bind "J" { Resize "Decrease down"; }
-        bind "K" { Resize "Decrease up"; }
-        bind "L" { Resize "Decrease right"; }
+        // ASYMMETRIC LEVERAGE: h/j/k/l for growing panes.
         bind "h" { Resize "Increase left"; }
         bind "j" { Resize "Increase down"; }
         bind "k" { Resize "Increase up"; }
         bind "l" { Resize "Increase right"; }
-        bind "Ctrl n" { SwitchToMode "normal"; }
+        bind "H" { Resize "Decrease left"; } // Shift-H to shrink left
+        bind "J" { Resize "Decrease down"; } // Shift-J to shrink down
+        bind "K" { Resize "Decrease up"; }   // Shift-K to shrink up
+        bind "L" { Resize "Decrease right"; } // Shift-L to shrink right
+        bind "+" { Resize "Increase"; }     // Increase pane size
+        bind "-" { Resize "Decrease"; }     // Decrease pane size
+        bind "=" { Resize "Increase"; }     // Alias for Increase
+        bind "Alt esc" { SwitchToMode "normal"; }
     }
+    // MOVE MODE (move active pane to another split)
     move {
-        bind "left" { MovePane "left"; }
-        bind "down" { MovePane "down"; }
-        bind "up" { MovePane "up"; }
-        bind "right" { MovePane "right"; }
         bind "h" { MovePane "left"; }
-        bind "Ctrl h" { SwitchToMode "normal"; }
         bind "j" { MovePane "down"; }
         bind "k" { MovePane "up"; }
         bind "l" { MovePane "right"; }
-        bind "n" { MovePane; }
-        bind "p" { MovePaneBackwards; }
-        bind "tab" { MovePane; }
+        bind "p" { MovePaneBackwards; } // Move to previous position
+        bind "Alt esc" { SwitchToMode "normal"; }
     }
+    // SCROLL MODE (navigate scrollback buffer)
+    // Neovim-like scrolling with Ctrl-d/u for half-page, Ctrl-b/f for full page.
     scroll {
-        bind "e" { EditScrollback; SwitchToMode "normal"; }
-        bind "s" { SwitchToMode "entersearch"; SearchInput 0; }
+        bind "j" { ScrollDown; }
+        bind "k" { ScrollUp; }
+        // ASYMMETRIC LEVERAGE: Ctrl-d/u for half-page scrolls, like Neovim.
+        bind "Ctrl d" { HalfPageScrollDown; }
+        bind "Ctrl u" { HalfPageScrollUp; }
+        bind "d" { HalfPageScrollDown; } // Also 'd' for half-page down
+        bind "u" { HalfPageScrollUp; }   // Also 'u' for half-page up
+        bind "Ctrl b" { PageScrollUp; }  // Ctrl-b for full page up
+        bind "Ctrl f" { PageScrollDown; } // Ctrl-f for full page down
+        bind "g" { ScrollToTop; SwitchToMode "normal"; } // Go to top and exit scroll
+        bind "G" { ScrollToBottom; SwitchToMode "normal"; } // Go to bottom and exit scroll
+        bind "e" { EditScrollback; SwitchToMode "normal"; } // Edit scrollback
+        bind "s" { SwitchToMode "entersearch"; SearchInput 0; } // Enter search
+        bind "Alt esc" { SwitchToMode "normal"; }
     }
+    // SEARCH MODE (search within scrollback)
     search {
         bind "c" { SearchToggleOption "CaseSensitivity"; }
         bind "n" { Search "down"; }
         bind "o" { SearchToggleOption "WholeWord"; }
         bind "p" { Search "up"; }
         bind "w" { SearchToggleOption "Wrap"; }
+        bind "Alt esc" { SwitchToMode "normal"; }
     }
+    // SESSION MODE (manage plugins and sessions)
+    // SESSION MODE (manage plugins and sessions)
     session {
         bind "a" {
             LaunchOrFocusPlugin "zellij:about" {
@@ -110,7 +154,6 @@ keybinds clear-defaults=true {
             }
             SwitchToMode "normal"
         }
-        bind "Ctrl o" { SwitchToMode "normal"; }
         bind "p" {
             LaunchOrFocusPlugin "plugin-manager" {
                 floating true
@@ -132,116 +175,35 @@ keybinds clear-defaults=true {
             }
             SwitchToMode "normal"
         }
+        bind "Alt esc" { SwitchToMode "normal"; }
     }
-    shared_except "locked" {
-        bind "Alt left" { MoveFocusOrTab "left"; }
-        bind "Alt down" { MoveFocus "down"; }
-        bind "Alt up" { MoveFocus "up"; }
-        bind "Alt right" { MoveFocusOrTab "right"; }
-        bind "Alt +" { Resize "Increase"; }
-        bind "Alt -" { Resize "Decrease"; }
-        bind "Alt =" { Resize "Increase"; }
-        bind "Alt [" { PreviousSwapLayout; }
-        bind "Alt ]" { NextSwapLayout; }
-        bind "Alt f" { ToggleFloatingPanes; }
-        bind "Ctrl g" { SwitchToMode "locked"; }
-        bind "Alt h" { MoveFocusOrTab "left"; }
-        bind "Alt i" { MoveTab "left"; }
-        bind "Alt j" { MoveFocus "down"; }
-        bind "Alt k" { MoveFocus "up"; }
-        bind "Alt l" { MoveFocusOrTab "right"; }
-        bind "Alt n" { NewPane; }
-        bind "Alt o" { MoveTab "right"; }
-        bind "Alt p" { TogglePaneInGroup; }
-        bind "Alt Shift p" { ToggleGroupMarking; }
-        bind "Ctrl q" { Quit; }
-    }
-    shared_except "locked" "move" {
-        bind "Ctrl h" { SwitchToMode "move"; }
-    }
-    shared_except "locked" "session" {
-        bind "Ctrl o" { SwitchToMode "session"; }
-    }
-    shared_except "locked" "scroll" "search" "tmux" {
-        bind "Ctrl b" { SwitchToMode "tmux"; }
-    }
-    shared_except "locked" "scroll" "search" {
-        bind "Ctrl s" { SwitchToMode "scroll"; }
-    }
-    shared_except "locked" "tab" {
-        bind "Ctrl t" { SwitchToMode "tab"; }
-    }
-    shared_except "locked" "pane" {
-        bind "Ctrl p" { SwitchToMode "pane"; }
-    }
-    shared_except "locked" "resize" {
-        bind "Ctrl n" { SwitchToMode "resize"; }
-    }
-    shared_except "normal" "locked" "entersearch" {
-        bind "enter" { SwitchToMode "normal"; }
-    }
-    shared_except "normal" "locked" "entersearch" "renametab" "renamepane" {
-        bind "esc" { SwitchToMode "normal"; }
-    }
-    shared_among "pane" "tmux" {
-        bind "x" { CloseFocus; SwitchToMode "normal"; }
-    }
-    shared_among "scroll" "search" {
-        bind "PageDown" { PageScrollDown; }
-        bind "PageUp" { PageScrollUp; }
-        bind "left" { PageScrollUp; }
-        bind "down" { ScrollDown; }
-        bind "up" { ScrollUp; }
-        bind "right" { PageScrollDown; }
-        bind "Ctrl b" { PageScrollUp; }
-        bind "Ctrl c" { ScrollToBottom; SwitchToMode "normal"; }
-        bind "d" { HalfPageScrollDown; }
-        bind "Ctrl f" { PageScrollDown; }
-        bind "h" { PageScrollUp; }
-        bind "j" { ScrollDown; }
-        bind "k" { ScrollUp; }
-        bind "l" { PageScrollDown; }
-        bind "Ctrl s" { SwitchToMode "normal"; }
-        bind "u" { HalfPageScrollUp; }
-    }
+
+
+
+
+
+
+
+
+
+
     entersearch {
-        bind "Ctrl c" { SwitchToMode "scroll"; }
-        bind "esc" { SwitchToMode "scroll"; }
-        bind "enter" { SwitchToMode "search"; }
+        bind "Ctrl c" { SwitchToMode "scroll"; } // Exit search to scroll mode
+        bind "esc" { SwitchToMode "scroll"; }    // Escape to scroll mode
+        bind "enter" { SwitchToMode "search"; } // Perform search
     }
+    // Rename modes are simple, just escape to their parent mode.
     renametab {
         bind "esc" { UndoRenameTab; SwitchToMode "tab"; }
     }
-    shared_among "renametab" "renamepane" {
-        bind "Ctrl c" { SwitchToMode "normal"; }
-    }
+
     renamepane {
         bind "esc" { UndoRenamePane; SwitchToMode "pane"; }
     }
-    shared_among "session" "tmux" {
+    shared_among "session" {
         bind "d" { Detach; }
     }
-    tmux {
-        bind "left" { MoveFocus "left"; SwitchToMode "normal"; }
-        bind "down" { MoveFocus "down"; SwitchToMode "normal"; }
-        bind "up" { MoveFocus "up"; SwitchToMode "normal"; }
-        bind "right" { MoveFocus "right"; SwitchToMode "normal"; }
-        bind "space" { NextSwapLayout; }
-        bind "\"" { NewPane "down"; SwitchToMode "normal"; }
-        bind "%" { NewPane "right"; SwitchToMode "normal"; }
-        bind "," { SwitchToMode "renametab"; }
-        bind "[" { SwitchToMode "scroll"; }
-        bind "Ctrl b" { Write 2; SwitchToMode "normal"; }
-        bind "c" { NewTab; SwitchToMode "normal"; }
-        bind "h" { MoveFocus "left"; SwitchToMode "normal"; }
-        bind "j" { MoveFocus "down"; SwitchToMode "normal"; }
-        bind "k" { MoveFocus "up"; SwitchToMode "normal"; }
-        bind "l" { MoveFocus "right"; SwitchToMode "normal"; }
-        bind "n" { GoToNextTab; SwitchToMode "normal"; }
-        bind "o" { FocusNextPane; }
-        bind "p" { GoToPreviousTab; SwitchToMode "normal"; }
-        bind "z" { ToggleFocusFullscreen; SwitchToMode "normal"; }
-    }
+
 }
 
 // Plugin aliases - can be used to change the implementation of Zellij
@@ -285,8 +247,8 @@ web_client {
 theme "catppuccin-mocha"
  
 // choose the base input mode of zellij.
-// default: normal
-default_mode "locked"
+// ASYMMETRIC LEVERAGE: Default to "normal" for immediate interaction, like Neovim.
+default_mode "normal"
  
 // Choose the path to the default shell that zellij will use for opening new panes
 // Default: $SHELL
@@ -407,7 +369,7 @@ copy_command "wl-copy"                    // wayland
 //   - true (default)
 //   - false
 // 
-// session_serialization false
+session_serialization true
  
 // Whether pane viewports are serialized along with the session, default is false
 // Options:
@@ -431,7 +393,7 @@ copy_command "wl-copy"                    // wayland
  
 // How often in seconds sessions are serialized
 // 
-// serialization_interval 10000
+serialization_interval 10
  
 // Enable or disable writing of session metadata to disk (if disabled, other sessions might not know
 // metadata info on this session)
@@ -500,16 +462,16 @@ copy_command "wl-copy"                    // wayland
 // Whether to show tips on startup
 // Default: true
 // 
-// show_startup_tips false
+show_startup_tips false
  
 // Whether to show release notes on first version run
 // Default: true
 // 
-// show_release_notes false
+show_release_notes false
  
 // Whether to enable mouse hover effects and pane grouping functionality
 // default is true
-// advanced_mouse_actions false
+advanced_mouse_actions false
  
 // The ip address the web server should listen on when it starts
 // Default: "127.0.0.1"

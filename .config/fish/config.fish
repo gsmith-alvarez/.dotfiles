@@ -1,73 +1,95 @@
-### --- 1. INITIALIZATION --- ###
-# We add all standard paths FIRST using -g (global append/prepend)
-# so that our high-performance tools can overwrite them later.
-
-fish_add_path -g ~/.local/bin
-
-if test -d ~/.cargo/bin
-    fish_add_path -g ~/.cargo/bin
+### --- 1. THE ENGINE: MISE (Pre-Interactive) --- ###
+# We activate mise first so all managed binaries are immediately available.
+if type -q mise
+    mise activate fish | source
 end
 
-if test -d /home/gsmith-alvarez/.lmstudio/bin
-    fish_add_path -g /home/gsmith-alvarez/.lmstudio/bin
-end
+### --- 2. PATH CONSOLIDATION --- ###
+# Use a single, unified path addition for non-mise binaries.
+fish_add_path -g ~/.local/bin ~/.cargo/bin /home/gsmith-alvarez/.lmstudio/bin
 
-# Go (Only needed for dynamic go installs since mise manages the core binary)
+# Go Path Sync
 if type -q go
     set -gx GOPATH (go env GOPATH)
     fish_add_path -g $GOPATH/bin
 end
 
-# LM Studio 
-if test -d /home/gsmith-alvarez/.lmstudio/bin
-    fish_add_path -g /home/gsmith-alvarez/.lmstudio/bin
-end
-
-### --- 2. THE ENGINE: MISE (Top Layer) --- ###
-if type -q mise
-    mise activate fish | source
-end
-
-### --- 3. CREDENTIALS --- ###
-# GitHub Token (Note: synchronous lookups add shell startup latency)
-if command -v secret-tool >/dev/null
-    set -gx GITHUB_TOKEN (secret-tool lookup github token)
-    set -gx GH_TOKEN $GITHUB_TOKEN
-end
-
-
-### --- 2. INTERACTIVE ONLY --- ###
+### --- 3. INTERACTIVE OPTIMIZATION --- ###
 if status is-interactive
-    # mise handles the PATH, so these inits are now much faster
+    # [[ FAST INITIALIZATION ]]
+    # Chain these together to reduce process spawning overhead
     type -q starship; and starship init fish | source
     type -q zoxide; and zoxide init fish | source
     type -q fzf; and fzf --fish | source
-    type -q atuin; and atuin init fish | source
+    type -q atuin; and atuin init fish --disable-up-arrow | source
     type -q navi; and navi widget fish | source
 
-    # UI Preferences
+    # [[ UI PREFERENCES ]]
     set -g fish_greeting
     fish_vi_key_bindings
 
-    ### --- 3. ABBREVIATIONS --- ###
+    # [[ USER BINDINGS: VI-MODE RECTIFICATION ]]
+    function fish_user_key_bindings
+        # 1. Atuin: Bridge Normal and Insert modes
+        # This fixes your 'kj' issue. Atuin will now work in Normal Mode.
+        bind -M insert \cr _atuin_search
+        bind -M default \cr _atuin_search
+        bind -M insert \e\[A _atuin_bind_up
+        bind -M default \e\[A _atuin_bind_up
 
-    # Navigation
+        # 2. Navi: Smart Replace
+        if type -q navi
+            bind -M insert \cg _navi_smart_replace
+            bind -M default \cg _navi_smart_replace
+            bind -M insert \ee _navi_smart_replace
+            bind -M default \ee _navi_smart_replace
+        end
+    end
+
+# [[ FZF MODAL CATPPUCCIN MOCHA CONFIGURATION ]]
+    # Advanced State Machine: Full Vi-Movement Matrix
+    set -l peach f9e2af
+    set -l lavender b4befe
+    set -l flamingo f2cdcd
+    set -l surface0 313244
+    set -l text cdd6f4
+
+    set -gx FZF_DEFAULT_OPTS "
+      --layout=reverse
+      --height=40%
+      --border
+      --info=inline
+      --prompt='[I] 󰭎 '
+      --pointer=''
+      --marker='󰄵 '
+      --color='bg+:-1,gutter:-1,spinner:#$flamingo,hl:#$peach'
+      --color='fg:#$text,header:#$flamingo,info:#$lavender,pointer:#$lavender'
+      --color='marker:#$lavender,fg+:#$text,prompt:#$lavender,hl+:#$peach'
+      --color='selected-bg:#$surface0'
+      
+      --bind='ctrl-b:preview-page-up,ctrl-f:preview-page-down'
+      
+      --bind='j:down,k:up,h:backward-char,l:forward-char'
+      --bind='w:forward-word,b:backward-word,x:delete-char,ctrl-d:clear-query,q:abort'
+     
+      --bind='i:unbind(j,k,h,l,w,b,x,D,q,ctrl-d)+change-prompt([I] 󰭎 )'
+--bind='esc:rebind(j,k,h,l,w,b,x,D,q,ctrl-d)+change-prompt([N] 󰭎 )'
+      --bind='start:unbind(j,k,h,l,w,b,x,D,q)'
+    "
+    ### --- 4. ABBREVIATIONS & ALIASES --- ###
     abbr -a .. 'cd ..'
     abbr -a ... 'cd ../..'
     abbr -a cd z
-
-    # Some Tools
     abbr -a cat bat
     abbr -a find fd
     abbr -a yr yazi
     abbr -a du "dust -r"
     abbr -a cp "rsync -ah --info=progress2"
-
-    # Power Management Asus Laptop
-    abbr -a pperf "asusctl profile set Performance"
-    abbr -a pbal "asusctl profile set Balanced"
-    abbr -a pquiet "asusctl profile set Quiet"
-    abbr -a bbstay "asusctl battery limit 60"
+    
+    # Python (uv)
+    abbr -a py "uv run"
+    abbr -a pyr "uv run python"
+    abbr -a pyv "uv venv"
 
     # Git
     abbr -a g git
@@ -76,13 +98,11 @@ if status is-interactive
     abbr -a gc 'git commit -m'
     abbr -a gp 'git push'
 
-    # Package Management
-    abbr -a top 'topgrade --cleanup'
-
-    # Python (uv)
-    abbr -a py "uv run"
-    abbr -a pyr "uv run python"
-    abbr -a pyv "uv venv"
+    # Asus Laptop Controls
+    abbr -a pperf "asusctl profile set Performance"
+    abbr -a pbal "asusctl profile set Balanced"
+    abbr -a pquiet "asusctl profile set Quiet"
+    abbr -a bbstay "asusctl battery limit 60"
 
     # Modern LS (eza)
     if type -q eza
@@ -92,36 +112,13 @@ if status is-interactive
         abbr -a tree 'eza --tree --icons'
     end
 
-    # Define user keybindings (persists across mode changes)
-    function fish_user_key_bindings
-        # Navi Keybinds
-        if type -q navi
-            # Restore default Ctrl+g bindings
-            bind \cg _navi_smart_replace
-            if test "$fish_key_bindings" = "fish_vi_key_bindings"
-                bind -M insert \cg _navi_smart_replace
-            end
-            # Bind to Alt+e (Escape + e in terminal talk)
-            # This works in both default and vi-mode
-            bind \ee _navi_smart_replace
-            if test "$fish_key_bindings" = "fish_vi_key_bindings"
-                bind -M insert \ee _navi_smart_replace
-            end
-        end
-    end
-    
-    # Call it once to apply (since fish_vi_key_bindings was already called)
-    fish_user_key_bindings
-
-    # Carapace Configuration
+    # Carapace (Completion Engine)
     if type -q carapace
         set -gx CARAPACE_BRIDGES 'zsh,bash,inshellisense,usage'
         carapace _carapace fish | source
     end
 
-    # Wayland Clipboard
-    abbr -a --set-cursor copy wl-copy
-    abbr -a --set-cursor paste wl-paste
-
-    complete -c y -w yazi
+    # Clipboard Shortcuts
+    abbr -a copy wl-copy
+    abbr -a paste wl-paste
 end
