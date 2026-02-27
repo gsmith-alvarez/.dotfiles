@@ -1,142 +1,143 @@
 {
-    "workbench.iconTheme": "material-icon-theme",
-    "security.workspace.trust.untrustedFiles": "open",
-    "workbench.activityBar.location": "hidden",
-    "workbench.statusBar.visible": true,
-    "editor.lineNumbers": "relative",
-    "editor.detectIndentation": true,
-    "keyboard.dispatch": "keyCode",
-    "workbench.layoutControl.enabled": false,
-    "workbench.editor.showTabs": "single",
-    "extensions.experimental.affinity": {
-        "asvetliakov.vscode-neovim": 1
+  "workbench.iconTheme": "material-icon-theme",
+  "security.workspace.trust.untrustedFiles": "open",
+  "workbench.activityBar.location": "hidden",
+  "workbench.statusBar.visible": true,
+  "editor.lineNumbers": "relative",
+  "editor.detectIndentation": true,
+  "keyboard.dispatch": "keyCode",
+  "workbench.layoutControl.enabled": false,
+  "workbench.editor.showTabs": "single",
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
+  "vscode-neovim.neovimExecutablePaths.linux": "nvim",
+  "vscode-neovim.neovimInitVimPaths.linux": "~/.config/nvim/init.lua",
+  "workbench.colorTheme": "Catppuccin Mocha",
+  "terminal.integrated.defaultProfile.linux": "fish",
+  "terminal.integrated.env.linux": {
+    "PATH": "${env:HOME}/.local/share/mise/shims:${env:PATH}"
+  },
+  "mise.configureExtensionsAutomatically": true,
+  "mise.updateEnvAutomatically": true,
+  "vim.easymotion": true,
+  "vim.useSystemClipboard": true,
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        "<space>"
+      ],
+      "commands": [
+        "vspacecode.space"
+      ]
     },
-    "vscode-neovim.neovimExecutablePaths.linux": "nvim",
-    "vscode-neovim.neovimInitVimPaths.linux": "~/.config/nvim/init.lua",
-    "workbench.colorTheme": "Catppuccin Mocha",
-    "terminal.integrated.defaultProfile.linux": "fish",
-    "terminal.integrated.env.linux": {
-        "PATH": "${env:HOME}/.local/share/mise/shims:${env:PATH}"
+    {
+      "before": [
+        ","
+      ],
+      "commands": [
+        "vspacecode.space",
+        {
+          "command": "whichkey.triggerKey",
+          "args": "m"
+        }
+      ]
+    }
+  ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        "<space>"
+      ],
+      "commands": [
+        "vspacecode.space"
+      ]
     },
-    "mise.configureExtensionsAutomatically": true,
-    "mise.updateEnvAutomatically": true,
-    "vim.easymotion": true,
-    "vim.useSystemClipboard": true,
-    "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        ","
+      ],
+      "commands": [
+        "vspacecode.space",
         {
-            "before": [
-                "<space>"
-            ],
-            "commands": [
-                "vspacecode.space"
-            ]
-        },
-        {
-            "before": [
-                ","
-            ],
-            "commands": [
-                "vspacecode.space",
-                {
-                    "command": "whichkey.triggerKey",
-                    "args": "m"
-                }
-            ]
+          "command": "whichkey.triggerKey",
+          "args": "m"
         }
-    ],
-    "vim.visualModeKeyBindingsNonRecursive": [
+      ]
+    },
+    {
+      "before": [
+        ">"
+      ],
+      "commands": [
+        "editor.action.indentLines"
+      ]
+    },
+    {
+      "before": [
+        "<"
+      ],
+      "commands": [
+        "editor.action.outdentLines"
+      ]
+    }
+  ],
+  "platformio-ide.useBuiltinPIOCore": false,
+  "platformio-ide.customPATH": "/home/gsmith-alvarez/.local/share/mise/installs/pipx-platformio/6.1.19/bin/pio",
+  "platformio-ide.autoRebuildAutocompleteIndex": false,
+  "C_Cpp.intelliSenseEngine": "disabled",
+  "clangd.arguments": [
+    "--compile-commands-dir=${workspaceFolder}",
+    "--background-index",
+    "--completion-style=detailed",
+    "--header-insertion=never"
+  ],
+  "editor.minimap.enabled": false,
+  "breadcrumbs.enabled": false,
+  "vspacecode.bindingOverrides": [
+    {
+      "keys": "e",
+      "name": "+Embedded (PlatformIO)",
+      "type": "bindings",
+      "bindings": [
         {
-            "before": [
-                "<space>"
-            ],
-            "commands": [
-                "vspacecode.space"
-            ]
+          "key": "b",
+          "name": "Build Firmware",
+          "type": "command",
+          "command": "workbench.action.tasks.runTask",
+          "args": "PIO: Build"
         },
         {
-            "before": [
-                ","
-            ],
-            "commands": [
-                "vspacecode.space",
-                {
-                    "command": "whichkey.triggerKey",
-                    "args": "m"
-                }
-            ]
+          "key": "u",
+          "name": "Upload to Board",
+          "type": "command",
+          "command": "workbench.action.tasks.runTask",
+          "args": "PIO: Upload"
         },
         {
-            "before": [
-                ">"
-            ],
-            "commands": [
-                "editor.action.indentLines"
-            ]
+          "key": "m",
+          "name": "Serial Monitor",
+          "type": "command",
+          "command": "workbench.action.tasks.runTask",
+          "args": "PIO: Monitor"
         },
         {
-            "before": [
-                "<"
-            ],
-            "commands": [
-                "editor.action.outdentLines"
-            ]
+          "key": "c",
+          "name": "Update Compile DB (clangd)",
+          "type": "command",
+          "command": "workbench.action.tasks.runTask",
+          "args": "PIO: Generate Compilation DB"
         }
-    ],
-    "platformio-ide.useBuiltinPIOCore": false,
-    "platformio-ide.customPATH": "/home/gsmith-alvarez/.local/share/mise/installs/pipx-platformio/6.1.19/bin/pio",
-    "platformio-ide.autoRebuildAutocompleteIndex": false,
-    "C_Cpp.intelliSenseEngine": "disabled",
-    "clangd.arguments": [
-        "--compile-commands-dir=${workspaceFolder}",
-        "--background-index",
-        "--completion-style=detailed",
-        "--header-insertion=never"
-    ],
-    "editor.minimap.enabled": false,
-    "breadcrumbs.enabled": false,
-    "vspacecode.bindingOverrides": [
-        {
-            "keys": "e",
-            "name": "+Embedded (PlatformIO)",
-            "type": "bindings",
-            "bindings": [
-                {
-                    "key": "b",
-                    "name": "Build Firmware",
-                    "type": "command",
-                    "command": "workbench.action.tasks.runTask",
-                    "args": "PIO: Build"
-                },
-                {
-                    "key": "u",
-                    "name": "Upload to Board",
-                    "type": "command",
-                    "command": "workbench.action.tasks.runTask",
-                    "args": "PIO: Upload"
-                },
-                {
-                    "key": "m",
-                    "name": "Serial Monitor",
-                    "type": "command",
-                    "command": "workbench.action.tasks.runTask",
-                    "args": "PIO: Monitor"
-                },
-                {
-                    "key": "c",
-                    "name": "Update Compile DB (clangd)",
-                    "type": "command",
-                    "command": "workbench.action.tasks.runTask",
-                    "args": "PIO: Generate Compilation DB"
-                }
-            ]
-        },
-        {
-            "keys": "?",
-            "name": "Open Workflow Cheat Sheet",
-            "type": "command",
-            "command": "workbench.action.tasks.runTask",
-            "args": "Open Workflow Cheatsheet"
-        }
-    ],
-    "zig.zls.enabled": "on"
+      ]
+    },
+    {
+      "keys": "?",
+      "name": "Open Workflow Cheat Sheet",
+      "type": "command",
+      "command": "workbench.action.tasks.runTask",
+      "args": "Open Workflow Cheatsheet"
+    }
+  ],
+  "zig.zls.enabled": "on",
+  "workbench.colorCustomizations": null
 }

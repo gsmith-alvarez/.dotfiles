@@ -85,7 +85,7 @@ if status is-interactive
     abbr -a yr yazi
     abbr -a du "dust -r"
     abbr -a cp "rsync -ah --info=progress2"
-    
+
     # Python (uv)
     abbr -a py "uv run"
     abbr -a pyr "uv run python"
@@ -121,4 +121,6 @@ if status is-interactive
     # Clipboard Shortcuts
     abbr -a copy wl-copy
     abbr -a paste wl-paste
+    abbr -a v nvim
+    abbr -a bk 'bmm tui'
 end
