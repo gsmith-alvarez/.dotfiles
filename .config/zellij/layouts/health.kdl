@@ -1,0 +1,36 @@
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        children
+        pane size=2 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+
+    tab name="System Diagnostics" focus=true {
+        pane split_direction="horizontal" {
+            // Top Main Pane: Real-time interactive process/resource monitoring
+            pane size="65%" name="Core Telemetry (btop)" command="btop"
+            
+            // Bottom Row: Disk, Network, and Power
+            pane split_direction="vertical" size="35%" {
+                // Left: Static disk footprint, piped to less so it doesn't auto-close
+                pane name="Root FS Footprint (dust)" command="sh" {
+                    args "-c" "dust -r -d 2 / | less -R"
+                }
+                
+                // Middle: Live network sockets, refreshing every 2 seconds
+                pane name="Active Sockets (ss)" command="watch" {
+                    args "-n" "2" "--color" "ss -tunap | head -n 15"
+                }
+                
+                // Right: Live battery/power polling
+                pane name="Power State" command="watch" {
+                    args "-n" "5" "upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -E 'state|percentage|time to empty' || echo 'No Battery Interfaced'"
+                }
+            }
+        }
+    }
+}
