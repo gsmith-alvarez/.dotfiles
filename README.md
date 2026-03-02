@@ -12,9 +12,13 @@ at the repo root and are symlinked into `~/.config/`.
 ## Bootstrap
 
 ```bash
-gh repo clone gsmith-alvarez/.dotfiles ~/dotfiles
+git clone https://github.com/gsmith-alvarez/.dotfiles.git ~/dotfiles
 cd ~/dotfiles
+
+# create symlinks and install mise-managed tools
 stow --target ~/.config .
+# Installs mise and adds activation to ~/.bashrc
+curl https://mise.run/bash | sh
 mise install
 ```
 

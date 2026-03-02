@@ -12,9 +12,6 @@ Establish the foundation by updating the base system, adding external repositori
 ```bash
 # Terra Repo (Ghostty/Edge Packages)
 sudo dnf config-manager addrepo --from-repofile="https://repos.fyralabs.com/terra$(rpm -E %fedora)/terra.repo"
-
-# Mise Toolchain Repo
-sudo dnf config-manager addrepo --from-repofile="https://mise.jdx.dev/rpm/mise.repo"
 ```
 
 ### 2. Base System Synchronization
@@ -26,13 +23,11 @@ sudo dnf upgrade --refresh -y
 ### 3. Package Deployment
 Deploy the primary toolset including compilers, debuggers, and virtualization layers.
 ```bash
-sudo dnf install -y fish llvm-devel clang lldb lld ccache git gh ghostty \
-direnv lnav tree-sitter-cli valgrind gdb \
-flatpak podman toolbox virt-manager \
+sudo dnf install -y fish llvm-devel clang lldb lld git ghostty \
+valgrind gdb flatpak podman toolbox virt-manager \
 thunderbird keepassxc syncthing texlive-scheme-medium libusb1-devel \
-distrobox openssl-devel alsa-lib-devel dbus-devel mold readline-devel asd \
-sysstat perf picocom avrdude tuned-utils iotop nload clang-tools-extra \
-mise gcc-gfortran
+distrobox openssl-devel alsa-lib-devel dbus-devel readline-devel asd \
+sysstat perf picocom avrdude tuned-utils iotop nload clang-tools-extra gcc-gfortran \
 
 sudo dnf group install -y admin-tools c-development development-tools \
 security-lab electronic-lab python-science libreoffice \
@@ -61,7 +56,9 @@ gh repo clone gsmith-alvarez/.dotfiles ~/dot cd ~/dotfiles
 
 stow --target ~/.config
 
-mise install
+
+# Installs mise and adds activation to ~/.bashrc
+curl https://mise.run/bash | sh
 ```
 
 ### 2. Runtime Toolchain
