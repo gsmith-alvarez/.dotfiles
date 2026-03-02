@@ -1,43 +1,44 @@
-# Ignore everything in the Code folder by default
-.config/Code/*
+# --- VSCodium ---
+VSCodium/*
+!VSCodium/User/
+VSCodium/User/*
+!VSCodium/User/settings.json
+!VSCodium/User/keybindings.json
+!VSCodium/User/tasks.json
+!VSCodium/User/cheatsheet.md
+!VSCodium/User/snippets/
+VSCodium/User/History/
+VSCodium/User/workspaceStorage/
+VSCodium/User/globalStorage/
+VSCodium/User/chatSessions/
 
-# But explicitly allow the stuff that actually matters
-!.config/Code/User/
-.config/Code/User/*
-!.config/Code/User/settings.json
-!.config/Code/User/keybindings.json
-!.config/Code/User/snippets/
-
-# Ignore the heavy/private stuff inside the User folder
-.config/Code/User/History/
-.config/Code/User/workspaceStorage/
-.config/Code/User/globalStorage/
-.config/Code/User/chatSessions/
+# --- VSCode (legacy, remove once fully on VSCodium) ---
+Code/
 
 # --- EasyEffects ---
 # Back up your presets, but ignore the runtime state
-.config/easy-effects/*
-!.config/easy-effects/input/
-!.config/easy-effects/output/
+easy-effects/*
+!easy-effects/input/
+!easy-effects/output/
 
 # --- Fish Shell ---
 # Keep your functions and config, ignore history and completions
-.config/fish/*
-!.config/fish/config.fish
-!.config/fish/functions/
-!.config/fish/conf.d/
-.config/fish/fish_variables
-.config/fish/fish_history
+fish/*
+!fish/config.fish
+!fish/functions/
+!fish/conf.d/
+fish/fish_variables
+fish/fish_history
 
 # --- Mise ---
 # Mise usually tracks local tool versions in the project folder, 
 # but ignore the internal data/cache if it's in .config
-.config/mise/cache/
-.config/mise/downloads/
+mise/cache/
+mise/downloads/
 
 # --- Zellij ---
 # Ignore layouts you don't want to track or temp files
-.config/zellij/cache/
+zellij/cache/
 
 # --- General Linux Bloat ---
 **/*.log
@@ -48,13 +49,13 @@
 .aider*
 
 # --- Neovim ---
-.config/nvim/deps/
-.config/nvim/undo/
-.config/nvim/shada/
-.config/nvim/view/
-.config/nvim/backup/
-.config/nvim/lazy-lock.json
-.config/nvim/.luarc.json
-.config/nvim/.neoconf.json
-.config/nvim/spell/*.add
-.config/nvim/spell/*.add.spl
+nvim/deps/
+nvim/undo/
+nvim/shada/
+nvim/view/
+nvim/backup/
+nvim/lazy-lock.json
+nvim/.luarc.json
+nvim/.neoconf.json
+nvim/spell/*.add
+nvim/spell/*.add.spl

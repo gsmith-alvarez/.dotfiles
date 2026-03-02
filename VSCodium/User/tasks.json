@@ -4,9 +4,9 @@
         {
             "label": "Open Workflow Cheatsheet",
             "type": "shell",
-            "command": "code",
+            "command": "codium",
             "args": [
-                "${userHome}/.config/Code/User/cheatsheet.md"
+                "${userHome}/.config/VSCodium/User/cheatsheet.md"
             ],
             "presentation": {
                 "reveal": "never",
