@@ -1,109 +1,119 @@
 [tools]
 # --- Core CLI (Modern Unix Suite) ---
-ripgrep = "latest"                                                     # Fast text search (Rust)
-ripgrep-all = "latest"                                                 # Search PDFs, Ebooks, Office docs (Rust)
-fd = "latest"                                                          # User-friendly 'find' alternative (Rust)
-fzf = "latest"                                                         # General purpose fuzzy finder (Go)
-bat = "latest"                                                         # 'cat' clone with syntax highlighting (Rust)
-zoxide = "latest"                                                      # Smart 'cd' replacement (Rust)
-starship = "latest"                                                    # Fast, cross-shell prompt (Rust)
-atuin = "latest"                                                       # SQLite-backed shell history (Rust)
-yazi = "latest"                                                        # Terminal file manager with previews (Rust)
-eza = "latest"                                                         # Modern 'ls' with icons/git integration (Rust)
-dust = "latest"                                                        # Visual disk usage analyzer (Rust)
-glow = "latest"                                                        # Markdown renderer for terminal (Go)
-cargo-binstall = "latest"                                              # Install Rust binaries from releases (Rust)
-"cargo:cargo-update" = "latest"                                        # Update all cargo binaries (Rust)
-"cargo:topgrade" = "latest"                                            # Universal system/tool updater (Rust)
-"cargo:cargo-cache" = "latest"                                         # Manage/clean cargo cache (Rust)
-usage = "latest"                                                       # CLI specification tool (Rust)
-carapace = "latest"                                                    # Multi-shell completion engine (Go)
-btop = "latest"
-bottom = "latest"
-gojq = "latest"
-sd = "latest"
-watchexec = "latest"
-"pipx:aider-chat" = { version = "latest", uvx_args = "--python 3.12" }
+ripgrep    = "latest"  # Fast text search (Rust)
+ripgrep-all = "latest" # Search PDFs, Ebooks, Office docs (Rust)
+fd         = "latest"  # User-friendly 'find' alternative (Rust)
+fzf        = "latest"  # General purpose fuzzy finder (Go)
+bat        = "latest"  # 'cat' clone with syntax highlighting (Rust)
+zoxide     = "latest"  # Smart 'cd' replacement (Rust)
+starship   = "latest"  # Fast, cross-shell prompt (Rust)
+atuin      = "latest"  # SQLite-backed shell history (Rust)
+yazi       = "latest"  # Terminal file manager with previews (Rust)
+eza        = "latest"  # Modern 'ls' with icons/git integration (Rust)
+dust       = "latest"  # Visual disk usage analyzer (Rust)
+glow       = "latest"  # Markdown renderer for terminal (Go)
+gojq       = "latest"  # Fast jq-compatible JSON processor (Go)
+sd         = "latest"  # Intuitive sed/awk replacement (Rust)
+watchexec  = "latest"  # Re-run commands on file change (Rust)
+xh         = "latest"  # Fast native HTTP client (Rust)
+usage      = "latest"  # CLI specification tool (Rust)
+carapace   = "latest"  # Multi-shell completion engine (Go)
+
+# --- Monitoring ---
+btop   = "latest" # Feature-rich resource monitor (C++)
+bottom = "latest" # Graphical process/resource monitor — btm (Rust)
+
+# --- Cargo Utilities ---
+cargo-binstall         = "latest" # Install Rust binaries from releases
+"cargo:cargo-update"   = "latest" # Update all cargo-installed binaries
+"cargo:cargo-cache"    = "latest" # Manage/clean cargo cache
+"cargo:topgrade"       = "latest" # Universal system/tool updater
 
 # --- Config & Data Formats ---
-taplo = "latest"           # TOML LSP, linter, and formatter (Rust)
-"cargo:kdl-fmt" = "latest" # Formatter for KDL documents (Rust)
-yamllint = "latest"        # Strict YAML logic/syntax linter (Python)
-"cargo:jless" = "latest"   # Interactive JSON viewer/pager (Rust)
+taplo           = "latest"  # TOML LSP, linter, and formatter (Rust)
+"cargo:kdl-fmt" = "latest"  # Formatter for KDL documents (Rust)
+yamllint        = "latest"  # Strict YAML logic/syntax linter (Python)
+"cargo:jless"   = "latest"  # Interactive JSON viewer/pager (Rust)
 
 # --- Shell Scripting ---
-shellcheck = "latest"
-shfmt = "latest"                                  # Shell script formatter (Go)
-"go:github.com/go-delve/delve/cmd/dlv" = "latest"
+shellcheck = "latest" # Shell script static analysis (Haskell)
+shfmt      = "latest" # Shell script formatter (Go)
 
 # --- Development & Build Tools ---
-neovim = "latest"          # Core text editor (C/Lua)
-zellij = "latest"          # Terminal multiplexer/workspace (Rust)
-make = "latest"            # Classic build automation (C)
-cmake = "latest"           # Cross-platform build generator (C++)
-hyperfine = "latest"       # CLI benchmarking tool (Rust)
-podman = "latest"          # Daemonless container engine (Go)
-podman-tui = "latest"      # Podman terminal user interface (Rust)
-ninja = "latest"           # High-speed build executor (C++)
-ccache = "latest"          # Compiler cache for C/C++ (C++)
-"cargo:sccache" = "latest"
+neovim    = "latest" # Core text editor (C/Lua)
+zellij    = "latest" # Terminal multiplexer/workspace (Rust)
+make      = "latest" # Classic build automation (C)
+cmake     = "latest" # Cross-platform build generator (C++)
+hyperfine = "latest" # CLI benchmarking tool (Rust)
+ninja     = "latest" # High-speed build executor (C++)
+ccache    = "latest" # Compiler cache for C/C++ (C++)
+podman     = "latest" # Daemonless container engine (Go)
+podman-tui = "latest" # Podman terminal user interface (Rust)
+"cargo:sccache" = "latest" # Distributed compiler cache (Rust)
+
+# --- Debuggers ---
+"go:github.com/go-delve/delve/cmd/dlv" = "latest" # Go debugger (dlv)
 
 # --- Embedded & Systems (EE Specific) ---
-arduino-cli = "latest"            # Command-line Arduino toolchain (Go)
-"gcc-arm-none-eabi" = "latest"    # ARM Cortex-M cross-compiler (C)
-"cargo:cargo-binutils" = "latest" # Binary management for MCUs (Rust)
-"cargo:cargo-bloat" = "latest"    # Analyze binary size overhead (Rust)
-"cargo:probe-rs-tools" = "latest" # MCU flashing/debugging suite (Rust)
-"pipx:platformio" = "latest"
+arduino-cli              = "latest" # Command-line Arduino toolchain (Go)
+"gcc-arm-none-eabi"      = "latest" # ARM Cortex-M cross-compiler (C)
+"cargo:cargo-binutils"   = "latest" # Binary management for MCUs (Rust)
+"cargo:cargo-bloat"      = "latest" # Analyze binary size overhead (Rust)
+"cargo:probe-rs-tools"   = "latest" # MCU flashing/debugging suite (Rust)
+"pipx:platformio"        = "latest" # Embedded framework & build system (Python)
 
 # --- Languages & Toolchains ---
-rust = "latest"          # Systems programming language
+rust          = "latest" # Systems programming language
 rust-analyzer = "latest" # Rust Language Server
-"cargo:bacon" = "latest" # Background Rust code checker (Rust)
-go = "latest"            # Cloud/Backend language
-zig = "latest"           # Low-level systems language
-python = "latest"        # Scripting and AI language
-uv = "latest"            # Fast Python project/package manager (Rust)
-node = "lts"             # JS/TS runtime
-lua = "5.1"              # Scripting language (Neovim config)
-lazygit = "latest"
-zls = "latest"
-typst = "latest"         # Typst compiler
-tinymist = "latest"      # Typst language server
-typstyle = "latest"      # Typstyle
+"cargo:bacon" = "latest" # Background Rust code checker
+go            = "latest" # Cloud/backend language
+zig           = "latest" # Low-level systems language
+zls           = "latest" # Zig Language Server
+python        = "latest" # Scripting and AI language
+uv            = "latest" # Fast Python project/package manager (Rust)
+node          = "lts"    # JS/TS runtime
+lua           = "5.1"    # Scripting language (Neovim config)
+typst         = "latest" # Typst compiler
+tinymist      = "latest" # Typst Language Server
+typstyle      = "latest" # Typst formatter
 
+# --- Git Tools ---
+lazygit = "latest" # Terminal UI for Git
 
 # --- Linters & Formatters ---
-ruff = "latest"                                    # Fast Python linter/formatter (Rust)
-stylua = "latest"                                  # Opinionated Lua formatter (Rust)
-lua-language-server = "latest"                     # Lua LSP (Lua/C++)
-oxlint = "latest"                                  # Ultra-fast JS/TS linter (Rust)
-"npm:oxfmt" = "latest"                             # Fast JS/TS formatter (Rust-backed)
-"cargo:typos-cli" = "latest"                       # Source code spell checker (Rust)
-marksman = "latest"                                # Markdown LSP (C#)
-"npm:bash-language-server" = "latest"
-"npm:vscode-json-languageserver" = "latest"
-"npm:yaml-language-server" = "latest"
-"npm:dockerfile-language-server-nodejs" = "latest"
-"npm:typescript-language-server" = "latest"        # ts_ls
-"go:golang.org/x/tools/gopls" = "latest"
-tree-sitter = "latest"
-"npm:pyright" = "latest"
+ruff                   = "latest" # Fast Python linter/formatter (Rust)
+stylua                 = "latest" # Opinionated Lua formatter (Rust)
+oxlint                 = "latest" # Ultra-fast JS/TS linter (Rust)
+"npm:oxfmt"            = "latest" # Fast JS/TS formatter (Rust-backed)
+"cargo:typos-cli"      = "latest" # Source code spell checker (Rust)
+tree-sitter            = "latest" # Parser generator & incremental parsing library
+"npm:markdownlint-cli2" = "latest" # Markdown linter (Node)
 
+# --- Language Servers ---
+lua-language-server                       = "latest" # Lua LSP (Lua/C++)
+marksman                                  = "latest" # Markdown LSP (C#)
+"npm:bash-language-server"                = "latest" # Bash LSP
+"npm:vscode-json-languageserver"          = "latest" # JSON LSP
+"npm:yaml-language-server"                = "latest" # YAML LSP
+"npm:dockerfile-language-server-nodejs"   = "latest" # Dockerfile LSP
+"npm:typescript-language-server"          = "latest" # TypeScript/JavaScript LSP
+"go:golang.org/x/tools/gopls"            = "latest" # Go LSP
+"npm:pyright"                             = "latest" # Python LSP (static type checker)
 
 # --- Navigation & Utilities ---
-"cargo:bmm" = "latest"                            # TUI bookmark manager (Rust)
-"cargo:wiki-tui" = "latest"                       # Wikipedia TUI explorer (Rust)
-navi = "latest"                                   # Interactive cheatsheet (Rust)
-"cargo:bluetui" = "latest"                        # Bluetooth management TUI (Rust)
-"cargo:jolt-tui" = "latest"                       # Battery monitoring TUI (Rust)
-"cargo:ouch" = "latest"                           # Unified compression tool (Rust)
-"go:github.com/surge-downloader/surge" = "latest" # P2P/HTTP downloader (Go)
-"cargo:lemmeknow" = "latest"                      # String/Hash identifier (Rust)
-"go:github.com/rs/curlie" = "latest"              # User-friendly curl wrapper (Go)
-xh = "latest"                                     # Fast native HTTP client (Rust)
-"cargo:spotify_player" = "latest"                 # Feature-rich Spotify TUI (Rust)
-"npm:markdownlint-cli2" = "latest"
+navi                                       = "latest" # Interactive cheatsheet (Rust)
+"cargo:ouch"                               = "latest" # Unified compression tool (Rust)
+"cargo:bmm"                                = "latest" # TUI bookmark manager (Rust)
+"cargo:wiki-tui"                           = "latest" # Wikipedia TUI explorer (Rust)
+"cargo:bluetui"                            = "latest" # Bluetooth management TUI (Rust)
+"cargo:jolt-tui"                           = "latest" # Battery monitoring TUI (Rust)
+"cargo:spotify_player"                     = "latest" # Feature-rich Spotify TUI (Rust)
+"cargo:lemmeknow"                          = "latest" # String/hash identifier (Rust)
+"go:github.com/surge-downloader/surge"    = "latest" # P2P/HTTP downloader (Go)
+"go:github.com/rs/curlie"                 = "latest" # User-friendly curl wrapper (Go)
+
+# --- AI ---
+"pipx:aider-chat" = { version = "latest", uvx_args = "--python 3.12" } # AI pair programmer
 
 [env]
 EDITOR = "nvim"
