@@ -4,9 +4,9 @@
 
 local search_keys = {
 	{ '<leader>ff', function() require('snacks').picker.files() end,                                          'Find Files' },
-	{ '<leader>cd', function() require('snacks').picker.zoxide() end,                                         'Zoxide Directory' },
-	{ '<leader>sg', function() require('snacks').picker.grep() end,                                           'Grep Project' },
-	{ '<leader>sw', function() require('snacks').picker.grep_word() end,                                      'Grep Word Under Cursor' },
+	{ '<leader>cd', function() require('snacks').picker.zoxide() end,                                         'Zoxide Directory',  'zoxide' },
+	{ '<leader>sg', function() require('snacks').picker.grep() end,                                           'Grep Project',      'rg' },
+	{ '<leader>sw', function() require('snacks').picker.grep_word() end,                                      'Grep Word Under Cursor', 'rg' },
 	{ '<leader>sd', function() require('snacks').picker.diagnostics() end,                                    'Search Diagnostics' },
 	{ '<leader>sr', function() require('snacks').picker.resume() end,                                         'Resume Last Search' },
 	{ '<leader>sh', function() require('snacks').picker.help() end,                                           'Search Help' },
@@ -15,7 +15,9 @@ local search_keys = {
 }
 
 for _, k in ipairs(search_keys) do
-	vim.keymap.set('n', k[1], k[2], { desc = 'Search: ' .. k[3] })
+	if not k[4] or vim.fn.executable(k[4]) == 1 then
+		vim.keymap.set('n', k[1], k[2], { desc = 'Search: ' .. k[3] })
+	end
 end
 
 return {}

@@ -23,6 +23,12 @@ local openocd_job_id = nil
 local function start_openocd()
 	if openocd_job_id then return true end -- Already running
 
+	-- Guard: openocd is EE-specific; skip silently if not installed
+	if not utils.mise_shim('openocd') then
+		utils.soft_notify('openocd not found — install it via mise.local.toml to enable hardware debugging.', vim.log.levels.WARN)
+		return false
+	end
+
 	-- Enforce project-level configuration.
 	-- You must have an openocd.cfg in your project root.
 	if vim.fn.filereadable('openocd.cfg') == 0 then
