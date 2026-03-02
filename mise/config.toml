@@ -50,9 +50,8 @@ ccache = "latest"          # Compiler cache for C/C++ (C++)
 podman = "latest"          # Daemonless container engine (Go)
 podman-tui = "latest"      # Podman terminal user interface (Rust)
 "cargo:sccache" = "latest" # Distributed compiler cache (Rust)
-# mold: Linux-only — add to mise.local.toml on Linux machines (see mise.local.toml.example)
-direnv = "latest" # Per-directory environment manager (Go)
-lnav = "latest"   # Log file navigator (C++)
+direnv = "latest"          # Per-directory environment manager (Go)
+lnav = "latest"            # Log file navigator (C++)
 
 # --- Debuggers ---
 "go:github.com/go-delve/delve/cmd/dlv" = "latest" # Go debugger (dlv)
