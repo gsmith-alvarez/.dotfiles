@@ -4,6 +4,26 @@
 ## windows: %USERPROFILE%/.local/share/atuin
 # data_dir = "~/.local/share/atuin"
 
+# =============================================================================
+# Active configuration (uncommented = enabled)
+# =============================================================================
+
+## Fuzzy search for more flexible matching
+search_mode = "fuzzy"
+
+## Show results from current directory first, fall back to global
+filter_mode = "directory"
+
+## Enable git-repo-aware filtering (workspace = whole repo tree)
+workspaces = true
+
+## Compact UI: less chrome, more history
+style = "compact"
+
+## Preview long commands that get cut off
+show_preview = true
+max_preview_height = 4
+
 ## where to store your database, default is your system data directory
 ## linux/mac: ~/.local/share/atuin/history.db
 ## windows: %USERPROFILE%/.local/share/atuin/history.db
@@ -194,32 +214,18 @@ enter_accept = true
 
 [stats]
 ## Set commands where we should consider the subcommand for statistics. Eg, kubectl get vs just kubectl
-# common_subcommands = [
-#   "apt",
-#   "cargo",
-#   "composer",
-#   "dnf",
-#   "docker",
-#   "dotnet",
-#   "git",
-#   "go",
-#   "ip",
-#   "jj",
-#   "kubectl",
-#   "nix",
-#   "nmcli",
-#   "npm",
-#   "pecl",
-#   "pnpm",
-#   "podman",
-#   "port",
-#   "systemctl",
-#   "tmux",
-#   "yarn",
-# ]
+common_subcommands = [
+  "cargo",
+  "dnf",
+  "git",
+  "go",
+  "mise",
+  "podman",
+  "systemctl",
+  "zig",
+]
 
-## Set commands that should be totally stripped and ignored from stats
-# common_prefix = ["sudo"]
+common_prefix = ["sudo"]
 
 ## Set commands that will be completely ignored from stats
 # ignored_commands = [

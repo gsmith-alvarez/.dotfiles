@@ -303,7 +303,7 @@ default_shell "/usr/bin/fish"
 // Options:
 //   - detach (Default)
 //   - quit
-on_force_close "quit"
+on_force_close "detach"
  
 // Configure the scroll back buffer size
 // This is the number of lines zellij stores for each pane in the scroll back
@@ -393,7 +393,7 @@ session_serialization true
  
 // How often in seconds sessions are serialized
 // 
-serialization_interval 10
+serialization_interval 60
  
 // Enable or disable writing of session metadata to disk (if disabled, other sessions might not know
 // metadata info on this session)

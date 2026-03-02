@@ -72,14 +72,13 @@ if status is-interactive
       --bind='j:down,k:up,h:backward-char,l:forward-char'
       --bind='w:forward-word,b:backward-word,x:delete-char,ctrl-d:clear-query,q:abort'
      
-      --bind='i:unbind(j,k,h,l,w,b,x,D,q,ctrl-d,i)+change-prompt([I] 󰭎 )'
-      --bind='esc:rebind(j,k,h,l,w,b,x,D,q,ctrl-d,i)+change-prompt([N] 󰭎 )'
-      --bind='start:unbind(j,k,h,l,w,b,x,D,q,i)'
+      --bind='i:unbind(j,k,h,l,w,b,x,q,ctrl-d,i)+change-prompt([I] 󰭎 )'
+      --bind='esc:rebind(j,k,h,l,w,b,x,q,ctrl-d,i)+change-prompt([N] 󰭎 )'
+      --bind='start:unbind(j,k,h,l,w,b,x,q,i)'
     "
     ### --- 4. ABBREVIATIONS & ALIASES --- ###
     abbr -a .. 'cd ..'
     abbr -a ... 'cd ../..'
-    abbr -a cd z
     abbr -a cat bat
     abbr -a find fd
     abbr -a yr yazi
@@ -97,6 +96,12 @@ if status is-interactive
     abbr -a ga 'git add'
     abbr -a gc 'git commit -m'
     abbr -a gp 'git push'
+    abbr -a gab 'git absorb'          # Auto fixup into correct ancestor commit
+
+    # New tools
+    abbr -a ps procs                  # Modern ps
+    abbr -a hx hexyl                  # Hex viewer for binaries/firmware
+    abbr -a mp mprocs                 # Multi-process TUI runner
 
     # Asus Laptop Controls
     abbr -a pperf "asusctl profile set Performance"

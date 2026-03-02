@@ -6,7 +6,10 @@ function fkill -d "Fuzzy kill processes"
         --preview-window down:3:wrap | awk '{print $2}')
 
     if test -n "$pids"
-        echo $pids | xargs kill -9
+        # Graceful SIGTERM first, then SIGKILL for anything that survives
+        echo $pids | xargs kill -15
+        sleep 2
+        echo $pids | xargs kill -9 2>/dev/null
         echo "💀 Killed PID(s): $pids"
     end
 end

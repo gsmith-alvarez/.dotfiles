@@ -21,13 +21,16 @@ carapace = "latest"    # Multi-shell completion engine (Go)
 
 # --- Monitoring ---
 btop = "latest"   # Feature-rich resource monitor (C++)
-bottom = "latest" # Graphical process/resource monitor — btm (Rust)
 
 # --- Cargo Utilities ---
 cargo-binstall = "latest"       # Install Rust binaries from releases
 "cargo:cargo-update" = "latest" # Update all cargo-installed binaries
 "cargo:cargo-cache" = "latest"  # Manage/clean cargo cache
 "cargo:topgrade" = "latest"     # Universal system/tool updater
+# "cargo:cargo-nextest" = "latest"  # [SUGGESTED] 3-5× faster Rust test runner with better output
+# "cargo:cargo-expand" = "latest"   # [SUGGESTED] Show macro expansion output for debugging
+# "cargo:cargo-machete" = "latest"  # [SUGGESTED] Find unused Cargo dependencies (binary size)
+# "cargo:cargo-deny" = "latest"     # [SUGGESTED] Audit dep tree for vulns + license violations
 
 # --- Config & Data Formats ---
 taplo = "latest"           # TOML LSP, linter, and formatter (Rust)
@@ -72,8 +75,11 @@ tinymist = "latest"      # Typst Language Server
 typstyle = "latest"      # Typst formatter
 
 # --- Git Tools ---
-lazygit = "latest" # Terminal UI for Git
-gh = "latest"      # GitHub CLI (Go)
+lazygit = "latest"            # Terminal UI for Git
+gh = "latest"                 # GitHub CLI (Go)
+delta = "latest"              # Syntax-highlighting git diff pager (Rust)
+"cargo:git-absorb" = "latest" # Auto fixup commits into the right ancestor (Rust)
+# hurl = "latest"             # [SUGGESTED] Reproducible HTTP request sequences as text files
 
 # --- Linters & Formatters ---
 ruff = "latest"                    # Fast Python linter/formatter (Rust)
@@ -97,6 +103,8 @@ marksman = "latest"                                # Markdown LSP (C#)
 
 # --- Navigation & Utilities ---
 navi = "latest"                                   # Interactive cheatsheet (Rust)
+just = "latest"                                   # Ergonomic command runner / task file (Rust)
+tokei = "latest"                                  # Code statistics across mixed languages (Rust)
 "cargo:ouch" = "latest"                           # Unified compression tool (Rust)
 "cargo:bmm" = "latest"                            # TUI bookmark manager (Rust)
 "cargo:wiki-tui" = "latest"                       # Wikipedia TUI explorer (Rust)
@@ -104,8 +112,12 @@ navi = "latest"                                   # Interactive cheatsheet (Rust
 "cargo:jolt-tui" = "latest"                       # Battery monitoring TUI (Rust)
 "cargo:spotify_player" = "latest"                 # Feature-rich Spotify TUI (Rust)
 "cargo:lemmeknow" = "latest"                      # String/hash identifier (Rust)
+"cargo:hexyl" = "latest"                          # Hex viewer for binary/firmware files (Rust)
+"cargo:mprocs" = "latest"                         # Multi-process TUI runner (Rust)
+"cargo:procs" = "latest"                          # Modern ps replacement (Rust)
+"cargo:miniserve" = "latest"                      # One-command HTTP file server (Rust)
 "go:github.com/surge-downloader/surge" = "latest" # P2P/HTTP downloader (Go)
-"go:github.com/rs/curlie" = "latest"              # User-friendly curl wrapper (Go)
+"npm:@ast-grep/cli" = "latest"                    # Structural code search & rewrite (Rust/Node)
 
 # --- AI ---
 "pipx:aider-chat" = { version = "latest", uvx_args = "--python 3.12" } # AI pair programmer
@@ -113,7 +125,6 @@ navi = "latest"                                   # Interactive cheatsheet (Rust
 [env]
 EDITOR = "nvim"
 VISUAL = "nvim"
-PAGER = "bat"
 LANG = "en_US.UTF-8"
 
 # Path Setup
@@ -132,9 +143,9 @@ CMAKE_GENERATOR = "Ninja" # Force Ninja for CMake builds
 # when the relevant binaries are actually present on the current machine.
 _.source = ".mise-env.sh"
 
-# Aider - AI
-OPENAI_API_BASE = "http://localhost:1234/v1"
-OPENAI_API_KEY = "lm-studio"
+# Aider - AI (credentials stored in mise.local.toml, not tracked in git)
+# OPENAI_API_BASE = "http://localhost:1234/v1"
+# OPENAI_API_KEY = "lm-studio"
 
 [settings]
 env_shell_expand = true    # Support $HOME in paths

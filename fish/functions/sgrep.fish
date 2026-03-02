@@ -1,6 +1,9 @@
-function sg -d "Fuzzy search file contents and open in Neovim"
+function sgrep -d "Fuzzy search file contents and open in Neovim"
+    # Accept an optional search pattern; default to empty (show all)
+    set -l pattern (test (count $argv) -gt 0; and echo $argv[1]; or echo "")
+
     # 1. Search with rg, pipe to fzf with a bat preview centered on the match
-    set -l match (rg --color=always --line-number --no-heading --smart-case "" | \
+    set -l match (rg --color=always --line-number --no-heading --smart-case "$pattern" | \
         fzf --ansi \
             --color "hl:-1:underline,hl+:-1:underline:reverse" \
             --delimiter : \

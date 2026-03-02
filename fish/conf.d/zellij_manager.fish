@@ -13,7 +13,7 @@ function __zj_notify -d "Renders a cute, colorful notification"
     echo (set_color $color)"$icon [Shell-chan]: "(set_color normal)"$msg"
 end
 
-# 2. EVENT: Directory Change
+# 2. EVENT: Directory Change — only notify when a layout actually exists
 function __on_pwd_change --on-variable PWD
     test "$PWD" = "$HOME" -o "$PWD" = /; and return
 
@@ -22,9 +22,6 @@ function __on_pwd_change --on-variable PWD
 
     if test -f "$layout"
         __zj_notify "Ooh! I found a special layout for $folder! Use it? ฅ(^◕ᴥ◕^)" yellow
-    else
-        # Just a small vibe check
-        __zj_notify "Wandered into $folder... Looks cozy! 🏡" cyan
     end
 end
 
