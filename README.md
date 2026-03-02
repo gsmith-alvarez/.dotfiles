@@ -4,9 +4,6 @@ Personal configuration for a Fedora-based embedded engineering workstation.
 Managed with [GNU Stow](https://www.gnu.org/software/stow/) — all configs live
 at the repo root and are symlinked into `~/.config/`.
 
-> For the full workstation provisioning guide (packages, hardware, kernel tuning,
-> Flatpaks, firewall, etc.) see [`nvim/README.md`](nvim/README.md).
-
 ---
 
 ## Bootstrap
@@ -26,6 +23,8 @@ mise install
 `~/.config/`. Files listed in `.stow-local-ignore` (`README.md`, `reference.md`,
 `.gitignore`, `.git`) are excluded.
 
+For full provisioning details — packages, hardware, kernel tuning, Flatpaks, firewall, and mise portability — see [**QUICKSTART.md**](QUICKSTART.md).
+
 ---
 
 ## Configs
@@ -37,7 +36,7 @@ mise install
 | `fish/` | Fish shell — functions, abbreviations, `zs` session manager |
 | `zellij/` | Zellij — multiplexer layouts (health, dashboard) |
 | `ghostty/` | Ghostty terminal emulator |
-| `mise/` | mise — language runtime & tool version manager |
+| `mise/` | mise — language runtime & tool version manager (see [QUICKSTART.md § Runtime Toolchain](QUICKSTART.md#2-runtime-toolchain)) |
 | `atuin/` | Atuin — shell history sync |
 | `carapace/` | Carapace — multi-shell completion bridge |
 | `lazygit/` | Lazygit |

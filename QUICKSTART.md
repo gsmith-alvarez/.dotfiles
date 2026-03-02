@@ -62,10 +62,34 @@ curl https://mise.run/bash | sh
 ```
 
 ### 2. Runtime Toolchain
-Initialize `mise` to manage language runtimes and other tools
+Initialize `mise` to manage language runtimes and other tools.
 ```bash
 mise install -y
 ```
+
+### 3. Machine-Specific Build Optimizations (Linux only)
+
+`mise/config.toml` is portable and safe on any machine. Volatile build variables (`RUSTC_WRAPPER`, `LDFLAGS`, `RUSTFLAGS`, linker targets) are **not** hardcoded in TOML — they are delegated to `mise/.mise-env.sh`, which is sourced at every shell activation via `_.source`. The script guards each export behind a `command -v` check and an `$OSTYPE` check, so variables are only set when the relevant binary is actually present.
+
+To opt into Linux performance tools (`mold`, and optionally embedded/EE tooling), copy the example local config:
+```bash
+cp ~/.config/mise/mise.local.toml.example ~/.config/mise/mise.local.toml
+# Uncomment any EE tools you need, then:
+mise install -y
+```
+
+`mise.local.toml` is never committed. On the **next** shell activation after `mise install` finishes, `mold` and `sccache` will be found by the script and their flags will be exported automatically.
+
+**Bootstrapping sequence on a fresh machine:**
+```
+mise install          # tools download; sccache/mold not in PATH yet
+                      # .mise-env.sh runs, finds nothing, exports nothing ✓
+# ... install finishes ...
+# open new shell / re-activate
+                      # .mise-env.sh runs, finds sccache/mold, exports flags ✓
+```
+
+On macOS, `mold` is never installed (it's only in the local example), so none of the Linux linker flags are ever set.
 
 ---
 

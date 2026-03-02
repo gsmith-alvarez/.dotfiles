@@ -50,20 +50,12 @@ ccache = "latest"          # Compiler cache for C/C++ (C++)
 podman = "latest"          # Daemonless container engine (Go)
 podman-tui = "latest"      # Podman terminal user interface (Rust)
 "cargo:sccache" = "latest" # Distributed compiler cache (Rust)
-mold = "latest"            # High-speed linker (C++)
-direnv = "latest"          # Per-directory environment manager (Go)
-lnav = "latest"            # Log file navigator (C++)
+# mold: Linux-only — add to mise.local.toml on Linux machines (see mise.local.toml.example)
+direnv = "latest" # Per-directory environment manager (Go)
+lnav = "latest"   # Log file navigator (C++)
 
 # --- Debuggers ---
 "go:github.com/go-delve/delve/cmd/dlv" = "latest" # Go debugger (dlv)
-
-# --- Embedded & Systems (EE Specific) ---
-arduino-cli = "latest"            # Command-line Arduino toolchain (Go)
-"gcc-arm-none-eabi" = "latest"    # ARM Cortex-M cross-compiler (C)
-"cargo:cargo-binutils" = "latest" # Binary management for MCUs (Rust)
-"cargo:cargo-bloat" = "latest"    # Analyze binary size overhead (Rust)
-"cargo:probe-rs-tools" = "latest" # MCU flashing/debugging suite (Rust)
-"pipx:platformio" = "latest"      # Embedded framework & build system (Python)
 
 # --- Languages & Toolchains ---
 rust = "latest"          # Systems programming language
@@ -129,18 +121,17 @@ LANG = "en_US.UTF-8"
 GOPATH = "{{env.HOME}}/.local/share/go"
 PATH = "{{env.HOME}}/.local/share/go/bin:{{env.HOME}}/.cargo/bin:{{env.HOME}}/.local/bin:{{env.PATH}}"
 
-# Build Optimization
+# Build Optimization (static, cross-platform safe)
 CC = "clang"              # Use ccache with Clang for C
 CXX = "clang++"           # Use ccache with Clang for C++
 CC_WRAPPER = "ccache"
 CXX_WRAPPER = "ccache"
-RUSTC_WRAPPER = "sccache"
 CMAKE_GENERATOR = "Ninja" # Force Ninja for CMake builds
 
-# Linker Flags
-RUSTFLAGS = "-C link-arg=-fuse-ld=mold"                # Use mold for Rust linking
-LDFLAGS = "-fuse-ld=mold"                              # Use mold for C linking
-CARGO_TARGET_X86_64_UNKNOWN_LINUX_GNU_LINKER = "clang"
+# Conditional build flags (sccache, mold, OS-specific linker targets) are
+# evaluated at shell activation time via the script below so they only apply
+# when the relevant binaries are actually present on the current machine.
+_.source = ".mise-env.sh"
 
 # Aider - AI
 OPENAI_API_BASE = "http://localhost:1234/v1"

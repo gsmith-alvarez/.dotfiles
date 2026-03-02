@@ -35,6 +35,7 @@ fish/fish_history
 # but ignore the internal data/cache if it's in .config
 mise/cache/
 mise/downloads/
+mise/mise.local.toml
 
 # --- Zellij ---
 # Ignore layouts you don't want to track or temp files
