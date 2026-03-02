@@ -29,7 +29,7 @@ Deploy the primary toolset including compilers, debuggers, and virtualization la
 sudo dnf install -y llvm-devel clang lldb lld ccache git gh ghostty \
 direnv lnav tree-sitter-cli valgrind gdb \
 flatpak podman toolbox virt-manager \
-code thunderbird keepassxc syncthing texlive-scheme-medium libusb1-devel \
+thunderbird keepassxc syncthing texlive-scheme-medium libusb1-devel \
 distrobox openssl-devel alsa-lib-devel dbus-devel mold readline-devel asd \
 sysstat perf picocom avrdude tuned-utils iotop nload clang-tools-extra \
 mise gcc-gfortran
