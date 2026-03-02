@@ -13,10 +13,6 @@ Establish the foundation by updating the base system, adding external repositori
 # Terra Repo (Ghostty/Edge Packages)
 sudo dnf config-manager addrepo --from-repofile="https://repos.fyralabs.com/terra$(rpm -E %fedora)/terra.repo"
 
-# Microsoft VSCode Repo
-sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
-
 # Mise Toolchain Repo
 sudo dnf config-manager addrepo --from-repofile="https://mise.jdx.dev/rpm/mise.repo"
 ```
