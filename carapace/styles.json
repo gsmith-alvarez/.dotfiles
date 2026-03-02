@@ -1,0 +1,10 @@
+{
+  "carapace.Command": { "color": "bold #89b4fa" },
+  "carapace.Flag": { "color": "#fab387" },
+  "carapace.Value": { "color": "#a6adc8" },
+  "carapace.Keyword": { "color": "italic #f9e2af" },
+  "carapace.Description": { "color": "#9399b2" },
+  "carapace.Error": { "color": "#f38ba8" },
+  "carapace.Directory": { "color": "#89dceb" },
+  "carapace.File": { "color": "#cdd6f4" }
+}

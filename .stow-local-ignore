@@ -1,0 +1,6 @@
+# Non-config files — do not stow into ~/.config
+README\.md
+reference\.md
+\.gitignore
+\.git
+\.aider.*

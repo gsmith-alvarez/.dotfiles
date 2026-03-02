@@ -1,0 +1,68 @@
+-- [[ REFACTORING.NVIM: Codebase Transformation ]]
+-- Domain: Text Manipulation & Refactoring
+--
+-- PHILOSOPHY: Action-Driven JIT Execution
+-- Refactoring is a heavy, AST-dependent operation.
+-- The engine only spins up the exact moment you attempt a refactor.
+
+local M = {}
+local utils = require('core.utils')
+
+local loaded = false
+
+-- [[ The JIT Engine ]]
+local function bootstrap_refactoring()
+  if loaded then return true end
+
+  -- 1. True AST Validation
+  -- We must verify if the engine can actually read the current buffer's filetype.
+  local ok_ts, parsers = pcall(require, 'nvim-treesitter.parsers')
+  if not ok_ts or not parsers.has_parser() then
+    utils.soft_notify('AST Error: No active Treesitter parser for this file.', vim.log.levels.WARN)
+    return false
+  end
+
+  local ok, err = pcall(function()
+    require('mini.deps').add({
+      source = 'ThePrimeagen/refactoring.nvim',
+      depends = { 'nvim-treesitter/nvim-treesitter' }
+    })
+
+    require('refactoring').setup({})
+  end)
+
+  if not ok then
+    utils.soft_notify('Refactoring engine failed to initialize: ' .. err, vim.log.levels.ERROR)
+    return false
+  end
+
+  loaded = true
+  return true
+end
+
+-- [[ THE PROXY KEYMAPS ]]
+-- The Lua API requires explicit arguments and `expr = true` for visual mode execution.
+local refactors = {
+  { keys = '<leader>rr', is_expr = false, action = function() require('refactoring').select_refactor() end,                           modes = { 'n', 'x' }, desc = 'Select Refactor (UI)' },
+  { keys = '<leader>re', is_expr = true,  action = function() return require('refactoring').refactor('Extract Variable') end,         modes = { 'x' },      desc = 'Extract Variable' },
+  { keys = '<leader>rf', is_expr = true,  action = function() return require('refactoring').refactor('Extract Function') end,         modes = { 'x' },      desc = 'Extract Function' },
+  { keys = '<leader>rF', is_expr = true,  action = function() return require('refactoring').refactor(
+    'Extract Function To File') end,                                                                                                  modes = { 'x' },      desc = 'Extract Function to File' },
+  { keys = '<leader>ri', is_expr = true,  action = function() return require('refactoring').refactor('Inline Variable') end,          modes = { 'n', 'x' }, desc = 'Inline Variable' },
+}
+
+for _, ref in ipairs(refactors) do
+  vim.keymap.set(ref.modes, ref.keys, function()
+    -- The JIT Execution
+    if bootstrap_refactoring() then
+      return ref.action()
+    end
+
+    -- If bootstrap fails (e.g., no AST parser), and Neovim is expecting an
+    -- expression return value, we return an empty string to prevent a Lua crash.
+    return ref.is_expr and "" or nil
+  end, { desc = 'AST: ' .. ref.desc .. ' (JIT)', expr = ref.is_expr })
+end
+
+-- THE CONTRACT: Return the module to satisfy the Editing Orchestrator
+return M

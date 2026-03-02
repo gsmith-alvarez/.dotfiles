@@ -46,3 +46,15 @@
 **/tmp/
 .DS_Store
 .aider*
+
+# --- Neovim ---
+.config/nvim/deps/
+.config/nvim/undo/
+.config/nvim/shada/
+.config/nvim/view/
+.config/nvim/backup/
+.config/nvim/lazy-lock.json
+.config/nvim/.luarc.json
+.config/nvim/.neoconf.json
+.config/nvim/spell/*.add
+.config/nvim/spell/*.add.spl

@@ -1,0 +1,21 @@
+{
+  "environment": {
+    "executable": "/home/gsmith-alvarez/.local/share/mise/installs/python/3.14.3/bin/python3.14",
+    "prefix": "/home/gsmith-alvarez/.local/share/mise/installs/python/3.14.3",
+    "version": "3.14.3.final.0",
+    "is64Bit": true,
+    "symlinks": [
+      "/home/gsmith-alvarez/.local/share/mise/installs/python/3.14.3/bin/python3.14"
+    ]
+  },
+  "symlinks": [
+    [
+      "/home/gsmith-alvarez/.local/share/mise/installs/python/3.14.3/bin/python3.14",
+      {
+        "secs_since_epoch": 1704067200,
+        "nanos_since_epoch": 0
+      },
+      null
+    ]
+  ]
+}

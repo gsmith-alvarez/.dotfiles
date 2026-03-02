@@ -1,0 +1,4 @@
+[Default Applications]
+application/x-terminal-emulator=com.mitchellh.ghostty.desktop
+x-scheme-handler/jetbrains=jetbrainsd.desktop
+x-scheme-handler/terminal=com.mitchellh.ghostty.desktop
