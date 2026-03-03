@@ -23,7 +23,7 @@ sudo dnf upgrade --refresh -y
 ### 3. Package Deployment
 Deploy the primary toolset including compilers, debuggers, and virtualization layers.
 ```bash
-sudo dnf install -y fish llvm-devel clang lldb lld git ghostty \
+sudo dnf install -y fish git ghostty \
 valgrind gdb flatpak podman toolbox virt-manager mise \
 thunderbird keepassxc syncthing texlive-scheme-medium libusb1-devel \
 distrobox openssl-devel alsa-lib-devel dbus-devel readline-devel asd \

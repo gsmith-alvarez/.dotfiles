@@ -27,10 +27,10 @@ cargo-binstall = "latest"        # Install Rust binaries from releases
 "cargo:cargo-update" = "latest"  # Update all cargo-installed binaries
 "cargo:cargo-cache" = "latest"   # Manage/clean cargo cache
 "cargo:topgrade" = "latest"      # Universal system/tool updater
-"cargo:cargo-nextest" = "latest" # [SUGGESTED] 3-5× faster Rust test runner with better output
-"cargo:cargo-expand" = "latest"  # [SUGGESTED] Show macro expansion output for debugging
-"cargo:cargo-machete" = "latest" # [SUGGESTED] Find unused Cargo dependencies (binary size)
-"cargo:cargo-deny" = "latest"    # [SUGGESTED] Audit dep tree for vulns + license violations
+"cargo:cargo-nextest" = "latest" #  3-5× faster Rust test runner with better output
+"cargo:cargo-expand" = "latest"  #  Show macro expansion output for debugging
+"cargo:cargo-machete" = "latest" # Find unused Cargo dependencies (binary size)
+"cargo:cargo-deny" = "latest"    # Audit dep tree for vulns + license violations
 
 # --- Config & Data Formats ---
 taplo = "latest"           # TOML LSP, linter, and formatter (Rust)
@@ -43,18 +43,16 @@ shellcheck = "latest" # Shell script static analysis (Haskell)
 shfmt = "latest"      # Shell script formatter (Go)
 
 # --- Development & Build Tools ---
-neovim = "latest"          # Core text editor (C/Lua)
-zellij = "latest"          # Terminal multiplexer/workspace (Rust)
-make = "latest"            # Classic build automation (C)
-cmake = "latest"           # Cross-platform build generator (C++)
-hyperfine = "latest"       # CLI benchmarking tool (Rust)
-ninja = "latest"           # High-speed build executor (C++)
-ccache = "latest"          # Compiler cache for C/C++ (C++)
-podman = "latest"          # Daemonless container engine (Go)
-podman-tui = "latest"      # Podman terminal user interface (Rust)
-"cargo:sccache" = "latest" # Distributed compiler cache (Rust)
-direnv = "latest"          # Per-directory environment manager (Go)
-lnav = "latest"            # Log file navigator (C++)
+neovim = "latest"     # Core text editor (C/Lua)
+zellij = "latest"     # Terminal multiplexer/workspace (Rust)
+make = "latest"       # Classic build automation (C)
+cmake = "latest"      # Cross-platform build generator (C++)
+hyperfine = "latest"  # CLI benchmarking tool (Rust)
+ninja = "latest"      # High-speed build executor (C++)
+podman = "latest"     # Daemonless container engine (Go)
+podman-tui = "latest" # Podman terminal user interface (Rust)
+direnv = "latest"     # Per-directory environment manager (Go)
+lnav = "latest"       # Log file navigator (C++)
 
 # --- Debuggers ---
 "go:github.com/go-delve/delve/cmd/dlv" = "latest" # Go debugger (dlv)
@@ -79,7 +77,7 @@ lazygit = "latest"            # Terminal UI for Git
 gh = "latest"                 # GitHub CLI (Go)
 delta = "latest"              # Syntax-highlighting git diff pager (Rust)
 "cargo:git-absorb" = "latest" # Auto fixup commits into the right ancestor (Rust)
-hurl = "latest"               # [SUGGESTED] Reproducible HTTP request sequences as text files
+hurl = "latest"               # Reproducible HTTP request sequences as text files
 
 # --- Linters & Formatters ---
 ruff = "latest"                    # Fast Python linter/formatter (Rust)
@@ -132,11 +130,10 @@ GOPATH = "{{env.HOME}}/.local/share/go"
 PATH = "{{env.HOME}}/.local/share/go/bin:{{env.HOME}}/.cargo/bin:{{env.HOME}}/.local/bin:{{env.PATH}}"
 
 # Build Optimization (static, cross-platform safe)
-CC = "clang"              # Use ccache with Clang for C
-CXX = "clang++"           # Use ccache with Clang for C++
-CC_WRAPPER = "ccache"
-CXX_WRAPPER = "ccache"
-CMAKE_GENERATOR = "Ninja" # Force Ninja for CMake builds
+CC = "zig cc"
+CXX = "zig c++"
+AR = "zig ar"         # Useful for static library archiving
+RANLIB = "zig ranlib" # Often needed alongside AR
 
 # Conditional build flags (sccache, mold, OS-specific linker targets) are
 # evaluated at shell activation time via the script below so they only apply
