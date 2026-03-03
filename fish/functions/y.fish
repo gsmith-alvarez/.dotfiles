@@ -8,7 +8,7 @@ function y --description "Yazi wrapper: Zoxide state sync + Neovim handoff"
 
     # 1. State Sync: Update directory and feed the Zoxide database
     if set cwd (command cat -- "$tmp_cwd"); and test -n "$cwd"; and test "$cwd" != "$PWD"
-        z "$cwd"
+        cd "$cwd"
     end
 
     # 2. Handoff: If you hit <Enter> on a file, open it in Neovim natively

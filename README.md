@@ -14,8 +14,6 @@ cd ~/dotfiles
 
 # create symlinks and install mise-managed tools
 stow --target ~/.config .
-# Installs mise and adds activation to ~/.bashrc
-curl https://mise.run/bash | sh
 mise install
 ```
 

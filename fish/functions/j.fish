@@ -7,10 +7,10 @@ function j
         set -l drive (zoxide query -l | string match -v -r "^$escaped_dir/?\$" | fzf --height 40% --layout=reverse --border --preview 'eza -T -L 1 --icons --color=always {1}')
 
         if test -n "$drive"
-            z "$drive"
+            cd "$drive"
         end
     else
-        z $argv
+        cd $argv
     end
 
 end

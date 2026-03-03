@@ -21,6 +21,8 @@ configured in this Fish shell environment.
 | `wtf` | `atuin`, `aider` | Sends last 5 commands + exit codes to `aider` for failure diagnosis. |
 | `y` | `yazi`, `zoxide`, `nvim` | Yazi wrapper: syncs CWD to zoxide on exit, opens selected file in nvim. |
 | `zk` | `zellij`, `fzf` | Fuzzy Zellij session manager — attach to existing or create new. |
+| 'fcd' | 'fd', 'fzf', 'Zoxide' | Fuzzy search the current directory and move with z |
+
 
 ---
 

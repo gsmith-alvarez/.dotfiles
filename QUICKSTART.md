@@ -24,7 +24,7 @@ sudo dnf upgrade --refresh -y
 Deploy the primary toolset including compilers, debuggers, and virtualization layers.
 ```bash
 sudo dnf install -y fish llvm-devel clang lldb lld git ghostty \
-valgrind gdb flatpak podman toolbox virt-manager \
+valgrind gdb flatpak podman toolbox virt-manager mise \
 thunderbird keepassxc syncthing texlive-scheme-medium libusb1-devel \
 distrobox openssl-devel alsa-lib-devel dbus-devel readline-devel asd \
 sysstat perf picocom avrdude tuned-utils iotop nload clang-tools-extra gcc-gfortran \
@@ -55,10 +55,6 @@ gh auth login
 gh repo clone gsmith-alvarez/.dotfiles ~/dot cd ~/dotfiles
 
 stow --target ~/.config
-
-
-# Installs mise and adds activation to ~/.bashrc
-curl https://mise.run/bash | sh
 ```
 
 ### 2. Runtime Toolchain

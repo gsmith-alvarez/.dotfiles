@@ -20,17 +20,17 @@ usage = "latest"       # CLI specification tool (Rust)
 carapace = "latest"    # Multi-shell completion engine (Go)
 
 # --- Monitoring ---
-btop = "latest"   # Feature-rich resource monitor (C++)
+btop = "latest" # Feature-rich resource monitor (C++)
 
 # --- Cargo Utilities ---
-cargo-binstall = "latest"       # Install Rust binaries from releases
-"cargo:cargo-update" = "latest" # Update all cargo-installed binaries
-"cargo:cargo-cache" = "latest"  # Manage/clean cargo cache
-"cargo:topgrade" = "latest"     # Universal system/tool updater
-# "cargo:cargo-nextest" = "latest"  # [SUGGESTED] 3-5× faster Rust test runner with better output
-# "cargo:cargo-expand" = "latest"   # [SUGGESTED] Show macro expansion output for debugging
-# "cargo:cargo-machete" = "latest"  # [SUGGESTED] Find unused Cargo dependencies (binary size)
-# "cargo:cargo-deny" = "latest"     # [SUGGESTED] Audit dep tree for vulns + license violations
+cargo-binstall = "latest"        # Install Rust binaries from releases
+"cargo:cargo-update" = "latest"  # Update all cargo-installed binaries
+"cargo:cargo-cache" = "latest"   # Manage/clean cargo cache
+"cargo:topgrade" = "latest"      # Universal system/tool updater
+"cargo:cargo-nextest" = "latest" # [SUGGESTED] 3-5× faster Rust test runner with better output
+"cargo:cargo-expand" = "latest"  # [SUGGESTED] Show macro expansion output for debugging
+"cargo:cargo-machete" = "latest" # [SUGGESTED] Find unused Cargo dependencies (binary size)
+"cargo:cargo-deny" = "latest"    # [SUGGESTED] Audit dep tree for vulns + license violations
 
 # --- Config & Data Formats ---
 taplo = "latest"           # TOML LSP, linter, and formatter (Rust)
@@ -79,7 +79,7 @@ lazygit = "latest"            # Terminal UI for Git
 gh = "latest"                 # GitHub CLI (Go)
 delta = "latest"              # Syntax-highlighting git diff pager (Rust)
 "cargo:git-absorb" = "latest" # Auto fixup commits into the right ancestor (Rust)
-# hurl = "latest"             # [SUGGESTED] Reproducible HTTP request sequences as text files
+hurl = "latest"               # [SUGGESTED] Reproducible HTTP request sequences as text files
 
 # --- Linters & Formatters ---
 ruff = "latest"                    # Fast Python linter/formatter (Rust)
@@ -142,10 +142,6 @@ CMAKE_GENERATOR = "Ninja" # Force Ninja for CMake builds
 # evaluated at shell activation time via the script below so they only apply
 # when the relevant binaries are actually present on the current machine.
 _.source = ".mise-env.sh"
-
-# Aider - AI (credentials stored in mise.local.toml, not tracked in git)
-# OPENAI_API_BASE = "http://localhost:1234/v1"
-# OPENAI_API_KEY = "lm-studio"
 
 [settings]
 env_shell_expand = true    # Support $HOME in paths
