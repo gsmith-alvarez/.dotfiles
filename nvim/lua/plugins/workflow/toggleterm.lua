@@ -50,22 +50,12 @@ M.setup = function()
     vim.keymap.set('n', map[1], create_tui(map[2], map[3]), { desc = 'TUI: ' .. map[3] })
   end
 
-  -- 3. Dynamic Context Mappings (Aider & Glow)
+  -- 3. Dynamic Context Mappings (Aider)
   vim.keymap.set('n', '<leader>ta', function()
     local file = vim.fn.expand '%:p'
     local cmd = 'aider ' .. (file ~= '' and vim.fn.shellescape(file) or '')
     create_tui('aider', 'Aider AI', cmd)()
   end, { desc = 'TUI: Aider AI Chat' })
-
-  vim.keymap.set('n', '<leader>vg', function()
-    local file = vim.fn.expand '%:p'
-    local bat = utils.mise_shim 'bat'
-    local cmd = 'glow ' .. vim.fn.shellescape(file) .. (bat and (' | ' .. bat .. ' --paging=always') or '')
-    create_tui('glow', 'Glow Markdown', cmd)()
-  end, { desc = 'TUI: Markdown Preview' })
-
-  -- Create a convenience alias for the Glow preview
-  vim.keymap.set('n', '<leader>tm', '<leader>vg', { remap = true, silent = true })
 
   -- 4. Hardware/PlatformIO Domain
   local pio_tasks = {

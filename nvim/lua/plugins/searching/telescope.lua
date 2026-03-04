@@ -4,7 +4,7 @@
 
 local search_keys = {
 	{ '<leader>ff', function() require('snacks').picker.files() end,                                          'Find Files' },
-	{ '<leader>cd', function() require('snacks').picker.zoxide() end,                                         'Zoxide Directory',  'zoxide' },
+	{ '<leader>fd', function() require('snacks').picker.zoxide() end,                                         'Find [D]irectory (Zoxide)',  'zoxide' },
 	{ '<leader>sg', function() require('snacks').picker.grep() end,                                           'Grep Project',      'rg' },
 	{ '<leader>sw', function() require('snacks').picker.grep_word() end,                                      'Grep Word Under Cursor', 'rg' },
 	{ '<leader>sd', function() require('snacks').picker.diagnostics() end,                                    'Search Diagnostics' },

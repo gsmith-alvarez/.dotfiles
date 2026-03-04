@@ -9,7 +9,7 @@ local M = {}
 vim.keymap.set('n', '<leader>vq', '<cmd>Jq<CR>', { desc = '[J]q Live Scratchpad' })
 vim.keymap.set('n', '<leader>sR', '<cmd>Sd<CR>', { desc = '[S]earch & [R]eplace (Sd)' })
 vim.keymap.set('n', '<leader>vx', '<cmd>Xh<CR>', { desc = '[X]h HTTP Client' })
-vim.keymap.set('n', '<leader>vj', '<cmd>Jless<CR>', { desc = '[J]less JSON Viewer' })
+vim.keymap.set('n', '<leader>vJ', '<cmd>Jless<CR>', { desc = '[J]less JSON Viewer' })
 
 -- [[ Eradicate Search Highlights ]]
 -- Uses <Esc> to clear the 'hlsearch' state, removing the yellow glare

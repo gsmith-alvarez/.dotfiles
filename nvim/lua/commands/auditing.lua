@@ -164,7 +164,7 @@ vim.api.nvim_create_user_command('Typos', function()
 	end
 end, { desc = 'Populate Quickfix with project typos' })
 
-vim.keymap.set('n', '<leader>xt', '<cmd>Typos<CR>', { desc = 'Run Project [T]ypos' })
+vim.keymap.set('n', '<leader>ct', '<cmd>Typos<CR>', { desc = '[C]ode [T]ypos Check' })
 
 local utils = require('core.utils')
 

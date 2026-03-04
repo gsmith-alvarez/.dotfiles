@@ -41,13 +41,7 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus Up' })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
--- [[ 5. SYMBOL REFACTORING ]]
--- Leverages IncRename (if installed) for real-time symbol renaming.
-vim.keymap.set('n', '<leader>rn', function()
-  require('inc_rename').rename()
-end, { desc = '[R]e[n]ame Symbol (JIT)' })
-
--- [[ 6. BUFFER NAVIGATION ]]
+-- [[ 5. BUFFER NAVIGATION ]]
 vim.keymap.set('n', 'H', '<cmd>bprevious<CR>', { desc = 'Go to Previous Buffer' })
 vim.keymap.set('n', 'L', '<cmd>bnext<CR>', { desc = 'Go to Next Buffer' })
 

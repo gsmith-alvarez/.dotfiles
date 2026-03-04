@@ -50,10 +50,10 @@ end
 -- Overseer, scans your directory for build files, and executes the command.
 
 local actions = {
-  { "<leader>Ot", "OverseerToggle",     "Task: [T]oggle [O]verseer" },
-  { "<leader>Or", "OverseerRun",        "Task: Template [R]un" },
-  { "<leader>Oi", "OverseerInfo",       "Task: Task Config [I]nfo" },
-  { "<leader>Oa", "OverseerTaskAction", "Task: Task [A]ction Menu" },
+  { "<leader>ot", "OverseerToggle",     "[O]verseer [T]oggle" },
+  { "<leader>or", "OverseerRun",        "[O]verseer [R]un Template" },
+  { "<leader>oi", "OverseerInfo",       "[O]verseer [I]nfo" },
+  { "<leader>oa", "OverseerTaskAction", "[O]verseer [A]ction Menu" },
 }
 
 for _, action in ipairs(actions) do

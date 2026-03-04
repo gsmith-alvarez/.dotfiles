@@ -27,7 +27,7 @@ M.setup = function()
 
       -- 3. WORKFLOW: Definitions (Lazy-loaded on first call)
       terminal = {
-        win = { border = 'curved', winblend = 3, keys = { q = 'hide' } },
+        win = { border = 'rounded', winblend = 3, keys = { q = 'hide' } },
       },
 
       -- 4. NAVIGATION: Definitions (Lazy-loaded on first call)

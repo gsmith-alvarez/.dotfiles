@@ -26,13 +26,13 @@ vim.opt.updatetime = 500
 -- surgically mute the LSP when you are in the flow state, then turn it back
 -- on for the error-correction phase.
 
-vim.keymap.set('n', '<leader>dL', function()
+vim.keymap.set('n', '<leader>tl', function()
   local is_enabled = vim.diagnostic.is_enabled()
   vim.diagnostic.enable(not is_enabled)
   vim.notify("Diagnostics: " .. (not is_enabled and "ON" or "OFF"), vim.log.levels.INFO)
 end, { desc = '[T]oggle LSP [D]iagnostics' })
 
-vim.keymap.set('n', '<leader>dU', function()
+vim.keymap.set('n', '<leader>tu', function()
   local current = vim.diagnostic.config().underline
   vim.diagnostic.config({ underline = not current })
   vim.notify("Underlines: " .. (not current and "ON" or "OFF"))

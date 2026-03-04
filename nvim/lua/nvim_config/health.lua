@@ -45,7 +45,7 @@ local function check_plugins()
 		{ 'aerial.nvim',          'aerial.nvim',          '<leader>va' },
 		{ 'obsidian.nvim',        'obsidian.nvim',        'open a markdown file' },
 		{ 'trouble.nvim',         'trouble.nvim',         '<leader>xx' },
-		{ 'overseer.nvim',        'overseer.nvim',        '<leader>Ot' },
+		{ 'overseer.nvim',        'overseer.nvim',        '<leader>ot' },
 		{ 'nvim-dap',             'nvim-dap',             '<leader>db' },
 		{ 'nvim-dap-virtual-text','nvim-dap-virtual-text','<leader>db' },
 		{ 'typst-preview.nvim',   'typst-preview.nvim',   'open a .typ file' },

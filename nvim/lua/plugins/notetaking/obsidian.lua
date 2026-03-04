@@ -83,28 +83,28 @@ function M.setup()
         action = function() return require("obsidian").util.gf_passthrough() end,
         opts = { noremap = false, expr = true, buffer = true, desc = "Obsidian: Follow Link" },
       },
-      ["<leader>ot"] = {
+      ["<leader>nf"] = {
         action = function() return vim.cmd("ObsidianFollowLink tab") end,
-        opts = { buffer = true, desc = "Obsidian: Open Link in [T]ab" },
+        opts = { buffer = true, desc = "Obsidian: [F]ollow Link in Tab" },
       },
-      ["<leader>ov"] = {
+      ["<leader>nv"] = {
         action = function() vim.cmd("ObsidianFollowLink vsplit") end,
         opts = { buffer = true, desc = "Obsidian: Follow Link (V-Split)" },
       },
-      ["<leader>oh"] = {
+      ["<leader>nh"] = {
         action = function() vim.cmd("ObsidianFollowLink hsplit") end,
         opts = { buffer = true, desc = "Obsidian: Follow Link (H-Split)" },
       },
-      ["<leader>oT"] = {
+      ["<leader>nT"] = {
         action = function() vim.cmd("ObsidianTags") end,
         opts = { buffer = true, desc = "Obsidian: Search [T]ags" },
       },
-      ["<leader>oo"] = {
+      ["<leader>no"] = {
         -- Opens the current file in the Obsidian Desktop App
         action = function() vim.cmd("ObsidianOpen") end,
         opts = { buffer = true, desc = "Obsidian: [O]pen in GUI" },
       },
-      ["<leader>oc"] = {
+      ["<leader>nc"] = {
         action = function() vim.cmd("ObsidianTOC") end,
         opts = { buffer = true, desc = "Obsidian: [C]ontents (TOC)" },
       },
@@ -124,10 +124,10 @@ function M.setup()
         action = function() vim.cmd("ObsidianLink") end,
         opts = { buffer = true, desc = "Obsidian: [L]ink Existing [N]ote" },
       },
-      ["<leader>nn"] = {
+      ["<leader>nN"] = {
         -- Prompts for a title to create and link a NEW note
         action = function() vim.cmd("ObsidianLinkNew") end,
-        opts = { buffer = true, desc = "Obsidian: Lin[k] New [N]ote" },
+        opts = { buffer = true, desc = "Obsidian: Link [N]ew Note" },
       },
 
       -- 3. Media & Attachments

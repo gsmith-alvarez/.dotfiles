@@ -64,9 +64,9 @@ local function obsidian_stub(cmd)
 end
 
 local map = vim.keymap.set
-map("n", "<leader>oq", obsidian_stub("ObsidianQuickSwitch"), { desc = "[O]bsidian [Q]uick Switch" })
-map("n", "<leader>os", obsidian_stub("ObsidianSearch"), { desc = "[O]bsidian [S]earch (Ripgrep)" })
-map("n", "<leader>on", obsidian_stub("ObsidianNew"), { desc = "[O]bsidian [N]ew Note" })
+map("n", "<leader>nq", obsidian_stub("ObsidianQuickSwitch"), { desc = "[N]otes [Q]uick Switch" })
+map("n", "<leader>ns", obsidian_stub("ObsidianSearch"), { desc = "[N]otes [S]earch (Ripgrep)" })
+map("n", "<leader>nn", obsidian_stub("ObsidianNew"), { desc = "[N]otes [N]ew Note" })
 
 -- THE CONTRACT: Return the module to satisfy the Orchestrator's pcall.
 return M

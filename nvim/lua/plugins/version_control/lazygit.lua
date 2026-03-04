@@ -41,7 +41,7 @@ local function get_lazygit()
     direction = 'float',
     hidden = true,
     -- Aesthetics: Match our global curved border theme.
-    float_opts = { border = 'curved' },
+    float_opts = { border = 'rounded' },
     -- Workflow: Auto-focus the TUI and provide an emergency exit.
     on_open = function(term)
       vim.cmd('startinsert!')
