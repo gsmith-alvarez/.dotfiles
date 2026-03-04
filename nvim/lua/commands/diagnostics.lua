@@ -35,7 +35,7 @@ end, { desc = '[T]oggle LSP [D]iagnostics' })
 vim.keymap.set('n', '<leader>tu', function()
   local current = vim.diagnostic.config().underline
   vim.diagnostic.config({ underline = not current })
-  vim.notify("Underlines: " .. (not current and "ON" or "OFF"))
+  vim.notify("Underlines: " .. (not current and "ON" or "OFF"), vim.log.levels.INFO)
 end, { desc = '[T]oggle [U]nderlines' })
 
 -- [[ Diagnostic Quickfix Routing ]]

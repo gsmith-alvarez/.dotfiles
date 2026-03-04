@@ -57,13 +57,19 @@ For benchmarking run `PROFILE=1 nvim`, then `<leader>zp`.
 | `<leader>sh` | N | Search help | `snacks.picker` |
 | `<leader>sk` | N | Search keymaps | `snacks.picker` |
 | `<leader>sn` | N | Search Neovim config files | `snacks.picker` |
+| `<leader>su` | N | Search undo history | `snacks.picker` |
+| `<leader>sN` | N | Search notification history | `snacks.picker` |
 | `<leader><leader>` | N | Active buffers | `snacks.picker` |
+| `<leader>fr` | N | Recent files | `snacks.picker` |
+| `<leader>fc` | N | Recent files (cwd) | `snacks.picker` |
+| `<leader>so` | N | Omni grep (Ripgrep) | `snacks.picker` |
 
 ### Tier 2: File Browser
 
 | Key Chord | Mode | Action | Plugin |
 | :--- | :---: | :--- | :--- |
-| `-` | N | Open parent directory | `mini.files` |
+| `-` | N | Open current file's directory | `mini.files` |
+| `<leader>fe` | N | Open file explorer (root) | `mini.files` |
 
 ### Tier 3: Symbol Navigation (Aerial — JIT)
 
@@ -94,6 +100,7 @@ For benchmarking run `PROFILE=1 nvim`, then `<leader>zp`.
 | `<leader>rr` | N/X | Refactor: Select (UI) | `refactoring.nvim` |
 | `<leader>re` | X | Extract variable | `refactoring.nvim` |
 | `<leader>rf` | X | Extract function | `refactoring.nvim` |
+| `<leader>rF` | X | Extract function to file | `refactoring.nvim` |
 | `<leader>ri` | N/X | Inline variable | `refactoring.nvim` |
 
 ### Notes (Obsidian — JIT on markdown)
@@ -138,8 +145,12 @@ For benchmarking run `PROFILE=1 nvim`, then `<leader>zp`.
 
 | Key Chord | Mode | Action | Plugin |
 | :--- | :---: | :--- | :--- |
+| `<F5>` | N | Start / Continue | `nvim-dap` |
 | `<leader>db` | N | Toggle persistent breakpoint | `nvim-dap` |
-| `<leader>dc` | N | Start / Continue | `nvim-dap` |
+| `<leader>dB` | N | Clear all breakpoints | `nvim-dap` |
+| `<leader>dc` | N | Continue | `nvim-dap` |
+| `<leader>do` | N | Step over | `nvim-dap` |
+| `<leader>di` | N | Step into | `nvim-dap` |
 | `<leader>du` | N | Toggle DAP UI | `nvim-dap` |
 | `<leader>dr` | N | Toggle REPL | `nvim-dap` |
 
@@ -150,9 +161,14 @@ For benchmarking run `PROFILE=1 nvim`, then `<leader>zp`.
 | Key Chord | Mode | Action | Plugin |
 | :--- | :---: | :--- | :--- |
 | `<leader>gg` | N | Open Lazygit TUI | `snacks.terminal` |
-| `]h` / `[h` | N | Next / Prev git hunk | `mini.diff` |
-| `<leader>hs` | N | Stage hunk | `mini.diff` |
-| `<leader>hr` | N | Reset hunk | `mini.diff` |
+| `<leader>gl` | N | Git log (commits) | `snacks.picker` |
+| `<leader>gS` | N | Git status (changed files) | `snacks.picker` |
+| `<leader>gb` | N | Git branches | `snacks.picker` |
+| `]c` / `[c` | N | Next / Prev git change | `mini.diff` |
+| `<leader>gs` | N | Stage hunk | `mini.diff` |
+| `<leader>gu` | N | Undo hunk | `mini.diff` |
+| `<leader>gD` | N | Toggle diff overlay | `mini.diff` |
+| `<leader>gq` | N | Export hunks to quickfix | `mini.diff` |
 
 ---
 
@@ -192,6 +208,7 @@ For benchmarking run `PROFILE=1 nvim`, then `<leader>zp`.
 | :--- | :---: | :--- |
 | `<leader>cr` | N | Run code (interactive Zellij split) |
 | `<leader>cx` | N | Continuous watch + run (watchexec) |
+| `<leader>vw` | N | Manual watchexec trigger |
 
 ### PlatformIO
 

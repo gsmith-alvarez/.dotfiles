@@ -26,8 +26,8 @@ Deploy the primary toolset including compilers, debuggers, and virtualization la
 sudo dnf install -y fish git ghostty \
 valgrind gdb flatpak podman toolbox virt-manager mise \
 thunderbird keepassxc syncthing texlive-scheme-medium libusb1-devel \
-distrobox openssl-devel alsa-lib-devel dbus-devel readline-devel asd \
-sysstat perf picocom avrdude tuned-utils iotop nload clang-tools-extra gcc-gfortran \
+distrobox openssl-devel alsa-lib-devel dbus-devel readline-devel \
+sysstat perf picocom avrdude tuned-utils iotop nload clang-tools-extra gcc-gfortran
 
 sudo dnf group install -y admin-tools c-development development-tools \
 security-lab electronic-lab python-science libreoffice \
@@ -55,7 +55,7 @@ gh auth login
 gh repo clone gsmith-alvarez/.dotfiles ~/dotfiles
 cd ~/dotfiles
 
-stow --target ~/.config
+stow --target ~/.config .
 ```
 
 ### 2. Runtime Toolchain

@@ -122,10 +122,12 @@ No Mason. All language servers, formatters, and tools are managed by `mise`. `co
 | `echasnovski/mini.nvim` | Icons, tabline, statusline, starter, diff, files, ai, surround, move, pairs, indentscope, hipatterns, visits, bracketed, clue |
 | `folke/snacks.nvim` | Notifier, fuzzy picker (replaces telescope), floating terminal, ui_select |
 | `echasnovski/mini.base16` (bundled) | Colorscheme (Catppuccin Mocha palette, part of mini.nvim) |
-| `saghen/blink.cmp` | Completion engine |
+| `saghen/blink.cmp` | Completion engine (LSP, path, snippets, lazydev) |
+| `rafamadriz/friendly-snippets` | Community VSCode-format snippet collection |
 | `neovim/nvim-lspconfig` | LSP server stub registry |
 | `nvim-treesitter/nvim-treesitter` | Parsing + syntax |
 | `nvim-treesitter/nvim-treesitter-textobjects` | Text objects (functions, classes, params) |
+| `nvim-treesitter/nvim-treesitter-context` | Pins current scope/function header at viewport top |
 | `MeanderingProgrammer/render-markdown.nvim` | Markdown visual rendering |
 | `stevearc/aerial.nvim` | Symbol sidebar + jump (JIT) |
 | `stevearc/overseer.nvim` | Task runner (JIT) |
@@ -135,6 +137,12 @@ No Mason. All language servers, formatters, and tools are managed by `mise`. `co
 | `obsidian-nvim/obsidian.nvim` | Notetaking (JIT on markdown, snacks.picker) |
 | `chomosuke/typst-preview.nvim` | Typst live preview |
 | `mfussenegger/nvim-dap` | Debugger |
+| `rcarriga/nvim-dap-ui` | DAP UI layout |
+| `Weissle/persistent-breakpoints.nvim` | Breakpoint persistence across sessions |
+| `nvim-neotest/nvim-nio` | Async I/O library (required by nvim-dap-ui) |
+| `smjonas/inc-rename.nvim` | Incremental LSP rename (JIT) |
+| `ThePrimeagen/refactoring.nvim` | AST-based refactoring (JIT) |
+| `NMAC427/guess-indent.nvim` | Auto indentation detection |
 | `folke/lazydev.nvim` | Lua API intelligence |
 | `ThePrimeagen/vim-be-good` | Motion training (ghost command) |
 
@@ -145,7 +153,7 @@ No Mason. All language servers, formatters, and tools are managed by `mise`. `co
 ### Core
 | Mode | Keybind | Description |
 |------|---------|-------------|
-| n | `<leader><space>` | Clear search highlights |
+| n | `<Esc>` | Clear search highlights |
 | t | `<Esc><Esc>` | Exit terminal mode |
 | n | `H` / `L` | Previous / Next buffer |
 | n | `<leader>bd` | Buffer delete |
@@ -162,13 +170,19 @@ No Mason. All language servers, formatters, and tools are managed by `mise`. `co
 | Mode | Keybind | Description |
 |------|---------|-------------|
 | n | `<leader>ff` | Find files |
+| n | `<leader>fe` | File explorer (root dir) |
+| n | `<leader>fr` | Recent files |
+| n | `<leader>fc` | Recent files (cwd) |
 | n | `<leader>sg` | Live grep |
+| n | `<leader>so` | Omni grep (Ripgrep) |
 | n | `<leader>sw` | Grep word under cursor |
 | n | `<leader>sd` | Search diagnostics |
 | n | `<leader>sr` | Resume last search |
 | n | `<leader>sh` | Search help |
 | n | `<leader>sk` | Search keymaps |
 | n | `<leader>sn` | Search Neovim config files |
+| n | `<leader>su` | Search undo history |
+| n | `<leader>sN` | Search notification history |
 | n | `<leader>fd` | Find directory (Zoxide) |
 | n | `<leader><leader>` | Active buffers |
 
@@ -191,9 +205,14 @@ No Mason. All language servers, formatters, and tools are managed by `mise`. `co
 | Mode | Keybind | Description |
 |------|---------|-------------|
 | n | `<leader>gg` | Lazygit TUI |
-| n | `]h` / `[h` | Next / Prev git hunk |
-| n | `<leader>hs` | Stage hunk |
-| n | `<leader>hr` | Reset hunk |
+| n | `<leader>gl` | Git log (commits) |
+| n | `<leader>gS` | Git status (changed files) |
+| n | `<leader>gb` | Git branches |
+| n | `]c` / `[c` | Next / Prev git change |
+| n | `<leader>gs` | Stage hunk |
+| n | `<leader>gu` | Undo hunk |
+| n | `<leader>gD` | Toggle diff overlay |
+| n | `<leader>gq` | Export hunks to quickfix |
 
 ### View / Navigation
 | Mode | Keybind | Description |
@@ -201,6 +220,7 @@ No Mason. All language servers, formatters, and tools are managed by `mise`. `co
 | n | `<leader>va` | Toggle Aerial symbol sidebar |
 | n | `<leader>vj` | Jump to symbol (Aerial nav) |
 | n | `<leader>vJ` | jless JSON viewer |
+| n | `<leader>fe` | File explorer (root dir) |
 | n | `<leader>xx` | Workspace diagnostics (Trouble) |
 | n | `<leader>xd` | Document diagnostics (Trouble) |
 | n | `<leader>xq` | Quickfix list (Trouble) |
@@ -214,6 +234,7 @@ No Mason. All language servers, formatters, and tools are managed by `mise`. `co
 | n, x | `<leader>rr` | Refactor: Select (UI) |
 | x | `<leader>re` | Refactor: Extract variable |
 | x | `<leader>rf` | Refactor: Extract function |
+| x | `<leader>rF` | Refactor: Extract function to file |
 | n, x | `<leader>ri` | Refactor: Inline variable |
 
 ### Terminal / TUI (snacks.terminal)
@@ -247,8 +268,12 @@ No Mason. All language servers, formatters, and tools are managed by `mise`. `co
 ### DAP
 | Mode | Keybind | Description |
 |------|---------|-------------|
+| n | `<F5>` | Start / Continue |
 | n | `<leader>db` | Toggle persistent breakpoint |
-| n | `<leader>dc` | Start / Continue |
+| n | `<leader>dB` | Clear all breakpoints |
+| n | `<leader>dc` | Continue |
+| n | `<leader>do` | Step over |
+| n | `<leader>di` | Step into |
 | n | `<leader>du` | Toggle DAP UI |
 | n | `<leader>dr` | Toggle DAP REPL |
 
@@ -275,12 +300,15 @@ No Mason. All language servers, formatters, and tools are managed by `mise`. `co
 |------|---------|-------------|
 | n | `<leader>cx` | Code: Continuous watch (watchexec) |
 | n | `<leader>cr` | Code: Run interactive |
+| n | `<leader>vw` | Watchexec: Manual trigger |
 | n | `<leader>vq` | JQ live scratchpad |
 | n | `<leader>sR` | Search & replace (sd) |
 | n | `<leader>vx` | XH HTTP client |
+| n | `<leader>ur` | Restart LSP |
 | n | `<leader>ut` | Tool check (mise audit) |
 | n | `<leader>tl` | Toggle diagnostic virtual text |
 | n | `<leader>tu` | Toggle diagnostic underlines |
+| n | `<leader>q` | Diagnostic quickfix list |
 | n | `<leader>ct` | Run typos checker |
 | n | `<leader>yp` | Yank absolute path |
 | n | `<leader>yr` | Yank relative path |
@@ -301,9 +329,9 @@ No Mason. All language servers, formatters, and tools are managed by `mise`. `co
 
 ## External Binaries (via `mise`)
 
-**Language Servers:** `pyright`, `ruff`, `rust-analyzer`, `gopls`, `zls`, `clangd`, `lua-language-server`, `marksman`, `taplo`, `bash-language-server`, `tinymist`
+**Language Servers:** `pyright`, `ruff`, `rust-analyzer`, `gopls`, `zls`, `clangd`, `ts_ls`, `lua-language-server`, `tinymist`, `taplo`, `bash-language-server`, `vscode-json-languageserver`, `yaml-language-server`, `markdown-oxide`
 
-**Formatters / Linters:** `stylua`, `oxfmt`, `markdownlint-cli2`, `shellcheck`
+**Formatters / Linters:** `stylua`, `oxfmt`, `ruff` (python), `fish_indent`, `markdownlint-cli2`, `shellcheck`
 
-**Utilities:** `rg`, `fd`, `make`, `gcc`, `lazygit`, `btm`, `dlv`, `watchexec`, `uv`, `go`, `zig`, `zellij`, `gojq`, `sd`, `xh`, `bat`, `zoxide`, `cargo`, `curl`, `spotify_player`, `podman-tui`, `aider`, `pio`, `typos`
+**Utilities:** `rg`, `fd`, `make`, `gcc`, `lazygit`, `btm`, `dlv`, `watchexec`, `uv`, `go`, `zig`, `zellij`, `gojq`, `sd`, `xh`, `bat`, `zoxide`, `cargo`, `curl`, `spotify_player`, `podman-tui`, `aider`, `pio`, `typos`, `openocd`, `lldb-dap`
 

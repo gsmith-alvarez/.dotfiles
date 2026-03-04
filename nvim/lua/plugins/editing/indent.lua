@@ -15,13 +15,19 @@ vim.api.nvim_create_autocmd({ 'BufReadPre', 'BufNewFile' }, {
   callback = function(args)
     local ok, err = pcall(function()
       require('mini.deps').add('NMAC427/guess-indent.nvim')
-      require('guess-indent').setup({})
+      require('guess-indent').setup({
+        auto_cmd = false, -- We manage triggering manually via our own autocmd below
+      })
 
-      -- Force the engine to evaluate the file that triggered this bootstrapper.
-      -- We schedule this for the next tick to ensure the buffer is fully
-      -- loaded into memory before the AST/Regex engine tries to parse it.
+      -- Route the notification to DEBUG so it's captured in snacks.notifier
+      -- history (<leader>sN) without appearing as a popup.
       vim.schedule(function()
-        pcall(require('guess-indent').set_from_buffer, args.buf)
+        local orig = vim.notify
+        vim.notify = function(msg, _, opts)
+          orig(msg, vim.log.levels.DEBUG, opts)
+        end
+        pcall(require('guess-indent').set_from_buffer, args.buf, false, false)
+        vim.notify = orig
       end)
     end)
 

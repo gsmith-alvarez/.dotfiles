@@ -34,6 +34,11 @@ M.setup = function()
         depends = { 'nvim-treesitter/nvim-treesitter' }
       })
 
+      MiniDeps.add({
+        source = 'nvim-treesitter/nvim-treesitter-context',
+        depends = { 'nvim-treesitter/nvim-treesitter' }
+      })
+
       local status_ok, ts_configs = pcall(require, 'nvim-treesitter.configs')
       if not status_ok then
         return
@@ -71,6 +76,18 @@ M.setup = function()
           },
         },
       })
+
+      -- [[ TREESITTER CONTEXT: Scope Pinning ]]
+      -- Pins the current function/class/block header at the top of the viewport
+      -- when you scroll past it. Essential for navigating long files.
+      local ctx_ok, context = pcall(require, 'treesitter-context')
+      if ctx_ok then
+        context.setup {
+          max_lines = 3,        -- Cap at 3 lines to avoid eating too much screen space
+          min_window_height = 20, -- Don't activate in tiny splits
+          trim_scope = 'outer', -- When context is multi-line, trim outermost scope first
+        }
+      end
     end)
   end)
 

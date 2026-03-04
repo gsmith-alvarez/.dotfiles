@@ -48,6 +48,7 @@ For full provisioning details — packages, hardware, kernel tuning, Flatpaks, f
 | `yazu/` | Yazi file manager |
 | `cosmic/` | COSMIC desktop settings |
 | `easy-effects/` | EasyEffects audio presets |
+| `mimeapps.list` | XDG MIME type associations |
 
 ---
 

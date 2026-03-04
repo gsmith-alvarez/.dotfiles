@@ -38,6 +38,15 @@ M.setup = function()
 			{ desc = 'Git: Toggle [D]iff Overlay' })
 		vim.keymap.set('n', '<leader>gq', function() diff.export_to_qf('current') end,
 			{ desc = 'Git: Export to [Q]uickfix' })
+
+		-- 4. snacks.picker Git Integration
+		-- Quick lookups without opening the full Lazygit TUI.
+		vim.keymap.set('n', '<leader>gl', function() require('snacks').picker.git_log() end,
+			{ desc = 'Git: [L]og (Commits)' })
+		vim.keymap.set('n', '<leader>gS', function() require('snacks').picker.git_status() end,
+			{ desc = 'Git: [S]tatus (Changed Files)' })
+		vim.keymap.set('n', '<leader>gb', function() require('snacks').picker.git_branches() end,
+			{ desc = 'Git: [B]ranches' })
 	end)
 end
 

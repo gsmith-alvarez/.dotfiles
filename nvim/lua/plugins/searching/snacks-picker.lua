@@ -12,6 +12,8 @@ local search_keys = {
 	{ '<leader>sh', function() require('snacks').picker.help() end,                                           'Search Help' },
 	{ '<leader>sk', function() require('snacks').picker.keymaps() end,                                        'Search Keymaps' },
 	{ '<leader>sn', function() require('snacks').picker.files({ cwd = vim.fn.stdpath('config') }) end,        'Search Neovim files' },
+	{ '<leader>su', function() require('snacks').picker.undo() end,                                           'Search Undo History' },
+	{ '<leader>sN', function() require('snacks').picker.notifications() end,                                  'Search Notification History' },
 }
 
 for _, k in ipairs(search_keys) do

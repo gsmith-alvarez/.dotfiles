@@ -67,6 +67,7 @@ M.setup = function()
 				}
 			},
 			gopls = { bin = 'gopls', ft = { 'go' }, root = { 'go.work', 'go.mod', '.git' } },
+			rust_analyzer = { bin = 'rust-analyzer', ft = { 'rust' }, root = { 'Cargo.toml', 'Cargo.lock', '.git' } },
 			zls = { bin = 'zls', ft = { 'zig' }, root = { 'zls.json', 'build.zig', '.git' } },
 			pyright = { bin = 'pyright-langserver', args = { '--stdio' }, ft = { 'python' }, root = { 'pyproject.toml', '.git' } },
 			ruff = { bin = 'ruff', args = { 'server' }, ft = { 'python' }, root = { 'pyproject.toml', '.git' } },

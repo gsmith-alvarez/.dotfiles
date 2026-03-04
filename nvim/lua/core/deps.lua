@@ -11,7 +11,7 @@ local deps_path = vim.fn.stdpath 'data' .. '/mini.deps'
 
 -- 2. Automated Installation (The Bootstrap)
 if not vim.uv.fs_stat(deps_path) then
-	vim.notify('Installing mini.deps...', vim.log.levels.WARN)
+	vim.notify('Installing mini.deps...', vim.log.levels.INFO)
 	vim.fn.system { 'git', 'clone', '--filter=blob:none', 'https://github.com/echasnovski/mini.deps', deps_path }
 end
 

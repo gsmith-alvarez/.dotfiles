@@ -20,6 +20,7 @@ M.setup = function()
         enabled = true,
         timeout = 3000,
         top_down = false,
+        level = vim.log.levels.INFO, -- DEBUG notifications go to history only, no popup
       },
 
       -- 2. PROFILING: Conditional overhead
@@ -51,13 +52,18 @@ M.setup = function()
         },
       },
 
-      -- 5. EXPLICIT OPT-OUT: Save cycles by disabling unused modules
+      -- 5. LSP PROGRESS: Spinner shown while language servers index/load (replaces fidget.nvim)
+      progress = { enabled = true },
+
+      -- 6. EXPLICIT OPT-OUT: Save cycles by disabling unused modules
       dashboard = { enabled = false },
       indent = { enabled = false },
       input = { enabled = false },
       scope = { enabled = false },
       scroll = { enabled = false },
       words = { enabled = false },
+      statuscolumn = { enabled = false },
+      lazygit = { enabled = false },
     }
   end)
 
