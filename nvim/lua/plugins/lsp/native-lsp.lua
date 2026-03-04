@@ -96,7 +96,7 @@ M.setup = function()
 			yamlls = { bin = 'yaml-language-server', args = { '--stdio' }, ft = { 'yaml' }, root = { '.git' } },
 			taplo = { bin = 'taplo', args = { 'lsp', 'stdio' }, ft = { 'toml' }, root = { '.git' } },
 			bashls = { bin = 'bash-language-server', args = { 'start' }, ft = { 'sh', 'bash' }, root = { '.git' } },
-			marksman = { bin = 'marksman', args = { 'server' }, ft = { 'markdown' }, root = { '.git' } },
+			markdown_oxide = { bin = 'markdown-oxide', ft = { 'markdown' }, root = { '.git' } },
 		}
 
 		local configured_servers = {}

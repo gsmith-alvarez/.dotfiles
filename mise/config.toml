@@ -89,7 +89,7 @@ tree-sitter = "latest"             # Parser generator & incremental parsing libr
 
 # --- Language Servers ---
 lua-language-server = "latest"                     # Lua LSP (Lua/C++)
-marksman = "latest"                                # Markdown LSP (C#)
+"github:Feel-ix-343/markdown-oxide" = "latest"    # Markdown LSP (Rust)
 "npm:bash-language-server" = "latest"              # Bash LSP
 "npm:vscode-json-languageserver" = "latest"        # JSON LSP
 "npm:yaml-language-server" = "latest"              # YAML LSP
