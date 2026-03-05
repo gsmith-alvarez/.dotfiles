@@ -46,6 +46,10 @@ M.setup = function()
 
     -- 3. Configure the Engine
     require('blink.cmp').setup {
+      fuzzy = {
+        -- Download a prebuilt binary if the native build is missing (new machine safety net)
+        prebuilt_binaries = { download = true },
+      },
       keymap = {
         -- Zero interference with native Neovim keys
         preset = 'none',
