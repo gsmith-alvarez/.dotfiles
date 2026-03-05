@@ -64,6 +64,7 @@ For benchmarking run `PROFILE=1 nvim` (profiler keys are dev-only, not bound glo
 | :--- | :---: | :--- | :--- |
 | `<leader>fd` | N | Find directory (Zoxide) | `snacks.picker` |
 | `<leader>ff` | N | Find files | `snacks.picker` |
+| `<leader>fs` | N | Find: Starter (open dashboard) | `mini.starter` |
 | `<leader>sg` | N | Grep project | `snacks.picker` |
 | `<leader>sw` | N | Grep word under cursor | `snacks.picker` |
 | `<leader>sr` | N | Resume last search | `snacks.picker` |

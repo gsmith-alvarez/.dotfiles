@@ -374,7 +374,14 @@ vim.keymap.set('n', '<leader>ql', function()
 	require('mini.sessions').select('read')
 end, { desc = 'Session: Select & Restore' })
 vim.keymap.set('n', '<leader>qw', function()
-	require('mini.sessions').write(nil, { verbose = true })
+	local ms = require('mini.sessions')
+	if vim.v.this_session ~= '' then
+		ms.write(nil, { verbose = true })
+	else
+		local default = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
+		local name = vim.fn.input('Session name: ', default)
+		if name ~= '' then ms.write(name, { verbose = true }) end
+	end
 end, { desc = 'Session: Save' })
 vim.keymap.set('n', '<leader>qd', function()
 	require('mini.sessions').config.autowrite = false

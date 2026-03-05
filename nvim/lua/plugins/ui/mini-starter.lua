@@ -22,60 +22,126 @@ M.setup = function()
 		end
 	end
 
+	-- [[ FOOTER: dynamic system context ]]
+	local function build_footer()
+		local parts = {}
+
+		-- Neovim version
+		local v = vim.version()
+		table.insert(parts, string.format('󰇅  v%d.%d.%d', v.major, v.minor, v.patch))
+
+		-- Plugin count (mini.deps managed)
+		local ok, deps = pcall(require, 'mini.deps')
+		if ok then
+			local snap = deps.get_session_data and deps.get_session_data() or nil
+			local count = snap and #vim.tbl_keys(snap.plugins or {}) or nil
+			if count then
+				table.insert(parts, string.format('󰏗  %d plugins', count))
+			end
+		end
+
+		-- Git branch of cwd (if any)
+		local branch = vim.fn.system('git -C ' .. vim.fn.getcwd() .. ' rev-parse --abbrev-ref HEAD 2>/dev/null')
+		    :gsub('%s+$', '')
+		if branch ~= '' and not branch:find('fatal') then
+			table.insert(parts, ' ' .. branch)
+		end
+
+		-- Lazy startup time (if profiler recorded it)
+		local startuptime = vim.g.loaded_startuptime
+		if startuptime then
+			table.insert(parts, string.format('⚡ %.0fms', startuptime))
+		end
+
+		local info_line = table.concat(parts, '   ')
+		return info_line .. '\n\n' .. 'Type highlighted letter to jump  ·  q to quit'
+	end
+
+	local function wrap_quote(text, max_width)
+		max_width = max_width or 60
+		local lines = {}
+		-- Split on the attribution suffix (" - Author" at end of last line)
+		local quote, attr = text:match('^(.*)" %- (.+)$')
+		local body = quote and (quote .. '"') or text
+
+		for _, paragraph in ipairs(vim.split(body, '\n')) do
+			local line = ''
+			for word in paragraph:gmatch('%S+') do
+				local candidate = line == '' and word or line .. ' ' .. word
+				if #candidate > max_width then
+					if line ~= '' then table.insert(lines, line) end
+					line = word
+				else
+					line = candidate
+				end
+			end
+			if line ~= '' then table.insert(lines, line) end
+		end
+
+		if attr then table.insert(lines, '  ─  ' .. attr) end
+		return table.concat(lines, '\n')
+	end
+
+	-- Short path: show …/parent/filename instead of full path
+	local function short_path(path)
+		local home = vim.fn.expand('~')
+		path = path:gsub('^' .. home, '~')
+		local parts = vim.split(path, '/', { plain = true })
+		if #parts <= 3 then return path end
+		return '\226\128\166/' .. parts[#parts - 1] .. '/' .. parts[#parts]
+	end
+
+	-- Items with icons baked into the name for visual richness
 	local my_items = {
 		vim.fn.isdirectory(paths.projects) == 1
-		and { name = 'Projects', action = snacks_action(paths.projects), section = 'Directories' }
+		and { name = 'Projects 󰉖 ', action = snacks_action(paths.projects), section = '  Workspaces' }
 		or nil,
 		vim.fn.isdirectory(paths.dotfiles) == 1
-		and { name = 'dotfiles', action = snacks_action(paths.dotfiles), section = 'Directories' }
+		and { name = 'dotfiles 󰄻 ', action = snacks_action(paths.dotfiles), section = '  Workspaces' }
 		or nil,
 		vim.fn.isdirectory(paths.obsidian) == 1
-		and { name = 'Obsidian', action = snacks_action(paths.obsidian), section = 'Directories' }
+		and { name = 'Obsidian 󰌱 ', action = snacks_action(paths.obsidian), section = '  Workspaces' }
 		or nil,
-		{ name = 'New file', action = 'ene | startinsert', section = 'Actions' },
-		{ name = 'Quit',     action = 'qall',              section = 'Actions' },
-		starter.sections.recent_files(5, false),
-		starter.sections.recent_files(5, true),
+		{ name = 'New file 󰈤 ', action = 'ene | startinsert', section = '  Actions' },
+		{ name = 'Quit     󰈆', action = 'qall', section = '  Actions' },
+		starter.sections.recent_files(5, false, short_path),
+		starter.sections.recent_files(3, true, short_path),
+		starter.sections.sessions(5, true),
 	}
 
 	starter.setup {
 		evaluate_single = true,
 		items = vim.tbl_filter(function(x) return x ~= nil end, my_items),
-		header = [[
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠤⠤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠰⡮⢳⡆⠀⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⢀⡏⠀⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠢⡀⠘⠋⡀⠔⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣶⣾⣷⣶⣦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢺⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣾⢿⣿⣿⣿⣿⣿⡟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⡞⢁⣿⣿⣿⣿⣿⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⢟⣥⣾⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⣯⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⡿⣿⡿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-]]
-		    .. '\n'
-		    .. quotes_engine.get_cached_quote(),
-		footer = 'Type highlighted prefix to jump.',
+		header = function()
+			local v = vim.version()
+			local logo = string.format([[
+┌─────────────────────────────────────────┐
+│                                         │
+│   ███╗   ██╗███████╗ ██████╗ ██╗   ██╗  │
+│   ████╗  ██║██╔════╝██╔═══██╗██║   ██║  │
+│   ██╔██╗ ██║█████╗  ██║   ██║██║   ██║  │
+│   ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝  │
+│   ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝   │
+│   ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝    │
+│                                         │
+│             v%d.%d.%d                     │
+└─────────────────────────────────────────┘]], v.major, v.minor, v.patch)
+			return logo .. '\n\n' .. wrap_quote(quotes_engine.get_cached_quote())
+		end,
+		footer = build_footer,
 		content_hooks = {
-			starter.gen_hook.adding_bullet '󰍟 ',
+			starter.gen_hook.adding_bullet '  ',
 			starter.gen_hook.aligning('center', 'center'),
-			starter.gen_hook.padding(3, 2),
+			starter.gen_hook.padding(3, 1),
 		},
 	}
 
 	vim.api.nvim_set_hl(0, 'MiniStarterHeader', { fg = '#89b4fa' })
-	vim.api.nvim_set_hl(0, 'MiniStarterSection', { fg = '#f5c2e7', bold = true })
+	vim.api.nvim_set_hl(0, 'MiniStarterSection', { fg = '#cba6f7', bold = true })
 	vim.api.nvim_set_hl(0, 'MiniStarterItem', { fg = '#cdd6f4' })
-	vim.api.nvim_set_hl(0, 'MiniStarterItemBullet', { fg = '#94e2d5' })
-	vim.api.nvim_set_hl(0, 'MiniStarterItemPrefix', { fg = '#f38ba8' })
-	vim.api.nvim_set_hl(0, 'MiniStarterFooter', { fg = '#585b70' })
+	vim.api.nvim_set_hl(0, 'MiniStarterItemBullet', { fg = '#313244' })
+	vim.api.nvim_set_hl(0, 'MiniStarterItemPrefix', { fg = '#f38ba8', bold = true })
+	vim.api.nvim_set_hl(0, 'MiniStarterFooter', { fg = '#6c7086', italic = true })
 
 	local starter_group = vim.api.nvim_create_augroup('UI_Starter', { clear = true })
 	vim.api.nvim_create_autocmd('User', {

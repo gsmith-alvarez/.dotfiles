@@ -18,7 +18,7 @@ vim.api.nvim_create_user_command('ToolCheck', function()
 		'yaml-language-server',
 		'taplo',
 		'lua-language-server',
-		'marksman',
+		'markdown-oxide',
 		'gopls',
 		'zls',
 		'typescript-language-server',

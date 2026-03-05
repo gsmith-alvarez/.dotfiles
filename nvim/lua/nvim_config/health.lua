@@ -74,7 +74,7 @@ local function check_lsp()
 		{ 'zls',                          'Zig' },
 		{ 'clangd',                       'C/C++' },
 		{ 'lua-language-server',          'Lua' },
-		{ 'marksman',                     'Markdown' },
+		{ 'markdown-oxide',               'Markdown' },
 		{ 'taplo',                        'TOML' },
 		{ 'bash-language-server',         'Bash' },
 		{ 'tinymist',                     'Typst' },

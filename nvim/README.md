@@ -34,15 +34,17 @@ nvim/
     │   ├── icons.lua                 # Central icon registry (diagnostics, git, kinds, dap)
     │   ├── init.lua                  # Core orchestrator (options → keymaps → libs)
     │   ├── keymaps.lua               # Home-row navigation, buffer, window keymaps
+    │   ├── plugin-keymaps.lua        # Central registry for all global plugin keymaps
     │   ├── libs.lua                  # Foundational library injection (lazydev)
     │   ├── lint.lua                  # Async CLI linter → vim.diagnostic bridge
     │   ├── options.lua               # Editor options, mise PATH injection
-    │   └── utils.lua                 # soft_notify, mise_shim, log-to-file
+    │   ├── utils.lua                 # soft_notify, mise_shim, log-to-file
+    │   └── vscode.lua                # VSCode-Neovim integration layer (loaded only in VSCode)
     └── plugins/
         ├── init.lua                  # Master boot orchestrator (context-aware phases)
         ├── core/
         │   ├── mini.lua              # TIER 0: mini.icons (deferred) + mini.tabline
-        │   └── snacks.lua            # snacks.nvim: notifier, picker, terminal, ui_select
+        │   └── snacks.lua            # snacks.nvim: notifier, picker, terminal, ui_select, LSP progress
         ├── dap/
         │   ├── debug.lua             # DAP config + PlatformIO hardware debugging
         │   ├── init.lua              # DAP domain orchestrator
@@ -122,12 +124,13 @@ No Mason. All language servers, formatters, and tools are managed by `mise`. `co
 
 | Plugin | Purpose |
 |--------|---------|
-| `echasnovski/mini.nvim` | Icons, tabline, statusline, starter, diff, files, ai, surround, move, pairs, indentscope, hipatterns, visits, bracketed, clue |
-| `folke/snacks.nvim` | Notifier, fuzzy picker (replaces telescope), floating terminal, ui_select |
+| `echasnovski/mini.nvim` | ai, bracketed, clue, comment, deps, diff, files, hipatterns, icons, indentscope, move, pairs, sessions, starter, statusline, surround, tabline, visits |
+| `folke/snacks.nvim` | Notifier, fuzzy picker (replaces telescope), floating terminal, ui_select, LSP progress spinner |
 | `echasnovski/mini.base16` (bundled) | Colorscheme (Catppuccin Mocha palette, part of mini.nvim) |
 | `saghen/blink.cmp` | Completion engine (LSP, path, snippets, lazydev) |
 | `rafamadriz/friendly-snippets` | Community VSCode-format snippet collection |
 | `neovim/nvim-lspconfig` | LSP server stub registry |
+| `nvim-lua/plenary.nvim` | Async utility library (required by obsidian.nvim) |
 | `nvim-treesitter/nvim-treesitter` | Parsing + syntax |
 | `nvim-treesitter/nvim-treesitter-textobjects` | Text objects (functions, classes, params) |
 | `nvim-treesitter/nvim-treesitter-context` | Pins current scope/function header at viewport top |
@@ -135,19 +138,19 @@ No Mason. All language servers, formatters, and tools are managed by `mise`. `co
 | `stevearc/aerial.nvim` | Symbol sidebar + jump (JIT) |
 | `stevearc/overseer.nvim` | Task runner (JIT) |
 | `folke/trouble.nvim` | Diagnostic aggregator (JIT) |
-| `mini.sessions` (bundled) | Session management (autowrite, picker restore) |
+| `folke/todo-comments.nvim` | TODO/FIXME/HACK/NOTE highlights + Trouble/quickfix integration |
 | `mrjones2014/smart-splits.nvim` | Neovim ↔ Zellij navigation |
 | `obsidian-nvim/obsidian.nvim` | Notetaking (JIT on markdown, snacks.picker) |
 | `chomosuke/typst-preview.nvim` | Typst live preview |
 | `mfussenegger/nvim-dap` | Debugger |
 | `rcarriga/nvim-dap-ui` | DAP UI layout |
+| `theHamsta/nvim-dap-virtual-text` | Inline variable values during debug |
 | `Weissle/persistent-breakpoints.nvim` | Breakpoint persistence across sessions |
 | `nvim-neotest/nvim-nio` | Async I/O library (required by nvim-dap-ui) |
 | `smjonas/inc-rename.nvim` | Incremental LSP rename (JIT) |
 | `ThePrimeagen/refactoring.nvim` | AST-based refactoring (JIT) |
 | `NMAC427/guess-indent.nvim` | Auto indentation detection |
 | `folke/lazydev.nvim` | Lua API intelligence |
-| `folke/todo-comments.nvim` | TODO/FIXME/HACK/NOTE highlights + Trouble/quickfix integration |
 | `ThePrimeagen/vim-be-good` | Motion training (ghost command) |
 
 ---
@@ -188,6 +191,7 @@ No Mason. All language servers, formatters, and tools are managed by `mise`. `co
 | Mode | Keybind | Description |
 |------|---------|-------------|
 | n | `<leader>ff` | Find files |
+| n | `<leader>fs` | Find: Starter (open dashboard) |
 | n | `<leader>fe` | File explorer (root dir) |
 | n | `<leader>fr` | Recent files |
 | n | `<leader>fc` | Recent files (cwd) |
@@ -209,7 +213,7 @@ No Mason. All language servers, formatters, and tools are managed by `mise`. `co
 |------|---------|-------------|
 | n | `gd` | Go to definition |
 | n | `gr` | References |
-| n | `K` | Hover documentation (rounded border) |
+| n | `K` | Hover documentation (rounded border, Neovim native) |
 | n | `<leader>ci` | Implementations |
 | n | `<leader>ct` | Type definitions |
 | n | `<leader>co` | Document symbols |
@@ -261,10 +265,6 @@ No Mason. All language servers, formatters, and tools are managed by `mise`. `co
 | n | `<leader>vx` | XH HTTP client |
 | n | `-` | Open file explorer (current file's dir) |
 | n | `<leader>fe` | Open file explorer (project root) |
-| n | `<leader>xx` | Workspace diagnostics (Trouble) |
-| n | `<leader>xd` | Document diagnostics (Trouble) |
-| n | `<leader>xq` | Quickfix list (Trouble) |
-| n | `<leader>xl` | Location list (Trouble) |
 
 ### Editing
 | Mode | Keybind | Description |
@@ -350,6 +350,7 @@ No Mason. All language servers, formatters, and tools are managed by `mise`. `co
 | n | `<leader>nq` | Quick switch |
 | n | `<leader>ns` | Search notes |
 | n | `<leader>nn` | New note |
+| n | `gf` | Follow link under cursor (buffer-local) |
 | n | `<leader>nf` | Follow link in tab (buffer-local) |
 | n | `<leader>nv` | Follow link vsplit (buffer-local) |
 | n | `<leader>nh` | Follow link hsplit (buffer-local) |

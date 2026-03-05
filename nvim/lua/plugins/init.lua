@@ -51,6 +51,8 @@ elseif #vim.api.nvim_list_uis() > 0 then
 		MiniDeps.add 'folke/snacks.nvim'
 		safe_load 'plugins.core.snacks'
 		safe_load 'plugins.core.mini'
+		-- Sessions must be set up before starter renders
+		safe_load 'plugins.workflow.persistence'
 		safe_load 'plugins.ui'
 
 		-- Sub-Domain: Searching

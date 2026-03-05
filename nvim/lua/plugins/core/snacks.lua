@@ -60,7 +60,7 @@ M.setup = function()
       indent = { enabled = false },
       input = { enabled = false },
       scope = { enabled = false },
-      scroll = { enabled = false },
+      scroll = { enabled = true },
       words = { enabled = false },
       statuscolumn = { enabled = false },
       lazygit = { enabled = false },
