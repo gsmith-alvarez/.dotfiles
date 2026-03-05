@@ -31,7 +31,7 @@ fish/fish_variables
 fish/fish_history
 
 # --- Mise ---
-# Mise usually tracks local tool versions in the project folder, 
+# Mise usually tracks local tool versions in the project folder,
 # but ignore the internal data/cache if it's in .config
 mise/cache/
 mise/downloads/
@@ -60,3 +60,6 @@ nvim/.luarc.json
 nvim/.neoconf.json
 nvim/spell/*.add
 nvim/spell/*.add.spl
+
+# --- COSMIC ---
+cosmic/com.system76.CosmicPortal/v1/screenshot
