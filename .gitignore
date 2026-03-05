@@ -62,4 +62,4 @@ nvim/spell/*.add
 nvim/spell/*.add.spl
 
 # --- COSMIC ---
-cosmic/com.system76.CosmicPortal/v1/screenshot
+cosmic/com.system76.CosmicPortal/v1/
