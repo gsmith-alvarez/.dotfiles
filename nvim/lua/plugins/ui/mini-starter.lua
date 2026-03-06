@@ -147,11 +147,14 @@ M.setup = function()
 	vim.api.nvim_create_autocmd('User', {
 		group = starter_group,
 		pattern = 'MiniStarterOpened',
-		callback = function()
+		callback = function(ev)
 			vim.bo.buftype = 'nofile'
 			vim.bo.bufhidden = 'wipe'
 			vim.bo.modifiable = false
 			vim.keymap.set('n', 'q', '<cmd>quit<CR>', { buffer = true, silent = true })
+			-- mini.clue intercepts g/z globally; disable it for the starter buffer
+			-- so those keys pass through to mini.starter's query handler
+			vim.b[ev.buf].miniclue_disable = true
 		end,
 	})
 end

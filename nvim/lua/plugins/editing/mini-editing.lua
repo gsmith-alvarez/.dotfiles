@@ -38,6 +38,20 @@ M.setup = function()
 			mappings = {},
 		}
 
+		-- TabOut: press <Tab> to jump past the next closing bracket/quote
+		local tabout_chars = { ')', ']', '}', "'", '"', '`', '>', ';', ',' }
+		vim.keymap.set('i', '<Tab>', function()
+			local line = vim.api.nvim_get_current_line()
+			local col  = vim.api.nvim_win_get_cursor(0)[2] -- 0-indexed
+			local after = line:sub(col + 1)                -- char directly under cursor
+			for _, ch in ipairs(tabout_chars) do
+				if after:sub(1, 1) == ch then
+					return '<Right>'
+				end
+			end
+			return '<Tab>'
+		end, { expr = true, silent = true, desc = 'TabOut: jump past closing char or insert tab' })
+
 		local hipatterns = require 'mini.hipatterns'
 		hipatterns.setup {
 			highlighters = {
@@ -48,6 +62,33 @@ M.setup = function()
 				hex_color = hipatterns.gen_highlighter.hex_color(),
 			},
 		}
+
+		-- [[ RAINBOW DELIMITERS ]]
+		-- Treesitter-based: each nesting level gets its own color, always visible.
+		require('mini.deps').add 'HiPhish/rainbow-delimiters.nvim'
+		local rainbow = require 'rainbow-delimiters'
+		require('rainbow-delimiters.setup').setup {
+			strategy = { [''] = rainbow.strategy['global'] },
+			query    = { [''] = 'rainbow-delimiters' },
+			priority = { [''] = 110 },
+			highlight = {
+				'RainbowDelimiterRed',
+				'RainbowDelimiterYellow',
+				'RainbowDelimiterBlue',
+				'RainbowDelimiterOrange',
+				'RainbowDelimiterGreen',
+				'RainbowDelimiterViolet',
+				'RainbowDelimiterCyan',
+			},
+		}
+		-- Catppuccin Mocha palette
+		vim.api.nvim_set_hl(0, 'RainbowDelimiterRed',    { fg = '#f38ba8' })
+		vim.api.nvim_set_hl(0, 'RainbowDelimiterYellow', { fg = '#f9e2af' })
+		vim.api.nvim_set_hl(0, 'RainbowDelimiterBlue',   { fg = '#89b4fa' })
+		vim.api.nvim_set_hl(0, 'RainbowDelimiterOrange', { fg = '#fab387' })
+		vim.api.nvim_set_hl(0, 'RainbowDelimiterGreen',  { fg = '#a6e3a1' })
+		vim.api.nvim_set_hl(0, 'RainbowDelimiterViolet', { fg = '#cba6f7' })
+		vim.api.nvim_set_hl(0, 'RainbowDelimiterCyan',   { fg = '#89dceb' })
 	end)
 end
 
