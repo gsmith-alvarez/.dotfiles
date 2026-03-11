@@ -1,4 +1,9 @@
 [Default Applications]
 application/x-terminal-emulator=com.mitchellh.ghostty.desktop
+application/xhtml+xml=app.zen_browser.zen.desktop
+text/html=app.zen_browser.zen.desktop
+x-scheme-handler/chrome=app.zen_browser.zen.desktop
+x-scheme-handler/http=app.zen_browser.zen.desktop
+x-scheme-handler/https=app.zen_browser.zen.desktop
 x-scheme-handler/jetbrains=jetbrainsd.desktop
 x-scheme-handler/terminal=com.mitchellh.ghostty.desktop
