@@ -45,6 +45,7 @@ local event_modules = {
   'ui.trouble',
   'ui.render-markdown',
   'ui.mini-statusline',
+  'ui.winbar',
   'ui.mini-clue',
 }
 for _, mod in ipairs(event_modules) do

@@ -58,8 +58,8 @@ M.setup = function()
         -- The Home-Row Navigation Protocol
         ['<C-j>'] = { 'select_next', 'fallback' },
         ['<C-k>'] = { 'select_prev', 'fallback' },
-        ['<C-l>'] = { 'accept', 'fallback' },
-        ['<C-h>'] = { 'hide', 'fallback' },
+        ['<C-l>'] = { 'accept', 'snippet_forward', 'fallback' },
+        ['<C-h>'] = { 'hide', 'snippet_backward', 'fallback' },
 
         ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
         ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },

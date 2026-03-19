@@ -61,6 +61,17 @@ M.setup = function()
 			if #active_clients > 0 then
 				lsp_status = '⚡ ' .. active_clients[1].name
 			end
+
+			local copilot_status = ''
+			local ok, copilot_config = pcall(require, 'copilot.config')
+			if ok then
+				local auto_trigger = copilot_config.suggestion.auto_trigger
+				if vim.b.copilot_suggestion_auto_trigger ~= nil then
+					auto_trigger = vim.b.copilot_suggestion_auto_trigger
+				end
+				copilot_status = auto_trigger and ' ' or ' '
+			end
+
 			local mise_status = vim.b.mise_status or ''
 
 			-- Diff counts from mini.diff (vim.b.minidiff_summary)
@@ -81,7 +92,7 @@ M.setup = function()
 				{ hl = 'MiniStatuslineFilename', strings = { filename } },
 				'%=',
 				'%S ',
-				{ hl = 'MiniStatuslineDevinfo',  strings = { lsp_status, mise_status } },
+				{ hl = 'MiniStatuslineDevinfo',  strings = { lsp_status, copilot_status, mise_status } },
 				{ hl = mode_hl,                  strings = { location } },
 			}
 		end

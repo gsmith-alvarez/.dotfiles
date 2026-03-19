@@ -63,7 +63,7 @@ M.setup = function()
       scroll = { enabled = true },
       words = { enabled = false },
       statuscolumn = { enabled = false },
-      lazygit = { enabled = false },
+      lazygit = { enabled = true },
     }
   end)
 

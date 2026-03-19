@@ -89,7 +89,13 @@ vim.keymap.set('n', '<leader>pc', pio('pio project init --ide=vscode'), { desc =
 -- [[ GIT: <leader>g ]]
 -- ─────────────────────────────────────────────────────────────────────────────
 
-vim.keymap.set('n', '<leader>gg', tui('lazygit', 'lazygit'), { desc = 'Git: Lazygit' })
+vim.keymap.set('n', '<leader>gg', function()
+	if not utils.mise_shim('lazygit') then
+		utils.soft_notify('lazygit missing. Install via: mise install lazygit', vim.log.levels.WARN)
+		return
+	end
+	require('snacks').lazygit.open()
+end, { desc = 'Git: Lazygit' })
 
 vim.keymap.set('n', '<leader>gl', function()
 	require('snacks').picker.git_log()
@@ -353,6 +359,10 @@ vim.keymap.set('n', '<leader>uu', function()
 	local cfg = vim.diagnostic.config()
 	vim.diagnostic.config({ underline = not cfg.underline })
 end, { desc = 'Utilities: Toggle Underlines' })
+vim.keymap.set('n', '<leader>uc', function()
+	require('copilot.suggestion').toggle_auto_trigger()
+	vim.cmd('redrawstatus')
+end, { desc = 'Utilities: Toggle Copilot' })
 
 -- ─────────────────────────────────────────────────────────────────────────────
 -- [[ YANK: <leader>y ]]
