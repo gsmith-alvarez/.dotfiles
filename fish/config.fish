@@ -14,6 +14,11 @@ if type -q go
     fish_add_path -g $GOPATH/bin
 end
 
+# Exercism CLI
+if test -d ~/bin
+    fish_add_path ~/bin
+end
+
 ### --- 3. INTERACTIVE OPTIMIZATION --- ###
 if status is-interactive
     # [[ FAST INITIALIZATION ]]

@@ -30,9 +30,9 @@ local MiniDeps = require 'mini.deps'
 -- Register `is-mise?` treesitter predicate immediately — before any buffer parsing.
 -- Used in after/queries/toml/injections.scm to limit shell injection to mise config files.
 vim.treesitter.query.add_predicate('is-mise?', function(match, pattern, source)
-  local bufname = vim.api.nvim_buf_get_name(source)
-  return bufname:match('[/\\]mise%.toml$') ~= nil
-    or bufname:match('[/\\]%.mise%.toml$') ~= nil
+	local bufname = vim.api.nvim_buf_get_name(source)
+	return bufname:match('[/\\]mise%.toml$') ~= nil
+	    or bufname:match('[/\\]%.mise%.toml$') ~= nil
 end, { force = true })
 
 if vim.fn.argc() > 0 then
@@ -97,9 +97,8 @@ if #vim.api.nvim_list_uis() > 0 then
 		safe_load 'plugins.version_control'
 
 		local scheduled_domains = {
-			'plugins.editing',    -- Text Manipulation (Surround, pairs, etc.)
-			'plugins.workflow',   -- External TUI / Snacks
-			'plugins.notetaking.obsidian', -- Obsidian vault integration (JIT)
+			'plugins.editing', -- Text Manipulation (Surround, pairs, etc.)
+			'plugins.workflow', -- External TUI / Snacks
 		}
 		for _, domain in ipairs(scheduled_domains) do
 			safe_load(domain)

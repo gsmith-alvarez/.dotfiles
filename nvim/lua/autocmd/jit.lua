@@ -20,8 +20,19 @@ local loaded = {
 
 --- Atomic Loader for Obsidian.
 --- Uses pcall to ensure a missing config file doesn't crash the editor.
-local function load_obsidian()
+local function load_obsidian(args)
   if loaded.obsidian then return true end
+
+  -- If triggered by opening a markdown file, only load if in an Obsidian vault.
+  if type(args) == "table" and args.event == "FileType" then
+    local vault_path = vim.fn.expand("~/Documents/Obsidian")
+    local current_file = vim.api.nvim_buf_get_name(args.buf or 0)
+
+    if current_file ~= "" and not current_file:find(vault_path, 1, true) then
+      utils.soft_notify("Not in Obsidian vault. Skipping plugin load.", vim.log.levels.INFO)
+      return false
+    end
+  end
 
   local ok, plugin = pcall(require, "plugins.notetaking.obsidian")
   if ok and plugin.setup then
@@ -65,8 +76,8 @@ end
 
 local map = vim.keymap.set
 map("n", "<leader>nq", obsidian_stub("Obsidian quick_switch"), { desc = "Notes: Quick Switch" })
-map("n", "<leader>ns", obsidian_stub("Obsidian search"),        { desc = "Notes: Search" })
-map("n", "<leader>nn", obsidian_stub("Obsidian new"),           { desc = "Notes: New Note" })
+map("n", "<leader>ns", obsidian_stub("Obsidian search"), { desc = "Notes: Search" })
+map("n", "<leader>nn", obsidian_stub("Obsidian new"), { desc = "Notes: New Note" })
 
 -- THE CONTRACT: Return the module to satisfy the Orchestrator's pcall.
 return M

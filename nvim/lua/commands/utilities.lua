@@ -112,3 +112,33 @@ end, { nargs = '*', desc = 'Execute HTTP request via xh' })
 
 -- [[ BUFFER MANAGEMENT ]]
 -- Buffer deletion keymaps live in lua/core/plugin-keymaps.lua (<leader>b prefix).
+
+-- [[ Better gx - Open URLs with System Default ]]
+-- Replaces the default 'gx' behavior with a more robust implementation that handles various URL formats
+
+vim.keymap.set("n", "gx", function()
+  -- 1. First, check if the cursor is directly on a valid URL
+  local cfile = vim.fn.expand("<cfile>")
+  if cfile:match("^https?://") then
+    return vim.ui.open(cfile)
+  end
+
+  -- 2. If not, parse the line to find the link nearest to the cursor
+  local line = vim.api.nvim_get_current_line()
+  local col = vim.api.nvim_win_get_cursor(0)[2] + 1 -- Current cursor column
+
+  -- Iterate through all markdown links on the line
+  for text, url in line:gmatch("%[([^%]]+)%]%((https?://[^%)]+)%)") do
+    -- Find the starting position of this specific link string
+    local start_idx, end_idx = line:find("%[" ..
+    text:gsub("([^%w])", "%%%1") .. "%]%(" .. url:gsub("([^%w])", "%%%1") .. "%)")
+
+    -- If the cursor is within the bounds of this specific Markdown link
+    if start_idx and col >= start_idx and col <= end_idx then
+      return vim.ui.open(url)
+    end
+  end
+
+  -- 3. Fallback if no URL or Markdown link is found at cursor
+  vim.ui.open(cfile)
+end, { desc = "Smart open link under cursor" })
