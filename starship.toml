@@ -263,7 +263,10 @@ format = '\[[$symbol($version)]($style)\]'
 format = '\[[$symbol($version)]($style)\]'
 
 [shell]
-format = '\[[$indicator]($style)\]'
+format = '[$indicator]($style)'
+disabled = false
+fish_indicator = '❯|~'
+bash_indicator = '\$'
 
 [singularity]
 format = '\[[$symbol\[$env\]]($style)\]'

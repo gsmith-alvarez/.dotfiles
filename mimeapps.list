@@ -2,6 +2,7 @@
 application/x-terminal-emulator=com.mitchellh.ghostty.desktop
 application/xhtml+xml=app.zen_browser.zen.desktop
 text/html=app.zen_browser.zen.desktop
+text/plain=com.system76.CosmicEdit.desktop
 x-scheme-handler/chrome=app.zen_browser.zen.desktop
 x-scheme-handler/http=app.zen_browser.zen.desktop
 x-scheme-handler/https=app.zen_browser.zen.desktop
