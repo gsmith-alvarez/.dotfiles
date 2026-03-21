@@ -104,6 +104,8 @@ if status is-interactive
     abbr -a yr yazi
     abbr -a du "dust -r"
     abbr -a cp "rsync -ah --info=progress2"
+    abbr -a rm "rm -i"
+    abbr -a mv "mv -i"
 
     # bat-extras
     abbr -a rg batgrep

@@ -4,15 +4,44 @@
             Super,
             Ctrl,
         ],
-        key: "Up",
+        key: "k",
     ): MoveToPreviousWorkspace,
     (
         modifiers: [
             Super,
             Ctrl,
         ],
-        key: "Right",
+        key: "h",
     ): Disable,
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "Tab",
+    ): NextWorkspace,
+    (
+        modifiers: [
+            Super,
+            Ctrl,
+        ],
+        key: "Up",
+    ): MoveToPreviousWorkspace,
+    (
+        modifiers: [
+            Super,
+            Ctrl,
+            Shift,
+        ],
+        key: "Left",
+    ): Disable,
+    (
+        modifiers: [
+            Super,
+            Ctrl,
+            Shift,
+        ],
+        key: "h",
+    ): Resizing(Outwards),
     (
         modifiers: [
             Super,
@@ -25,26 +54,12 @@
             Super,
             Ctrl,
         ],
-        key: "j",
-    ): MoveToNextWorkspace,
-    (
-        modifiers: [
-            Super,
-        ],
-        key: "n",
-    ): Minimize,
+        key: "l",
+    ): Disable,
     (
         modifiers: [
             Super,
             Ctrl,
-        ],
-        key: "Down",
-    ): MoveToNextWorkspace,
-    (
-        modifiers: [
-            Super,
-            Ctrl,
-            Shift,
         ],
         key: "Right",
     ): Disable,
@@ -54,38 +69,12 @@
             Ctrl,
             Shift,
         ],
-        key: "Left",
-    ): Disable,
-    (
-        modifiers: [
-            Super,
-            Ctrl,
-        ],
-        key: "h",
-    ): Disable,
-    (
-        modifiers: [
-            Super,
-            Ctrl,
-            Shift,
-        ],
-        key: "l",
-    ): Disable,
-    (
-        modifiers: [
-            Super,
-            Ctrl,
-        ],
-        key: "l",
+        key: "Down",
     ): Disable,
     (
         modifiers: [],
         key: "XF86AudioStop",
     ): Spawn("wayscriber --active"),
-    (
-        modifiers: [],
-        key: "Print",
-    ): Disable,
     (
         modifiers: [
             Super,
@@ -97,45 +86,11 @@
     (
         modifiers: [
             Super,
-        ],
-        key: "Tab",
-    ): NextWorkspace,
-    (
-        modifiers: [
-            Super,
             Ctrl,
             Shift,
         ],
-        key: "j",
-    ): Disable,
-    (
-        modifiers: [
-            Super,
-        ],
-        key: "Return",
-    ): System(Terminal),
-    (
-        modifiers: [
-            Super,
-            Ctrl,
-        ],
-        key: "k",
-    ): MoveToPreviousWorkspace,
-    (
-        modifiers: [
-            Super,
-            Ctrl,
-            Shift,
-        ],
-        key: "h",
-    ): Disable,
-    (
-        modifiers: [
-            Super,
-            Ctrl,
-        ],
-        key: "Left",
-    ): Disable,
+        key: "l",
+    ): Resizing(Inwards),
     (
         modifiers: [
             Super,
@@ -149,8 +104,55 @@
             Ctrl,
             Shift,
         ],
-        key: "Down",
+        key: "j",
     ): Disable,
+    (
+        modifiers: [
+            Super,
+            Ctrl,
+        ],
+        key: "j",
+    ): MoveToNextWorkspace,
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "Return",
+    ): System(Terminal),
+    (
+        modifiers: [
+            Super,
+            Ctrl,
+        ],
+        key: "Left",
+    ): Disable,
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "r",
+    ): Disable,
+    (
+        modifiers: [
+            Super,
+            Ctrl,
+        ],
+        key: "Down",
+    ): MoveToNextWorkspace,
+    (
+        modifiers: [
+            Super,
+            Ctrl,
+            Shift,
+        ],
+        key: "Right",
+    ): Disable,
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "n",
+    ): Minimize,
     (
         modifiers: [
             Super,
@@ -158,5 +160,16 @@
             Shift,
         ],
         key: "k",
+    ): Disable,
+    (
+        modifiers: [],
+        key: "Print",
+    ): Disable,
+    (
+        modifiers: [
+            Super,
+            Shift,
+        ],
+        key: "r",
     ): Disable,
 }
